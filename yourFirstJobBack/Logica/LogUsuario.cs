@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace yourFirstJobBack.Entidad
+namespace yourFirstJobBack.Logica
 {
-    internal class Usuario
+    internal class LogUsuario
     {
     }
 }
