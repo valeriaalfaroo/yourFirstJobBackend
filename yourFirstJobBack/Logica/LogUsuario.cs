@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using yourFirstJobBack.AccesoDatos;
 using yourFirstJobBack.Entidades.Request;
 using yourFirstJobBack.Entidades.Response;
 
@@ -85,25 +86,28 @@ namespace yourFirstJobBack.Logica
                 }
                 else
                 {
-                    //Llamar a la base de datos 
+                    //Llamar a la base de datos
+                    
+                    ConexionLinqDataContext conexion = new ConexionLinqDataContext();
 
-                   /* ConexionLinqDataContext conexion = new ConexionLinqDataContext();
-                    int? idReturn = 0;
-                    int? errorId = 0;
-                    string errorDescripcion = "";
 
-                    conexion.SP_INGRESAR_PUBLICACION(req.publicacion.idTema, req.publicacion.idUsuario, req.publicacion.titulo, req.publicacion.mensaje, ref idReturn, ref errorId, ref errorDescripcion);
-                    if (idReturn == 0)
-                    {
-                        //Error en base de datos
-                        //No se hizo la publicacion
-                        res.resultado = false;
-                        res.listaDeErrores.Add(errorDescripcion);
-                    }
-                    else
-                    {
-                        res.resultado = true;
-                    }*/
+                    /* ConexionLinqDataContext conexion = new ConexionLinqDataContext();
+                     int? idReturn = 0;
+                     int? errorId = 0;
+                     string errorDescripcion = "";
+
+                     conexion.SP_INGRESAR_PUBLICACION(req.publicacion.idTema, req.publicacion.idUsuario, req.publicacion.titulo, req.publicacion.mensaje, ref idReturn, ref errorId, ref errorDescripcion);
+                     if (idReturn == 0)
+                     {
+                         //Error en base de datos
+                         //No se hizo la publicacion
+                         res.resultado = false;
+                         res.listaDeErrores.Add(errorDescripcion);
+                     }
+                     else
+                     {
+                         res.resultado = true;
+                     }*/
                 }
 
             }cath (Exception ex) { 
