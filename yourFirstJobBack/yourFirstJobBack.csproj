@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="AccesoDatos\" />
+    <Folder Include="Entidades\Request\" />
+    <Folder Include="Logica\" />
+  </ItemGroup>
+
 </Project>
