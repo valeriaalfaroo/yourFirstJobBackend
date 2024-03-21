@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace yourFirstJobBack.Entidades.Entidad
+namespace yourFirstJobBack.Entidades.Request
 {
-    internal class usuario
+    public class ReqObtenerTodosLosEmpleos
     {
     }
 }

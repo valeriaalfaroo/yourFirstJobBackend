@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace yourFirstJobBack.Entidades.Request
 {
-    internal class ReqObtenerUsuario
+    public class ReqObtenerUsuario
     {
     }
 }

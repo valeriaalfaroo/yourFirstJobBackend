@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace yourFirstJobBack.Logica
 {
-    internal class LogUsuario
+    public class LogUsuario
     {
     }
 }

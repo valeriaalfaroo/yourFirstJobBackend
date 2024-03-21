@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace yourFirstJobBack.Entidades.Response
+namespace yourFirstJobBack.Entidades.entities
 {
-    public class ResBaseDatos
+    public class usuario
     {
     }
 }
