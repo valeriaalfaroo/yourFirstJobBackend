@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using yourFirstJobBack.Entidades.entities;
 using yourFirstJobBack.Entidades.Request;
 using yourFirstJobBack.Entidades.Response;
+using yourFirstJobBack.AccesoDatos; 
 
 namespace yourFirstJobBack.Logica
 {
@@ -24,7 +25,7 @@ namespace yourFirstJobBack.Logica
                 }
                 else
                 {
-                    if (req.empleo.idEmpresa == 0)
+                    if (req.empleo.empresa.idEmpresa == 0)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se recibio la empresa");
@@ -39,17 +40,12 @@ namespace yourFirstJobBack.Logica
                         res.resultado = false;
                         res.listaDeErrores.Add("Descripcion de empleo faltante");
                     }
-                    if (String.IsNullOrEmpty(req.empleo.fechaPublicacion))
-                    {
-                       res.resultado=false;
-                       res.listaDeErrores.Add("Fecha de publicacion faltante");
-                    }
                     if (String.IsNullOrEmpty(req.empleo.experiencia))
                     {
                         res.resultado=false;
                         res.listaDeErrores.Add("Experiencia faltante");
                     }
-                    if(req.empleo.idProfesion==0) {
+                    if(req.empleo.profesion.idProfesion==0) {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se recibio la profesion");
                     }
@@ -61,26 +57,26 @@ namespace yourFirstJobBack.Logica
                 {
                     //llamar base de datos 
 
-                    // da error porque no he conectado a linq
-                   // ConexionLinqDataContext conexion = new ConexionLinqDataContext();
-                    int? idReturn = 0;
-                    int? errorId = 0;
-                    string errorDescripcion = "";
+                   
+                    LinqDataContext conexion = new LinqDataContext();
+                    //int? idReturn = 0;
+                    //int? errorId = 0;
+                   // string errorDescripcion = "";
 
                     // conexion a SP 
 
-                   // conexion.SP_INGRESAR_PUBLICACION(req.publicacion.idTema, req.publicacion.idUsuario, req.publicacion.titulo, req.publicacion.mensaje, ref idReturn, ref errorId, ref errorDescripcion);
-                    if (idReturn == 0)
-                    {
-                        //Error en base de datos
-                        //No se hizo la publicacion
-                        res.resultado = false;
-                        res.listaDeErrores.Add(errorDescripcion);
-                    }
-                    else
-                    {
-                        res.resultado = true;
-                    }
+                    conexion.InsertarOfertaEmpleo(req.empleo.empresa.idEmpresa,req.empleo.tituloEmpleo,req.empleo.descripcionEmpleo, req.empleo.ubicacionEmpleo,req.empleo.tipoEmpleo,req.empleo.experiencia,req.empleo.fechaPublicacion/*ref idReturn, ref errorId, ref errorDescripcion*/);
+                    //if (idReturn == 0)
+                    //{
+                    //    //Error en base de datos
+                    //    //No se hizo la publicacion
+                    //    res.resultado = false;
+                    //    res.listaDeErrores.Add(errorDescripcion);
+                    //}
+                    //else
+                    //{
+                    //    res.resultado = true;
+                    //}
                 }
 
             }catch (Exception ex)
@@ -102,12 +98,12 @@ namespace yourFirstJobBack.Logica
             res.empleos = new List<Empleo>();
             try
             {
-               // ConexionLinqDataContext conexion = new ConexionLinqDataContext();
+                LinqDataContext conexion = new LinqDataContext();
 
-              //  List<SP_OBTENER_PUBLICACIONESResult> publicacionesDeBD = conexion.SP_OBTENER_PUBLICACIONES().ToList();
+               List<ObtenerTodasLasOfertasEmpleoResult> empleosDeBD = conexion.ObtenerTodasLasOfertasEmpleo().ToList();
 
-           //     foreach (SP_OBTENER_PUBLICACIONESResult cadaTC in publicacionesDeBD)
-                 //   res.empleos.Add(this.crearEmpleo(cadaTC));
+              foreach (ObtenerTodasLasOfertasEmpleoResult cadaTC in empleosDeBD)
+                   res.empleos.Add(this.crearEmpleo(cadaTC));
 
                 res.resultado = true;
 
@@ -127,10 +123,21 @@ namespace yourFirstJobBack.Logica
         #region
 
         //Factoria
-        private Empleo crearEmpleo()
+        private Empleo crearEmpleo(ObtenerTodasLasOfertasEmpleoResult empleosDeBD)
         {
-           // sin terminar, se ocupa bd 
-            return new Empleo();    
+            Empleo empleoRetornar= new Empleo();
+
+            empleoRetornar.idOfertas = empleosDeBD.idOfertas;
+            empleoRetornar.empresa.idEmpresa = (int)empleosDeBD.idEmpresa;
+            empleoRetornar.tituloEmpleo = empleosDeBD.tituloEmpleo;
+            empleoRetornar.descripcionEmpleo = empleosDeBD.descripcionEmpleo;
+            empleoRetornar.ubicacionEmpleo = empleosDeBD.ubicacionEmpleo;
+            empleoRetornar.tipoEmpleo = empleosDeBD.tipoEmpleo;
+            empleoRetornar.experiencia = empleosDeBD.experiencia; 
+            empleoRetornar.fechaPublicacion=(DateTime)empleosDeBD.fechaPublicacion;
+
+           
+            return empleoRetornar;    
         }
         #endregion
 

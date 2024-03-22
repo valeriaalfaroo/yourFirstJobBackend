@@ -92,7 +92,7 @@ namespace yourFirstJobBack.Logica
                 {
                     //Llamar a la base de datos
 
-                    ConexionLinqDataContext conexion = new ConexionLinqDataContext();
+                    LinqDataContext conexion = new LinqDataContext();
                     //faltan los ref en sp
                     int? idreturn = 0;
                     int? errorId = 0;
@@ -136,7 +136,7 @@ namespace yourFirstJobBack.Logica
 
             try
             {
-                ConexionLinqDataContext conexion = new ConexionLinqDataContext();
+                LinqDataContext conexion = new LinqDataContext();
 
                 int idUsuario = 1; //dato quemado
                 List<ObtenerInformacionUsuarioResult> usuariosBD = conexion.ObtenerInformacionUsuario(idUsuario).ToList();
