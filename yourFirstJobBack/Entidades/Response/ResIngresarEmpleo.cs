@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace yourFirstJobBack.Entidades.Response
 {
-    public class ResIngresarEmpleo:ResBase
+    public class ResIngresarEmpleo : ResBase
     {
     }
 }

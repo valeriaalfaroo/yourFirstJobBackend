@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using yourFirstJobBack.Entidades.entities;
 
-namespace yourFirstJobBack.Entidades;
+namespace yourFirstJobBack.Entidades.Request;
 
-public class ResObtenerTodosLosEmpleos:ResBase
+public class ResObtenerPerfilUsuario:ResBase
 {
-    public List<Empleo> empleos {  get; set; }
+    public List<usuario> usuarios {  get; set; }
+
 }

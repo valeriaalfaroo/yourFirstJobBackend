@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BdYourFirstJob" Class="ConexionLinqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Function Name="dbo.InsertUsuario" Method="InsertUsuario">
+    <Parameter Name="nombreUsuario" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="apellidos" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="correo" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="telefono" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fechaNacimiento" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="idRegion" Type="System.Int32" DbType="Int" />
+    <Parameter Name="contrasena" Type="System.String" DbType="VarChar(255)" />
+    <ElementType Name="InsertUsuarioResult">
+      <Column Name="ErrorMessage" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ActualizarEmpresa" Method="ActualizarEmpresa">
+    <Parameter Name="idEmpresa" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nombreEmpresa" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="telefonoEmpresa" Type="System.Int32" DbType="Int" />
+    <Parameter Name="cedulaJuridica" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idRegion" Type="System.Int32" DbType="Int" />
+    <Parameter Name="descripcion" Type="System.String" DbType="VarChar(255)" />
+    <ElementType Name="ActualizarEmpresaResult">
+      <Column Name="ErrorMessage" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ObtenerTodasLasOfertasEmpleo" Method="ObtenerTodasLasOfertasEmpleo">
+    <ElementType Name="ObtenerTodasLasOfertasEmpleoResult">
+      <Column Name="idOfertas" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idEmpresa" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="tituloEmpleo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="descripcionEmpleo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ubicacionEmpleo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="tipoEmpleo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="experiencia" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="fechaPublicacion" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.InsertarOfertaEmpleo" Method="InsertarOfertaEmpleo">
+    <Parameter Name="idEmpresa" Type="System.Int32" DbType="Int" />
+    <Parameter Name="tituloEmpleo" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="descripcionEmpleo" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="ubicacionEmpleo" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="tipoEmpleo" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="experiencia" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="fechaPublicacion" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="InsertarOfertaEmpleoResult">
+      <Column Name="ErrorMessage" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ObtenerInformacionUsuario" Method="ObtenerInformacionUsuario">
+    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
+    <ElementType Name="ObtenerInformacionUsuarioResult">
+      <Column Name="nombreUsuario" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>
