@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using yourFirstJobBack.AccesoDatos;
+using yourFirstJobBack.Entidades.entities;
 using yourFirstJobBack.Entidades.Request;
 using yourFirstJobBack.Entidades.Response;
 
@@ -14,20 +15,23 @@ namespace yourFirstJobBack.Logica
     {
         public ResIngresarUsuario ingresarUsuario(ReqIngresarUsuario req)
         {
+
+           
+
             ResIngresarUsuario res = new ResIngresarUsuario();
 
             try
             {
                 res.resultado = false;
                 res.listaDeErrores = new List<string>();
-                if(req == null)
+                if (req == null)
                 {
                     res.resultado = false;
                     res.listaDeErrores.Add("");
                 }
                 else
                 {
-                    if(req.Usuario.idUsuario == null)
+                    if (req.Usuario.idUsuario == null)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("no se encuentra el usuario");
@@ -47,12 +51,12 @@ namespace yourFirstJobBack.Logica
                         res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso el correo");
                     }
-                    if (req.Usuario.telefono ==null)
+                    if (req.Usuario.telefono == null)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso el numero de telefono");
                     }
-                    if (req.Usuario.fechaNacimiento ==null)
+                    if (req.Usuario.fechaNacimiento == null)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso la fecha de nacimiento");
@@ -87,38 +91,79 @@ namespace yourFirstJobBack.Logica
                 else
                 {
                     //Llamar a la base de datos
-                    
+
                     ConexionLinqDataContext conexion = new ConexionLinqDataContext();
+                    //faltan los ref en sp
+                    int? idreturn = 0;
+                    int? errorId = 0;
+                    string errorDescripcion = "";
 
+                    conexion.InsertUsuario(req.Usuario.nombreUsuario, req.Usuario.apellidos, req.Usuario.correo, req.Usuario.telefono,
+                        req.Usuario.fechaNacimiento, req.Usuario.idRegion, req.Usuario.contrasena);
+                    if (idreturn == 0)
+                    {
+                        //Error en base de datos
+                        //No se hizo la publicacion
+                        res.resultado = false;
+                        res.listaDeErrores.Add(errorDescripcion);
+                    }
+                    else
+                    {
+                        res.resultado = true;
+                    }
 
-                    /* ConexionLinqDataContext conexion = new ConexionLinqDataContext();
-                     int? idReturn = 0;
-                     int? errorId = 0;
-                     string errorDescripcion = "";
-
-                     conexion.SP_INGRESAR_PUBLICACION(req.publicacion.idTema, req.publicacion.idUsuario, req.publicacion.titulo, req.publicacion.mensaje, ref idReturn, ref errorId, ref errorDescripcion);
-                     if (idReturn == 0)
-                     {
-                         //Error en base de datos
-                         //No se hizo la publicacion
-                         res.resultado = false;
-                         res.listaDeErrores.Add(errorDescripcion);
-                     }
-                     else
-                     {
-                         res.resultado = true;
-                     }*/
+                    
                 }
 
-            }cath (Exception ex) { 
-            res.resultado=false;
-               // res.listaDeErrores.Add(ex)
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
 
             }
-           
+            finally { //bitacora
+                      }
+            return res;
 
         }
         
+        public ResObtenerPerfilUsuario obtenerUsuario(ReqObtenerUsuario req)
+        {
+            ResObtenerPerfilUsuario res = new ResObtenerPerfilUsuario();
+            res.listaDeErrores = new List<string>();
+            res.usuarios = new List<usuario>();
+
+            try
+            {
+                ConexionLinqDataContext conexion = new ConexionLinqDataContext();
+
+                int idUsuario = 1; //dato quemado
+                List<ObtenerInformacionUsuarioResult> usuariosBD = conexion.ObtenerInformacionUsuario(idUsuario).ToList();
+
+                foreach (ObtenerInformacionUsuarioResult allUsers in usuariosBD)
+                {
+                    
+                    usuario usuarioObj = new usuario();
+                    usuarioObj.nombreUsuario = allUsers.nombreUsuario;                 
+                    res.usuarios.Add(usuarioObj);
+                    //faltan los demas atributos?? 
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+
+            }
+            finally
+            {
+            }
+
+            return res;
+
+        }
        
 
         }

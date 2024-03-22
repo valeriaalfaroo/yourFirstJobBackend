@@ -55,12 +55,44 @@ namespace yourFirstJobBack.AccesoDatos
 		{
 			OnCreated();
 		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertUsuario")]
+
+        public ConexionLinqDataContext()
+        {
+        }
+
+        [global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertUsuario")]
 		public ISingleResult<InsertUsuarioResult> InsertUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string nombreUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string apellidos, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string correo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> telefono, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaNacimiento, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idRegion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string contrasena)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombreUsuario, apellidos, correo, telefono, fechaNacimiento, idRegion, contrasena);
 			return ((ISingleResult<InsertUsuarioResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ActualizarEmpresa")]
+		public ISingleResult<ActualizarEmpresaResult> ActualizarEmpresa([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idEmpresa, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string nombreEmpresa, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> telefonoEmpresa, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> cedulaJuridica, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idRegion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string descripcion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idEmpresa, nombreEmpresa, telefonoEmpresa, cedulaJuridica, idRegion, descripcion);
+			return ((ISingleResult<ActualizarEmpresaResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ObtenerTodasLasOfertasEmpleo")]
+		public ISingleResult<ObtenerTodasLasOfertasEmpleoResult> ObtenerTodasLasOfertasEmpleo()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<ObtenerTodasLasOfertasEmpleoResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertarOfertaEmpleo")]
+		public ISingleResult<InsertarOfertaEmpleoResult> InsertarOfertaEmpleo([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idEmpresa, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string tituloEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string descripcionEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string ubicacionEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string tipoEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string experiencia, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaPublicacion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idEmpresa, tituloEmpleo, descripcionEmpleo, ubicacionEmpleo, tipoEmpleo, experiencia, fechaPublicacion);
+			return ((ISingleResult<InsertarOfertaEmpleoResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ObtenerInformacionUsuario")]
+		public ISingleResult<ObtenerInformacionUsuarioResult> ObtenerInformacionUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario);
+			return ((ISingleResult<ObtenerInformacionUsuarioResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -85,6 +117,236 @@ namespace yourFirstJobBack.AccesoDatos
 				if ((this._ErrorMessage != value))
 				{
 					this._ErrorMessage = value;
+				}
+			}
+		}
+	}
+	
+	public partial class ActualizarEmpresaResult
+	{
+		
+		private string _ErrorMessage;
+		
+		public ActualizarEmpresaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ErrorMessage", DbType="NVarChar(4000)")]
+		public string ErrorMessage
+		{
+			get
+			{
+				return this._ErrorMessage;
+			}
+			set
+			{
+				if ((this._ErrorMessage != value))
+				{
+					this._ErrorMessage = value;
+				}
+			}
+		}
+	}
+	
+	public partial class ObtenerTodasLasOfertasEmpleoResult
+	{
+		
+		private int _idOfertas;
+		
+		private int _idEmpresa;
+		
+		private string _tituloEmpleo;
+		
+		private string _descripcionEmpleo;
+		
+		private string _ubicacionEmpleo;
+		
+		private string _tipoEmpleo;
+		
+		private string _experiencia;
+		
+		private System.DateTime _fechaPublicacion;
+		
+		public ObtenerTodasLasOfertasEmpleoResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idOfertas", DbType="Int NOT NULL")]
+		public int idOfertas
+		{
+			get
+			{
+				return this._idOfertas;
+			}
+			set
+			{
+				if ((this._idOfertas != value))
+				{
+					this._idOfertas = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEmpresa", DbType="Int NOT NULL")]
+		public int idEmpresa
+		{
+			get
+			{
+				return this._idEmpresa;
+			}
+			set
+			{
+				if ((this._idEmpresa != value))
+				{
+					this._idEmpresa = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tituloEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string tituloEmpleo
+		{
+			get
+			{
+				return this._tituloEmpleo;
+			}
+			set
+			{
+				if ((this._tituloEmpleo != value))
+				{
+					this._tituloEmpleo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcionEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string descripcionEmpleo
+		{
+			get
+			{
+				return this._descripcionEmpleo;
+			}
+			set
+			{
+				if ((this._descripcionEmpleo != value))
+				{
+					this._descripcionEmpleo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ubicacionEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string ubicacionEmpleo
+		{
+			get
+			{
+				return this._ubicacionEmpleo;
+			}
+			set
+			{
+				if ((this._ubicacionEmpleo != value))
+				{
+					this._ubicacionEmpleo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tipoEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string tipoEmpleo
+		{
+			get
+			{
+				return this._tipoEmpleo;
+			}
+			set
+			{
+				if ((this._tipoEmpleo != value))
+				{
+					this._tipoEmpleo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_experiencia", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string experiencia
+		{
+			get
+			{
+				return this._experiencia;
+			}
+			set
+			{
+				if ((this._experiencia != value))
+				{
+					this._experiencia = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaPublicacion", DbType="Date NOT NULL")]
+		public System.DateTime fechaPublicacion
+		{
+			get
+			{
+				return this._fechaPublicacion;
+			}
+			set
+			{
+				if ((this._fechaPublicacion != value))
+				{
+					this._fechaPublicacion = value;
+				}
+			}
+		}
+	}
+	
+	public partial class InsertarOfertaEmpleoResult
+	{
+		
+		private string _ErrorMessage;
+		
+		public InsertarOfertaEmpleoResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ErrorMessage", DbType="NVarChar(4000)")]
+		public string ErrorMessage
+		{
+			get
+			{
+				return this._ErrorMessage;
+			}
+			set
+			{
+				if ((this._ErrorMessage != value))
+				{
+					this._ErrorMessage = value;
+				}
+			}
+		}
+	}
+	
+	public partial class ObtenerInformacionUsuarioResult
+	{
+		
+		private string _nombreUsuario;
+		
+		public ObtenerInformacionUsuarioResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombreUsuario", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string nombreUsuario
+		{
+			get
+			{
+				return this._nombreUsuario;
+			}
+			set
+			{
+				if ((this._nombreUsuario != value))
+				{
+					this._nombreUsuario = value;
 				}
 			}
 		}
