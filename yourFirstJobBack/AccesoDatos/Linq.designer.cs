@@ -55,8 +55,13 @@ namespace yourFirstJobBack.AccesoDatos
 		{
 			OnCreated();
 		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ActualizarEmpresa")]
+
+        public LinqDataContext()
+            : this(@"Data Source=bdyourfirstjob.database.windows.net;Initial Catalog=BdYourFirstJob;Integrated Security=True")
+        {
+        }
+
+        [global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ActualizarEmpresa")]
 		public ISingleResult<ActualizarEmpresaResult> ActualizarEmpresa([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idEmpresa, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string nombreEmpresa, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> telefonoEmpresa, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> cedulaJuridica, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idRegion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string descripcion)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idEmpresa, nombreEmpresa, telefonoEmpresa, cedulaJuridica, idRegion, descripcion);

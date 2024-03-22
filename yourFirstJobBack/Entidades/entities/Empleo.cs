@@ -16,7 +16,7 @@ namespace yourFirstJobBack.Entidades.entities
         public Profesion profesion {  get; set; }
         public string tipoEmpleo { get; set; }
         public string experiencia { get; set; }
-        public DateOnly fechaPublicacion { get; set; }
+        public DateTime fechaPublicacion { get; set; }
 
 
 

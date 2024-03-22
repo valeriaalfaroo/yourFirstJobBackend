@@ -14,7 +14,7 @@ namespace yourFirstJobBack.Entidades.entities
         public string apellidos { get; set; }
         public string correo { get; set; }
         public int telefono { get; set; }
-        public DateOnly fechaNacimiento { get; set; }
+        public DateTime fechaNacimiento { get; set; }
         public int idRegion { get; set; }
         public string contrasena { get; set; }
         public string sitioWeb { get; set; }
