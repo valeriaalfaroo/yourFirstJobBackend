@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using yourFirstJobBack.Entidades.entities;
 using yourFirstJobBack.Entidades.Request;
 using yourFirstJobBack.Entidades.Response;
+using yourFirstJobBack.AccesoDatos; 
 
 namespace yourFirstJobBack.Logica
 {
@@ -24,7 +25,7 @@ namespace yourFirstJobBack.Logica
                 }
                 else
                 {
-                    if (req.empleo.idEmpresa == 0)
+                    if (req.empleo.empresa.idEmpresa == 0)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se recibio la empresa");
@@ -49,7 +50,7 @@ namespace yourFirstJobBack.Logica
                         res.resultado=false;
                         res.listaDeErrores.Add("Experiencia faltante");
                     }
-                    if(req.empleo.idProfesion==0) {
+                    if(req.empleo.profesion.idProfesion==0) {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se recibio la profesion");
                     }
@@ -62,7 +63,7 @@ namespace yourFirstJobBack.Logica
                     //llamar base de datos 
 
                     // da error porque no he conectado a linq
-                   // ConexionLinqDataContext conexion = new ConexionLinqDataContext();
+                    LinqDataContext conexion = new LinqDataContext();
                     int? idReturn = 0;
                     int? errorId = 0;
                     string errorDescripcion = "";

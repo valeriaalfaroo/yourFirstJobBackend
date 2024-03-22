@@ -5,9 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using yourFirstJobBack.Entidades.entities;
 
-namespace yourFirstJobBack.Entidades;
-
-public class ResObtenerTodosLosEmpleos:ResBase
+namespace yourFirstJobBack.Entidades.Response
 {
-    public List<Empleo> empleos {  get; set; }
+    public class ResObtenerTodosLosEmpleos : ResBase
+    {
+        public List<Empleo> empleos { get; set; }
+    }
+
 }
+

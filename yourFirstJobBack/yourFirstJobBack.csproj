@@ -7,21 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
+    <PackageReference Include="netstandard-System.Data.Linq" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Service Include="{3259aa49-8aa1-44d3-9025-a0b520596a8c}" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="AccesoDatos\ConexionLinq.designer.cs">
+    <Compile Update="AccesoDatos\Linq.designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ConexionLinq.dbml</DependentUpon>
+      <DependentUpon>Linq.dbml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="AccesoDatos\ConexionLinq.dbml">
+    <None Update="AccesoDatos\Linq.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>ConexionLinq.designer.cs</LastGenOutput>
+      <LastGenOutput>Linq.designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
