@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace yourFirstJobBack.Entidades.entities
 {
-    public class bitacoraUsuario
+    public class BitacoraUsuario
     {
         public int idBitacoraUsuario { get; set; }
-        public usuario usuario { get; set; }
+        public Usuario usuario { get; set; }
         public string descripcion { get; set; }
         public DateTime fechaHora { get; set; }
         public string estadoSesion { get; set; }

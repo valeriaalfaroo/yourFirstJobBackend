@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace yourFirstJobBack.Entidades.entities
 {
-    public class usuario
+    public class Usuario
     {
         public int idUsuario { get; set; }
         public string nombreUsuario { get; set; }

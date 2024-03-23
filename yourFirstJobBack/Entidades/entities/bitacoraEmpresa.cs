@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace yourFirstJobBack.Entidades.entities
 {
-    public class bitacoraEmpresa
+    public class BitacoraEmpresa
     {
         public int idBitacoraEmpresa { get; set; }
         public Empresa empresa { get; set; }

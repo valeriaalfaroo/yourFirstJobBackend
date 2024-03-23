@@ -18,6 +18,7 @@ namespace yourFirstJobBack.Logica
             {
                 res.resultado = false; 
                 res.listaDeErrores=new List<string>();
+
                 if (req == null)
                 {
                     res.resultado = false;
@@ -100,7 +101,7 @@ namespace yourFirstJobBack.Logica
             {
                 LinqDataContext conexion = new LinqDataContext();
 
-               List<ObtenerTodasLasOfertasEmpleoResult> empleosDeBD = conexion.ObtenerTodasLasOfertasEmpleo().ToList();
+                List<ObtenerTodasLasOfertasEmpleoResult> empleosDeBD = conexion.ObtenerTodasLasOfertasEmpleo().ToList();
 
               foreach (ObtenerTodasLasOfertasEmpleoResult cadaTC in empleosDeBD)
                    res.empleos.Add(this.crearEmpleo(cadaTC));

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace yourFirstJobBack.Entidades.entities
 {
-    public class experienciaLaboral
+    public class ExperienciaLaboral
     {
         public int idExperiencia {  get; set; }
-        public usuario usuario { get; set; }
+        public Usuario usuario { get; set; }
 
         public Profesion profesion {  get; set; }
         public string puesto { get; set; }
