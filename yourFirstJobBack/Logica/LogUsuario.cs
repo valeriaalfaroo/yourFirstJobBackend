@@ -174,9 +174,9 @@ namespace yourFirstJobBack.Logica
         #region
 
         
-        private usuario traerUsuario(ObtenerInformacionUsuarioResult usuarioBD)
+        private Usuario traerUsuario(ObtenerInformacionUsuarioResult usuarioBD)
         {
-            usuario usuarioRetornar = new usuario();
+            Usuario usuarioRetornar = new Usuario();
             usuarioRetornar.nombreUsuario=usuarioRetornar.nombreUsuario;
             usuarioRetornar.apellidos = usuarioRetornar.apellidos;
             usuarioRetornar.correo=usuarioRetornar.correo;
