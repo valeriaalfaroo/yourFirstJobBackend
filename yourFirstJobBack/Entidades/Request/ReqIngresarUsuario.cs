@@ -9,6 +9,6 @@ namespace yourFirstJobBack.Entidades.Request
 {
     public class ReqIngresarUsuario
     {
-        public usuario Usuario { get; set; }
+        public Usuario usuario { get; set; }
     }
 }

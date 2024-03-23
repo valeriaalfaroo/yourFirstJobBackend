@@ -9,7 +9,7 @@ namespace yourFirstJobBack.Entidades.entities
     public class Estudios
     {
         public int idEstudios { get; set; }
-        public usuario usuario { get; set; }
+        public Usuario usuario { get; set; }
         public string nombreInstitucion { get; set; }
         public string gradoAcademico { get; set; }
         public Profesion profesion { get; set; }

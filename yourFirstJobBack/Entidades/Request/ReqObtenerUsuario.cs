@@ -7,7 +7,7 @@ using yourFirstJobBack.Entidades.entities;
 
 namespace yourFirstJobBack.Entidades.Request
 {
-    public class ReqObtenerUsuario : usuario
+    public class ReqObtenerUsuario : Usuario
     {
 
     }
