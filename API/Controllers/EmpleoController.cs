@@ -16,5 +16,6 @@ namespace API.Controllers
             LogOfertaEmpleo logicaBackend = new LogOfertaEmpleo();
             return logicaBackend.obtenerEmpleos(null);
         }
+        //prueba
     }
 } 
