@@ -9,7 +9,9 @@ namespace yourFirstJobBack.Entidades.Response
 {
     public class ResObtenerPerfilUsuario : ResBase
     {
+
         public Usuario usuario { get; set; }
+
 
     }
 }

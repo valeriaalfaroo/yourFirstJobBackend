@@ -103,7 +103,6 @@ namespace yourFirstJobBack.Logica
                     if (idreturn == 0)
                     {
                         //Error en base de datos
-                        //No se hizo la publicacion
                         res.resultado = false;
                         res.listaDeErrores.Add(errorDescripcion);
                     }
@@ -135,15 +134,17 @@ namespace yourFirstJobBack.Logica
             res.listaDeErrores = new List<string>();
             res.usuario = usuario;
 
+
             try
             {
                 LinqDataContext conexion = new LinqDataContext();
 
                 int idUsuario = 1; //dato quemado
-                List<ObtenerInformacionUsuarioResult> usuariosBD = conexion.ObtenerInformacionUsuario(idUsuario).ToList();
+                ObtenerInformacionUsuarioResult usuarioBD = conexion.ObtenerInformacionUsuario(idUsuario).SingleOrDefault();
 
-                foreach (ObtenerInformacionUsuarioResult allUsers in usuariosBD)
+                if (usuarioBD != null)
                 {
+
                     
                     Usuario usuarioObj = new Usuario();
 
@@ -151,8 +152,9 @@ namespace yourFirstJobBack.Logica
                     
                     res.usuario = usuarioObj;
                     //faltan los demas atributos?? 
-                }
 
+               
+                }
             }
             catch (Exception ex)
             {
@@ -167,9 +169,44 @@ namespace yourFirstJobBack.Logica
             return res;
 
         }
-       
+
+
+        #region
+
+        
+        private usuario traerUsuario(ObtenerInformacionUsuarioResult usuarioBD)
+        {
+            usuario usuarioRetornar = new usuario();
+            usuarioRetornar.nombreUsuario=usuarioRetornar.nombreUsuario;
+            usuarioRetornar.apellidos = usuarioRetornar.apellidos;
+            usuarioRetornar.correo=usuarioRetornar.correo;
+            usuarioRetornar.telefono = usuarioRetornar.telefono;
+            usuarioRetornar.fechaNacimiento = usuarioRetornar.fechaNacimiento;
+            usuarioRetornar.sitioWeb = usuarioRetornar.sitioWeb;
+            usuarioRetornar.nombreInstitucion = usuarioRetornar.nombreInstitucion;
+            usuarioRetornar.gradoAcademico = usuarioRetornar.gradoAcademico;
+            usuarioRetornar.fechaInicioEstudio = usuarioRetornar.fechaInicioEstudio;
+            usuarioRetornar.fechaFinEstudio = usuarioRetornar.fechaFinEstudio;
+            usuarioRetornar._nombreArchivo = usuarioRetornar._nombreArchivo;
+            usuarioRetornar.archivo = usuarioRetornar.archivo;
+            usuarioRetornar.tipo = usuarioRetornar.tipo;
+            usuarioRetornar.categoria = usuarioRetornar.categoria;
+            usuarioRetornar.descripcion = usuarioRetornar.descripcion;
+            usuarioRetornar.idioma = usuarioRetornar.idioma;
+            usuarioRetornar.descripcion = usuarioRetornar.descripcion;
+            usuarioRetornar.puestoLaboral = usuarioRetornar.puestoLaboral;
+            usuarioRetornar.nombreEmpresa = usuarioRetornar.nombreEmpresa;
+            usuarioRetornar.fechaInicioExperiencia= usuarioRetornar.fechaInicioExperiencia;
+            usuarioRetornar.fechaFinExperiencia = usuarioRetornar.fechaFinExperiencia;
+
+            return usuarioRetornar;
+
+
+        }
+        #endregion
+
 
     }
 
 
- }
+}
