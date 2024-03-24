@@ -121,6 +121,43 @@ namespace yourFirstJobBack.Logica
             }
             return res; 
         }
+
+        //public ResBuscarOfertasPorTitulo buscarOfertasEmpleoPorTitulo (ReqBuscarOfertasPorTitulo req) {
+
+        //    ResBuscarOfertasPorTitulo res = new ResBuscarOfertasPorTitulo();
+
+        //    res.listaDeErrores = new List<string>();
+
+        //    res.empleos = new List<Empleo>();
+
+        //    try
+        //    {
+        //        LinqDataContext conexion = new LinqDataContext();
+
+        //        string tituloEmpleo = "Electrisista"; //Titulo quemado temporalmente
+
+        //        List<BuscarOfertasEmpleoPorTitulo> empleosDeBD = conexion.BuscarOfertasEmpleoPorTitulo(tituloEmpleo).ToList();
+
+        //        foreach (BuscarOfertasEmpleoPorTitulo cadaTC in empleosDeBD)
+        //            res.empleos.Add(this.crearEmpleo(cadaTC));
+
+        //        res.resultado = true;
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        res.resultado = false;
+        //        res.listaDeErrores.Add(ex.ToString());
+
+        //    }
+        //    finally
+        //    {
+        //        //Bitacorear
+        //    }
+        //    return res;
+        //}
+
+
         #region
 
         //Factoria
