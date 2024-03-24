@@ -56,7 +56,7 @@ namespace yourFirstJobBack.AccesoDatos
 			OnCreated();
 		}
 
-        public LinqDataContext()
+        public LinqDataContext() : this(@"Data Source=bdyourfirstjob.database.windows.net;Initial Catalog=BdYourFirstJob;Integrated Security=True")
         {
         }
 
