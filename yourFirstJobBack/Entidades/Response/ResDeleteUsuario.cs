@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using yourFirstJobBack.Entidades.entities;
 
-namespace yourFirstJobBack.Entidades.Request
+namespace yourFirstJobBack.Entidades.Response
 {
-    public class ReqIngresarUsuario
+    public class ResDeleteUsuario : ResBase
     {
-        public Usuario Usuario { get; set; }
+        public Usuario usuario { get; set; }
+
     }
 }

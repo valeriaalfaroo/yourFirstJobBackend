@@ -7,8 +7,8 @@ using yourFirstJobBack.Entidades.entities;
 
 namespace yourFirstJobBack.Entidades.Request
 {
-    public class ReqIngresarUsuario
+    public class ReqDeleteUsuario
     {
-        public Usuario Usuario { get; set; }
+        public Usuario usuario {  get; set; }
     }
 }
