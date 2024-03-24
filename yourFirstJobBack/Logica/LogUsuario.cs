@@ -31,42 +31,42 @@ namespace yourFirstJobBack.Logica
                 }
                 else
                 {
-                    if (req.Usuario.idUsuario == null)
+                    if (req.usuario.idUsuario == null)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se encuentra el usuario");
                     }
-                    if (String.IsNullOrEmpty(req.Usuario.nombreUsuario))
+                    if (String.IsNullOrEmpty(req.usuario.nombreUsuario))
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("Nombre de usuario faltante");
                     }
-                    if (String.IsNullOrEmpty(req.Usuario.apellidos))
+                    if (String.IsNullOrEmpty(req.usuario.apellidos))
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso los apellidos");
                     }
-                    if (String.IsNullOrEmpty(req.Usuario.correo))
+                    if (String.IsNullOrEmpty(req.usuario.correo))
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso el correo");
                     }
-                    if (req.Usuario.telefono == null)
+                    if (req.usuario.telefono == null)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso el numero de telefono");
                     }
-                    if (req.Usuario.fechaNacimiento == null)
+                    if (req.usuario.fechaNacimiento == null)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso la fecha de nacimiento");
                     }
-                    if (req.Usuario.idRegion == null)
+                    if (req.usuario.idRegion == null)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso id de region");
                     }
-                    if (req.Usuario.contrasena == null)
+                    if (req.usuario.contrasena == null)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso la contrasena");
@@ -78,7 +78,7 @@ namespace yourFirstJobBack.Logica
                          res.resultado = false;
                          res.listaDeErrores.Add("No se ingreso el sitio web");
                      }*/
-                    if (req.Usuario.fechaRegistro == null)
+                    if (req.usuario.fechaRegistro == null)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se encuentra la fecha de registro");
@@ -98,8 +98,8 @@ namespace yourFirstJobBack.Logica
                     int? errorId = 0;
                     string errorDescripcion = "";
 
-                    conexion.InsertUsuario(req.Usuario.nombreUsuario, req.Usuario.apellidos, req.Usuario.correo, req.Usuario.telefono,
-                        req.Usuario.fechaNacimiento, req.Usuario.idRegion, req.Usuario.contrasena);
+                    conexion.InsertUsuario(req.usuario.nombreUsuario, req.usuario.apellidos, req.usuario.correo, req.usuario.telefono,
+                        req.usuario.fechaNacimiento, req.usuario.idRegion, req.usuario.contrasena);
                     if (idreturn == 0)
                     {
                         //Error en base de datos
@@ -132,7 +132,7 @@ namespace yourFirstJobBack.Logica
             ResObtenerPerfilUsuario res = new ResObtenerPerfilUsuario();
             Usuario usuario = new Usuario();
             res.listaDeErrores = new List<string>();
-            res.usuarios = new Usuario();
+            res.usuario = new Usuario();
 
             try
             {
@@ -145,7 +145,7 @@ namespace yourFirstJobBack.Logica
                 {
 
 
-                    res.usuarios = traerUsuario(usuarioBD);
+                    res.usuario = traerUsuario(usuarioBD);
 
                
                 }
