@@ -31,42 +31,42 @@ namespace yourFirstJobBack.Logica
                 }
                 else
                 {
-                    if (req.usuario.idUsuario == null)
+                    if (req.Usuario.idUsuario == null)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se encuentra el usuario");
                     }
-                    if (String.IsNullOrEmpty(req.usuario.nombreUsuario))
+                    if (String.IsNullOrEmpty(req.Usuario.nombreUsuario))
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("Nombre de usuario faltante");
                     }
-                    if (String.IsNullOrEmpty(req.usuario.apellidos))
+                    if (String.IsNullOrEmpty(req.Usuario.apellidos))
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso los apellidos");
                     }
-                    if (String.IsNullOrEmpty(req.usuario.correo))
+                    if (String.IsNullOrEmpty(req.Usuario.correo))
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso el correo");
                     }
-                    if (req.usuario.telefono == null)
+                    if (req.Usuario.telefono == null)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso el numero de telefono");
                     }
-                    if (req.usuario.fechaNacimiento == null)
+                    if (req.Usuario.fechaNacimiento == null)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso la fecha de nacimiento");
                     }
-                    if (req.usuario.idRegion == null)
+                    if (req.Usuario.idRegion == null)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso id de region");
                     }
-                    if (req.usuario.contrasena == null)
+                    if (req.Usuario.contrasena == null)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso la contrasena");
@@ -78,7 +78,7 @@ namespace yourFirstJobBack.Logica
                          res.resultado = false;
                          res.listaDeErrores.Add("No se ingreso el sitio web");
                      }*/
-                    if (req.usuario.fechaRegistro == null)
+                    if (req.Usuario.fechaRegistro == null)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se encuentra la fecha de registro");
@@ -98,8 +98,8 @@ namespace yourFirstJobBack.Logica
                     int? errorId = 0;
                     string errorDescripcion = "";
 
-                    conexion.InsertUsuario(req.usuario.nombreUsuario, req.usuario.apellidos, req.usuario.correo, req.usuario.telefono,
-                        req.usuario.fechaNacimiento, req.usuario.idRegion, req.usuario.contrasena);
+                    conexion.InsertUsuario(req.Usuario.nombreUsuario, req.Usuario.apellidos, req.Usuario.correo, req.Usuario.telefono,
+                        req.Usuario.fechaNacimiento, req.Usuario.idRegion, req.Usuario.contrasena);
                     if (idreturn == 0)
                     {
                         //Error en base de datos
@@ -132,8 +132,7 @@ namespace yourFirstJobBack.Logica
             ResObtenerPerfilUsuario res = new ResObtenerPerfilUsuario();
             Usuario usuario = new Usuario();
             res.listaDeErrores = new List<string>();
-            res.usuario = usuario;
-
+            res.usuarios = new Usuario();
 
             try
             {
@@ -145,13 +144,8 @@ namespace yourFirstJobBack.Logica
                 if (usuarioBD != null)
                 {
 
-                    
-                    Usuario usuarioObj = new Usuario();
 
-                    usuarioObj.nombreUsuario = allUsers.nombreUsuario;  
-                    
-                    res.usuario = usuarioObj;
-                    //faltan los demas atributos?? 
+                    res.usuarios = traerUsuario(usuarioBD);
 
                
                 }
