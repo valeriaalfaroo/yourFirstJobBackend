@@ -99,7 +99,7 @@ namespace yourFirstJobBackend.Logica
                     string errorDescripcion = "";
 
                     conexion.InsertUsuario(req.usuario.nombreUsuario, req.usuario.apellidos, req.usuario.correo, req.usuario.telefono,
-                        req.usuario.fechaNacimiento, req.usuario.idRegion, req.usuario.contrasena);
+                        req.usuario.fechaNacimiento, req.usuario.idRegion, req.usuario.contrasena, ref errorId, ref errorDescripcion, ref idreturn);
                     if (idreturn == 0)
                     {
                         //Error en base de datos
