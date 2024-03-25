@@ -59,14 +59,14 @@ namespace yourFirstJobBackend.Logica
                     //llamar base de datos 
 
                    
-                    LinqDataContext conexion = new LinqDataContext();
+                    LinqDataContext conexion = new LinqDataContext("Data Source=serverbdyourfirstjob.database.windows.net;Initial Catalog=BdYourFirstJob;Persist Security Info=True;User ID=nachogoyenaga;Password=NacHoVaLeMaNueL062508;Encrypt=True");
                     //int? idReturn = 0;
                     //int? errorId = 0;
                    // string errorDescripcion = "";
 
                     // conexion a SP 
 
-                    conexion.InsertarOfertaEmpleo(req.empleo.empresa.idEmpresa,req.empleo.tituloEmpleo,req.empleo.descripcionEmpleo, req.empleo.ubicacionEmpleo,req.empleo.tipoEmpleo,req.empleo.experiencia,req.empleo.fechaPublicacion/*ref idReturn, ref errorId, ref errorDescripcion*/);
+                    conexion.InsertarOfertaEmpleo(req.empleo.empresa.idEmpresa, req.empleo.tituloEmpleo, req.empleo.descripcionEmpleo, req.empleo.ubicacionEmpleo, req.empleo.tipoEmpleo, req.empleo.experiencia, req.empleo.fechaPublicacion/*ref idReturn, ref errorId, ref errorDescripcion*/);
                     //if (idReturn == 0)
                     //{
                     //    //Error en base de datos
@@ -122,45 +122,46 @@ namespace yourFirstJobBackend.Logica
             return res; 
         }
 
-        //public ResBuscarOfertasPorTitulo buscarOfertasEmpleoPorTitulo (ReqBuscarOfertasPorTitulo req) {
+        public ResBuscarOfertasPorTitulo buscarOfertasEmpleoPorTitulo(ReqBuscarOfertasPorTitulo req)
+        {
 
-        //    ResBuscarOfertasPorTitulo res = new ResBuscarOfertasPorTitulo();
+            ResBuscarOfertasPorTitulo res = new ResBuscarOfertasPorTitulo();
 
-        //    res.listaDeErrores = new List<string>();
+            res.listaDeErrores = new List<string>();
 
-        //    res.empleos = new List<Empleo>();
+            res.empleos = new List<Empleo>();
 
-        //    try
-        //    {
-        //        LinqDataContext conexion = new LinqDataContext();
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
 
-        //        string tituloEmpleo = "Electrisista"; //Titulo quemado temporalmente
+                string tituloEmpleo = "Electrisista"; //Titulo quemado temporalmente
 
-        //        List<BuscarOfertasEmpleoPorTitulo> empleosDeBD = conexion.BuscarOfertasEmpleoPorTitulo(tituloEmpleo).ToList();
+                List<BuscarOfertasEmpleoPorTituloResult> empleosDeBD = conexion.BuscarOfertasEmpleoPorTitulo(tituloEmpleo).ToList();
 
-        //        foreach (BuscarOfertasEmpleoPorTitulo cadaTC in empleosDeBD)
-        //            res.empleos.Add(this.crearEmpleo(cadaTC));
+                foreach (BuscarOfertasEmpleoPorTituloResult cadaTC in empleosDeBD)
+                    res.empleos.Add(this.crearEmpleoT(cadaTC));
 
-        //        res.resultado = true;
+                res.resultado = true;
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        res.resultado = false;
-        //        res.listaDeErrores.Add(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
 
-        //    }
-        //    finally
-        //    {
-        //        //Bitacorear
-        //    }
-        //    return res;
-        //}
+            }
+            finally
+            {
+                //Bitacorear
+            }
+            return res;
+        }
 
 
         #region
 
-        //Factoria
+        //Factoria Todos los Empleos
         private Empleo crearEmpleo(ObtenerTodasLasOfertasEmpleoResult empleosDeBD)
         {
             Empleo empleoRetornar= new Empleo();
@@ -177,6 +178,25 @@ namespace yourFirstJobBackend.Logica
            
             return empleoRetornar;    
         }
+
+        //Factoria Todos los Empleos
+        private Empleo crearEmpleoT(BuscarOfertasEmpleoPorTituloResult empleosDeBD)
+        {
+            Empleo empleoRetornar = new Empleo();
+
+            empleoRetornar.idOfertas = empleosDeBD.idOfertas;
+            empleoRetornar.empresa.idEmpresa = (int)empleosDeBD.idEmpresa;
+            empleoRetornar.tituloEmpleo = empleosDeBD.tituloEmpleo;
+            empleoRetornar.descripcionEmpleo = empleosDeBD.descripcionEmpleo;
+            empleoRetornar.ubicacionEmpleo = empleosDeBD.ubicacionEmpleo;
+            empleoRetornar.tipoEmpleo = empleosDeBD.tipoEmpleo;
+            empleoRetornar.experiencia = empleosDeBD.experiencia;
+            empleoRetornar.fechaPublicacion = (DateTime)empleosDeBD.fechaPublicacion;
+
+
+            return empleoRetornar;
+        }
+
         #endregion
 
     }

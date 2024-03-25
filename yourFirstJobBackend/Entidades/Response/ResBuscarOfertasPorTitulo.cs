@@ -7,7 +7,7 @@ using yourFirstJobBackend.Entidades.entities;
 
 namespace yourFirstJobBackend.Entidades.Response
 {
-    internal class ResBuscarOfertasPorTitulo : ResBase {
+    public class ResBuscarOfertasPorTitulo : ResBase {
         public List<Empleo> empleos { get; set; }
     }
 }
