@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,7 +29,8 @@ namespace yourFirstJobBackend.Entidades.entities
 
         public string _nombreArchivo { get; set; }
 
-        public byte archivo { get; set; }
+        //public byte archivo { get; set; }
+        public Binary archivo { get; set; }
 
         public string tipo { get; set; }
 

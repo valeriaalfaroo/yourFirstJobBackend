@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace yourFirstJobBackend.Entidades.Response
 {
-    public class ResEliminarUsuario :ResBase
+    public class ResUpdateUsuario :ResBase
     {
-      
-
     }
 }
