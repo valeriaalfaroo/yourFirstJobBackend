@@ -14,6 +14,7 @@ namespace yourFirstJobBackend.Entidades.entities
         public int cedulaJuridica { get; set; }
         public Region region {  get; set; }
         public string descripcion {  get; set; }
+        public DateTime fechaRegistro { get; set; }
 
     }
 }
