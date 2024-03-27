@@ -165,6 +165,7 @@ namespace yourFirstJobBackend.Logica
         }
 
 
+
         #region
 
         
@@ -199,6 +200,37 @@ namespace yourFirstJobBackend.Logica
         }
         #endregion
 
+        //eliminr usuario
+        public ResEliminarUsuario eliminarUsuario(ReqEliminarUsuario req)
+        {
+            ResEliminarUsuario res = new ResEliminarUsuario();
+            res.listaDeErrores = new List<string>();
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+                int idUsuario = req.idUsuario; // Obtener el idUsuario desde el objeto req
+
+                DeleteUsuarioResult resultado = conexion.DeleteUsuario(idUsuario).SingleOrDefault();
+
+                if (resultado != null)
+                {
+                    res.resultado = true;
+                    res.mensaje = resultado.ErrorMessage; 
+                }
+                else
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("No se encontró el usuario.");
+                }
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+            }
+            return res;
+
+        }
 
     }
 

@@ -99,6 +99,20 @@ namespace yourFirstJobBackend.AccesoDatos
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tituloEmpleo);
 			return ((ISingleResult<BuscarOfertasEmpleoPorTituloResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UpdateUsuario")]
+		public ISingleResult<UpdateUsuarioResult> UpdateUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string nombreUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string apellidos, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string correo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> telefono, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaNacimiento, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idRegion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string contrasena, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string sitioWeb)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, nombreUsuario, apellidos, correo, telefono, fechaNacimiento, idRegion, contrasena, sitioWeb);
+			return ((ISingleResult<UpdateUsuarioResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.DeleteUsuario")]
+		public ISingleResult<DeleteUsuarioResult> DeleteUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario);
+			return ((ISingleResult<DeleteUsuarioResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class ObtenerTodasLasOfertasEmpleoResult
@@ -946,6 +960,58 @@ namespace yourFirstJobBackend.AccesoDatos
 				if ((this._fechaPublicacion != value))
 				{
 					this._fechaPublicacion = value;
+				}
+			}
+		}
+	}
+	
+	public partial class UpdateUsuarioResult
+	{
+		
+		private string _ErrorMessage;
+		
+		public UpdateUsuarioResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ErrorMessage", DbType="NVarChar(4000)")]
+		public string ErrorMessage
+		{
+			get
+			{
+				return this._ErrorMessage;
+			}
+			set
+			{
+				if ((this._ErrorMessage != value))
+				{
+					this._ErrorMessage = value;
+				}
+			}
+		}
+	}
+	
+	public partial class DeleteUsuarioResult
+	{
+		
+		private string _ErrorMessage;
+		
+		public DeleteUsuarioResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ErrorMessage", DbType="NVarChar(4000)")]
+		public string ErrorMessage
+		{
+			get
+			{
+				return this._ErrorMessage;
+			}
+			set
+			{
+				if ((this._ErrorMessage != value))
+				{
+					this._ErrorMessage = value;
 				}
 			}
 		}
