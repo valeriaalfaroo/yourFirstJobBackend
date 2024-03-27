@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using yourFirstJobBack.Entidades;
+using yourFirstJobBackend.Entidades.Response;
+using yourFirstJobBackend.Logica;
 namespace API.Controllers
 
 {
@@ -14,7 +15,7 @@ namespace API.Controllers
         public ResObtenerTodosLosEmpleos obtenerEmpleos()
         {
             LogOfertaEmpleo logicaBackend = new LogOfertaEmpleo();
-            return logicaBackend.obtenerEmpleos(null);
+            return logicaBackend.obtenerTodosLosEmpleos(null);
         }
         
     }
