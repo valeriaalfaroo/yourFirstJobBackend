@@ -10,12 +10,19 @@ namespace API.Controllers
 {
     public class UsuarioController : ApiController
     {
-        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/usuario/ingresarUsuario")]
         public ResIngresarUsuario insertUsuario()
         {
             LogUsuario logicaBackend = new LogUsuario();
             return logicaBackend.ingresarUsuario(null);
+        }
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("api/usuario/ObtenerUsuario")]
+        public ResObtenerPerfilUsuario obtenerUsuario()
+        {
+            LogUsuario logicaBackend = new LogUsuario();
+            return logicaBackend.obtenerUsuario(null);
         }
     }
 }
