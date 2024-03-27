@@ -8,18 +8,28 @@ namespace yourFirstJobBackend.Entidades.entities
 {
     public class Empleo
     {
+        //Atributos propios
         public int idOfertas {  get; set; }
-        public Empresa empresa { get; set; }
         public string tituloEmpleo { get; set; }
         public string descripcionEmpleo { get; set; }
         public string ubicacionEmpleo { get; set; }
-        public Profesion profesion {  get; set; }
         public string tipoEmpleo { get; set; }
         public string experiencia { get; set; }
         public DateTime fechaPublicacion { get; set; }
 
+        //Relaciones
 
+        //Empresa
+        public Empresa empresa { get; set; }
 
+        //Idiomas
+        public List<Idiomas> lstIdiomas { get; set; }
+
+        //Habilidades
+        public List<Habilidades> lstHabilidades { get; set; }
+
+        //Profesiones
+        public List<Profesion> lstProfesiones { get; set; }
 
     }
 }

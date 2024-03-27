@@ -55,12 +55,12 @@
     <Compile Include="Entidades\entities\Empleo.cs" />
     <Compile Include="Entidades\entities\Empresa.cs" />
     <Compile Include="Entidades\entities\Estudios.cs" />
-    <Compile Include="Entidades\entities\experienciaLaboral.cs" />
+    <Compile Include="Entidades\entities\ExperienciaLaboral.cs" />
     <Compile Include="Entidades\entities\Habilidades.cs" />
     <Compile Include="Entidades\entities\Idiomas.cs" />
     <Compile Include="Entidades\entities\Profesion.cs" />
     <Compile Include="Entidades\entities\Region.cs" />
-    <Compile Include="Entidades\entities\usuario.cs" />
+    <Compile Include="Entidades\entities\Usuario.cs" />
     <Compile Include="Entidades\Request\ReqBuscarOfertasPorTitulo.cs" />
     <Compile Include="Entidades\Request\ReqEliminarUsuario.cs" />
     <Compile Include="Entidades\Request\ReqIngresarEmpleo.cs" />
