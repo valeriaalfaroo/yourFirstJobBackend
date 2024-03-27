@@ -84,4 +84,24 @@
       <Column Name="fechaPublicacion" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.UpdateUsuario" Method="UpdateUsuario">
+    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nombreUsuario" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="apellidos" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="correo" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="telefono" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fechaNacimiento" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="idRegion" Type="System.Int32" DbType="Int" />
+    <Parameter Name="contrasena" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="sitioWeb" Type="System.String" DbType="VarChar(255)" />
+    <ElementType Name="UpdateUsuarioResult">
+      <Column Name="ErrorMessage" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.DeleteUsuario" Method="DeleteUsuario">
+    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
+    <ElementType Name="DeleteUsuarioResult">
+      <Column Name="ErrorMessage" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

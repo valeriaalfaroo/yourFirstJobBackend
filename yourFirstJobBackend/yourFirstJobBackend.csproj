@@ -62,12 +62,14 @@
     <Compile Include="Entidades\entities\Region.cs" />
     <Compile Include="Entidades\entities\usuario.cs" />
     <Compile Include="Entidades\Request\ReqBuscarOfertasPorTitulo.cs" />
+    <Compile Include="Entidades\Request\ReqEliminarUsuario.cs" />
     <Compile Include="Entidades\Request\ReqIngresarEmpleo.cs" />
     <Compile Include="Entidades\Request\ReqIngresarUsuario.cs" />
     <Compile Include="Entidades\Request\ReqObtenerTodosLosEmpleos.cs" />
     <Compile Include="Entidades\Request\ReqObtenerUsuario.cs" />
     <Compile Include="Entidades\Response\ResBase.cs" />
     <Compile Include="Entidades\Response\ResBuscarOfertasPorTitulo.cs" />
+    <Compile Include="Entidades\Response\ResEliminarUsuario.cs" />
     <Compile Include="Entidades\Response\ResIngresarEmpleo.cs" />
     <Compile Include="Entidades\Response\ResIngresarUsuario.cs" />
     <Compile Include="Entidades\Response\ResObtenerPerfilUsuario.cs" />
