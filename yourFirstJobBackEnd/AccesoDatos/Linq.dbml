@@ -1,22 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BdYourFirstJob" Class="LinqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=serverbdyourfirstjob.database.windows.net;Initial Catalog=BdYourFirstJob;Persist Security Info=True;User ID=nachogoyenaga;Encrypt=True" SettingsObjectName="yourFirstJobBackend.Properties.Settings" SettingsPropertyName="BdYourFirstJobConnectionString" Provider="System.Data.SqlClient" />
-  <Function Name="dbo.ObtenerTodasLasOfertasEmpleo" Method="ObtenerTodasLasOfertasEmpleo">
-    <ElementType Name="ObtenerTodasLasOfertasEmpleoResult">
-      <Column Name="idOfertas" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idEmpresa" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="tituloEmpleo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="descripcionEmpleo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="ubicacionEmpleo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="tipoEmpleo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="experiencia" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="fechaPublicacion" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="idArchivosEmpresa" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idEmpresa1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nombreArchivo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="archivo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="tipo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.InsertarOfertaEmpleo" Method="InsertarOfertaEmpleo">
     <Parameter Name="idEmpresa" Type="System.Int32" DbType="Int" />
     <Parameter Name="tituloEmpleo" Type="System.String" DbType="VarChar(255)" />
@@ -102,6 +85,58 @@
     <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
     <ElementType Name="DeleteUsuarioResult">
       <Column Name="ErrorMessage" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Select_Idiomas_Oferta" Method="Select_Idiomas_Oferta">
+    <Parameter Name="idOferta" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <ElementType Name="Select_Idiomas_OfertaResult">
+      <Column Name="idIdioma" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idioma" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="nivel" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Select_Profeciones_Oferta" Method="Select_Profeciones_Oferta">
+    <Parameter Name="idOferta" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <ElementType Name="Select_Profeciones_OfertaResult">
+      <Column Name="idProfesion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nombreProfesion" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="descripcion" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Select_Habilidades_Oferta" Method="Select_Habilidades_Oferta">
+    <Parameter Name="idOferta" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <ElementType Name="Select_Habilidades_OfertaResult">
+      <Column Name="idHabilidades" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="categoria" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="descripcion" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ObtenerTodasLasOfertasEmpleo" Method="ObtenerTodasLasOfertasEmpleo">
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <ElementType Name="ObtenerTodasLasOfertasEmpleoResult">
+      <Column Name="idOfertas" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idEmpresa" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="tituloEmpleo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="descripcionEmpleo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ubicacionEmpleo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="tipoEmpleo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="experiencia" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="fechaPublicacion" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="idEmpresa1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nombreEmpresa" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="telefonoEmpresa" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="cedulaJuridica" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idRegion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="descripcion" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="fechaRegitro" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nombreRegion" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>
