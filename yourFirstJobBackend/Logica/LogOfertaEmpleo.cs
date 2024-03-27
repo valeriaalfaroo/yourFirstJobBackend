@@ -166,8 +166,14 @@ namespace yourFirstJobBackend.Logica
         {
             Empleo empleoRetornar= new Empleo();
 
+            Empresa empresaRetornar = new Empresa();
+
             empleoRetornar.idOfertas = empleosDeBD.idOfertas;
-            empleoRetornar.empresa.idEmpresa = (int)empleosDeBD.idEmpresa;
+
+            empresaRetornar.idEmpresa = (int)empleosDeBD.idEmpresa;
+
+            empleoRetornar.empresa = empresaRetornar;
+
             empleoRetornar.tituloEmpleo = empleosDeBD.tituloEmpleo;
             empleoRetornar.descripcionEmpleo = empleosDeBD.descripcionEmpleo;
             empleoRetornar.ubicacionEmpleo = empleosDeBD.ubicacionEmpleo;
