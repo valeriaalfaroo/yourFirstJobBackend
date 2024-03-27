@@ -25,7 +25,7 @@ namespace API.Controllers
         public ResIngresarEmpleo ingresarEmpleo(ReqIngresarEmpleo req)
         {
             LogOfertaEmpleo logicaBackend = new LogOfertaEmpleo();
-            return logicaBackend.ingresarEmpleo(null);
+            return logicaBackend.ingresarEmpleo(req);
         }
 
     }

@@ -59,7 +59,7 @@ namespace yourFirstJobBackend.Logica
                     //llamar base de datos 
 
                    
-                    LinqDataContext conexion = new LinqDataContext("Data Source=serverbdyourfirstjob.database.windows.net;Initial Catalog=BdYourFirstJob;Persist Security Info=True;User ID=nachogoyenaga;Password=NacHoVaLeMaNueL062508;Encrypt=True");
+                    LinqDataContext conexion = new LinqDataContext();
                     //int? idReturn = 0;
                     //int? errorId = 0;
                    // string errorDescripcion = "";
