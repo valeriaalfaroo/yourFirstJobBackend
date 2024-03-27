@@ -199,6 +199,27 @@ namespace yourFirstJobBack.Logica
         }
         #endregion
 
+        public ResDeleteUsuario borrarUsuario(ReqDeleteUsuario req)
+        {
+            ResDeleteUsuario res = new ResDeleteUsuario();
+            Usuario usuario = new Usuario();
+            res.listaDeErrores = new List<string>();
+            res.usuario = new Usuario();
+
+            try {
+                LinqDataContext conexion = new LinqDataContext();
+
+                int idUsuario = 1; //dato quemado
+                delet usuarioBD = conexion.DeleteDatabase(idUsuario).SingleOrDefault();
+
+            }
+            catch(Exception ex) { 
+            
+            
+            }
+
+
+        }
 
     }
 
