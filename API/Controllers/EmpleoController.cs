@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using yourFirstJobBackend.Entidades.Response;
 using yourFirstJobBackend.Logica;
 namespace API.Controllers
 
 {
-    public class EmpleoController
+    public class EmpleoController : ApiController
     {
 
         [System.Web.Http.HttpGet]
