@@ -14,118 +14,95 @@ namespace yourFirstJobBackend.Logica
 {
     public class LogUsuario
     {
-        //ingresar un usuario
-        public ResIngresarUsuario ingresarUsuario(ReqIngresarUsuario req)
+        
+        public ResIngresarUsuario IngresarUsuario(Usuario usuario)
         {
-
-
             ResIngresarUsuario res = new ResIngresarUsuario();
 
             try
             {
                 res.resultado = false;
                 res.listaDeErrores = new List<string>();
-                if (req == null)
+
+                // Validación de los campos del usuario
+                if (usuario == null)
                 {
-                    res.resultado = false;
                     res.listaDeErrores.Add("Request nulo");
                 }
                 else
                 {
-                    if (req.usuario.idUsuario == null)
+                    if (usuario.idUsuario == null)
                     {
-                        res.resultado = false;
                         res.listaDeErrores.Add("No se encuentra el usuario");
                     }
-                    if (String.IsNullOrEmpty(req.usuario.nombreUsuario))
+                    if (String.IsNullOrEmpty(usuario.nombreUsuario))
                     {
-                        res.resultado = false;
                         res.listaDeErrores.Add("Nombre de usuario faltante");
                     }
-                    if (String.IsNullOrEmpty(req.usuario.apellidos))
+                    if (String.IsNullOrEmpty(usuario.apellidos))
                     {
-                        res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso los apellidos");
                     }
-                    if (String.IsNullOrEmpty(req.usuario.correo))
+                    if (String.IsNullOrEmpty(usuario.correo))
                     {
-                        res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso el correo");
                     }
-                    if (req.usuario.telefono == null)
+                    if (usuario.telefono == 0) 
                     {
-                        res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso el numero de telefono");
                     }
-                    if (req.usuario.fechaNacimiento == null)
+                    if (usuario.fechaNacimiento == DateTime.MinValue) 
                     {
-                        res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso la fecha de nacimiento");
                     }
-                    if (req.usuario.idRegion == null)
+                    if (usuario.idRegion == null)
                     {
-                        res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso id de region");
                     }
-                    if (req.usuario.contrasena == null)
+                    if (String.IsNullOrEmpty(usuario.contrasena))
                     {
-                        res.resultado = false;
                         res.listaDeErrores.Add("No se ingreso la contrasena");
                     }
-
-                    //puede ser null ya q no todos tienen web page
-                    /* if (String.IsNullOrEmpty(req.Usuario.sitioWeb))
-                     {
-                         res.resultado = false;
-                         res.listaDeErrores.Add("No se ingreso el sitio web");
-                     }*/
-                    if (req.usuario.fechaRegistro == null)
+                    /*if (usuario.fechaRegistro == DateTime.MinValue)
                     {
-                        res.resultado = false;
                         res.listaDeErrores.Add("No se encuentra la fecha de registro");
-                    }
+                    }*/ //fecha lo ingresa la bd
                 }
-                if (res.listaDeErrores.Any())
-                {
-                    res.resultado = false;
-                }
-                else
-                {
 
+                // Si no hay errores de validación, intenta insertar el usuario en la base de datos
+                if (!res.listaDeErrores.Any())
+                {
                     LinqDataContext conexion = new LinqDataContext();
-                    int? idreturn = 0;
+                    int? idReturn = 0;
                     int? errorId = 0;
                     string errorDescripcion = "";
 
-                    conexion.InsertUsuario(req.usuario.nombreUsuario, req.usuario.apellidos, req.usuario.correo, req.usuario.telefono,
-                        req.usuario.fechaNacimiento, req.usuario.idRegion, req.usuario.contrasena, ref errorId, ref errorDescripcion, ref idreturn);
-                    if (idreturn == 0)
+                    conexion.InsertUsuario(usuario.nombreUsuario, usuario.apellidos, usuario.correo, usuario.telefono,
+                        usuario.fechaNacimiento, usuario.idRegion, usuario.contrasena, ref errorId, ref errorDescripcion, ref idReturn);
+
+                    if (idReturn == 0)
                     {
-                        //Error en base de datos
-                        res.resultado = false;
+                        // Error en la base de datos
                         res.listaDeErrores.Add(errorDescripcion);
                     }
                     else
                     {
                         res.resultado = true;
                     }
-
-                    
                 }
-
             }
             catch (Exception ex)
             {
-                res.resultado = false;
                 res.listaDeErrores.Add(ex.ToString());
-
             }
-            finally { //bitacora
+            finally
+            {
+                // Bitácora
+            }
 
-                      }
             return res;
-
         }
+
 
 
         //traer un usuario
