@@ -19,39 +19,19 @@ namespace yourFirstJobBackend.Entidades.entities
         public string contrasena { get; set; }
         public string sitioWeb { get; set; }
         public DateTime fechaRegistro { get; set; }
-        public string nombreInstitucion { get; set; }
 
-        public string gradoAcademico { get; set; }
+        //agregar listas
+        //Idiomas
 
-        public DateTime fechaInicioEstudio { get; set; }
+        public List<Idiomas> listaIdiomas { get; set; }
 
-        public DateTime fechaFinEstudio { get; set; }
+        public List<Habilidades> listaHabilidades { get; set; }
+        public List<Estudios> listaEstudios { get; set; }
 
-        public string _nombreArchivo { get; set; }
 
-        //public byte archivo { get; set; }
-        public Binary archivo { get; set; }
+        public List<ArchivosUsuario> listaArchivosUsuarios { get; set; }
 
-        public string tipo { get; set; }
-
-        public string categoria { get; set; }
-
-        public string descripcion { get; set; }
-
-        public string idioma { get; set; }
-
-        public string nivel { get; set; }
-
-        public string puestoLaboral { get; set; }
-
-        public string nombreEmpresa { get; set; }
-
-        public string responsabilidades { get; set; }
-
-        public DateTime fechaInicioExperiencia { get; set; }
-
-        public DateTime fechaFinExperiencia { get; set; }
-
+        public List<ExperienciaLaboral> listaExperienciaLaboral { get; set; }
 
     }
 }
