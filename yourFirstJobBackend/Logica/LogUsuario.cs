@@ -91,10 +91,8 @@ namespace yourFirstJobBackend.Logica
                 }
                 else
                 {
-                    //Llamar a la base de datos
 
                     LinqDataContext conexion = new LinqDataContext();
-                    //faltan los ref en sp
                     int? idreturn = 0;
                     int? errorId = 0;
                     string errorDescripcion = "";
@@ -135,6 +133,8 @@ namespace yourFirstJobBackend.Logica
         {
             ResObtenerPerfilUsuario res = new ResObtenerPerfilUsuario();
             res.listaDeErrores = new List<string>();
+            int? errorId = 0;
+            string errorDescripcion = "";
 
             try
             {
@@ -145,10 +145,14 @@ namespace yourFirstJobBackend.Logica
                 int? errorId = 0;
                 string errorDescripcion = "";
 
+                SP_InformacionUsuarioResult usuarioBD = conexion.SP_InformacionUsuario(idUsuario, ref errorId, ref errorDescripcion).FirstOrDefault();
+
+
                 ObtenerInformacionUsuarioResult usuarioBD = conexion.ObtenerInformacionUsuario(idUsuario, ref errorId, ref errorDescripcion).FirstOrDefault();
 
                 if (errorId != 0)
                 {
+
                     //Error en base de datos
                     //No se hizo la publicacion
                     res.resultado = false;
@@ -169,6 +173,158 @@ namespace yourFirstJobBackend.Logica
                 }
 
                 
+
+                    //lista 
+                    List<Idiomas> listaIdiomas = new List<Idiomas>();
+                    List<Habilidades> listaHabilidad = new List<Habilidades>();
+                    List<Estudios> listaEstudio = new List<Estudios>();
+                    List<ArchivosUsuario> listaArchivoUsuario = new List<ArchivosUsuario>();
+                    List<ExperienciaLaboral> listaExperienciaLaboral = new List<ExperienciaLaboral>();
+                    res.resultado=true;
+                    res.usuario = traerUsuario(usuarioBD);
+                    res.usuario.listaIdiomas = listaIdiomas;
+                    res.usuario.listaHabilidades = listaHabilidad;
+                    res.usuario.listaEstudios = listaEstudio;
+                    res.usuario.listaArchivosUsuarios = listaArchivoUsuario;
+                    res.usuario.listaExperienciaLaboral = listaExperienciaLaboral;
+                    
+                   
+                    int? errorIdIdiomas = 0;
+                    string errorDescripcionIdiomas = "";
+
+                    foreach (var idiomaInfo in conexion.Select_Idiomas_Oferta(usuarioBD.idUsuario, ref errorIdIdiomas, ref errorDescripcionIdiomas))
+                    {
+                        if (errorIdIdiomas == 1)
+                        {
+                            //Error SP Idiomas
+                            res.resultado = false;
+                            res.listaDeErrores.Add(errorDescripcionIdiomas);
+
+                        }
+                        else
+                        {
+                            Idiomas idioma = new Idiomas();
+
+                            idioma.idIdioma = idiomaInfo.idIdioma;
+                            idioma.idioma = idiomaInfo.idioma;
+                            idioma.nivel = idiomaInfo.nivel;
+
+                            listaIdiomas.Add(idioma); // Agrega el idioma a la lista
+
+                        }
+
+                    }
+
+                    int? errorIdHabilidades = 0;
+                    string errorDescripcionidHabilidad = "";
+
+                    foreach (var habilidadInfo in conexion.Select_Habilidad_Usuario(usuarioBD.idUsuario, ref errorIdHabilidades, ref errorDescripcionidHabilidad))
+                    {
+                        if (errorIdHabilidades == 1)
+                        {
+                            res.resultado = false;
+                            res.listaDeErrores.Add(errorDescripcionidHabilidad);
+
+                        }
+                        else
+                        {
+                         Habilidades habilidades = new Habilidades();
+                            habilidades.idHabilidades = habilidadInfo.idHabilidades;
+                           habilidades.categoria = habilidadInfo.categoria;
+                            habilidades .descripcion= habilidadInfo.descripcion;
+                            
+                            listaHabilidad.Add(habilidades);
+
+                        }
+
+                    }
+
+
+                    int? errorIdEstudios = 0;
+                    string errorDescripcionidEstudios = "";
+                    foreach (var EstudiosInfo in conexion.Select_Estudios_Usuario(usuarioBD.idUsuario, ref errorIdEstudios, ref errorDescripcionidEstudios))
+                    {
+                        if (errorIdEstudios == 1)
+                        {
+                            res.resultado = false;
+                            res.listaDeErrores.Add(errorDescripcionidEstudios);
+
+                        }
+                        else
+                        {
+                            Estudios estudios = new Estudios();
+                            estudios.idEstudios = EstudiosInfo.idEstudios;
+                            estudios.nombreInstitucion = EstudiosInfo.nombreInstitucion;
+                            estudios.gradoAcademico = EstudiosInfo.gradoAcademico;
+                            estudios.fechaInicio = EstudiosInfo.fechaInicio;
+                            estudios.fechaFinalizacion = EstudiosInfo.fechaFinalizacion;
+
+
+                            listaEstudio.Add(estudios);
+                        }
+
+                    }
+
+
+                    int? errorIdArchivosU = 0;
+                    string errorDescripcionidArchivosU = "";
+                    foreach (var ArchivosInfo in conexion.Select_Archivos_Usuario(usuarioBD.idUsuario, ref errorIdEstudios, ref errorDescripcionidEstudios))
+                    {
+                        if (errorIdEstudios == 1)
+                        {
+                            res.resultado = false;
+                            res.listaDeErrores.Add(errorDescripcionidArchivosU);
+
+                        }
+                        else
+                        {
+                            ArchivosUsuario archivUsuario = new ArchivosUsuario();
+                            archivUsuario.idArchivosUsuarios = ArchivosInfo.idArchivosUsuarios;
+                            archivUsuario.idUsuario = ArchivosInfo.idUsuario;
+                            archivUsuario.nombreArchivo = ArchivosInfo.nombreArchivo;
+                            archivUsuario.archivo = ArchivosInfo.archivo;
+                            archivUsuario.tipo = ArchivosInfo.tipo;
+
+                       listaArchivoUsuario.Add(archivUsuario);
+                        }
+
+                    }
+
+
+                    int? errorIdExLaboral = 0;
+                    string errorDescripcionidExLaboral = "";
+                    foreach (var ExperienciaInfo in conexion.Select_Experiencia_Laboral(usuarioBD.idUsuario, ref errorIdExLaboral, ref errorDescripcionidExLaboral))
+                    {
+                        if (errorIdExLaboral == 1)
+                        {
+                            res.resultado = false;
+                            res.listaDeErrores.Add(errorDescripcionidExLaboral);
+
+                        }
+                        else
+                        {
+                            ExperienciaLaboral exLaboral = new ExperienciaLaboral();
+                            exLaboral.idExperiencia = ExperienciaInfo.idExperiencia;
+                            exLaboral.idUsuario = ExperienciaInfo.idUsuario;
+                            exLaboral.idProfesion = ExperienciaInfo.idProfesion;
+                            exLaboral.puesto = ExperienciaInfo.puesto;
+                            exLaboral.nombreEmpresa = ExperienciaInfo.nombreEmpresa;
+                            exLaboral.responsabilidades = ExperienciaInfo.responsabilidades;
+                            exLaboral.fechaInicio = ExperienciaInfo.fechaInicio;
+                            exLaboral.fechaFinalizacion = ExperienciaInfo.fechaFinalizacion;
+
+                            listaExperienciaLaboral.Add(exLaboral);
+                        }
+
+                    }
+
+
+
+                }
+               
+                
+               
+
             }
             catch (Exception ex)
             {
@@ -187,7 +343,7 @@ namespace yourFirstJobBackend.Logica
         #region
 
         
-        private Usuario traerUsuario(ObtenerInformacionUsuarioResult usuarioBD)
+        private Usuario traerUsuario(SP_InformacionUsuarioResult usuarioBD)
         {
             Usuario usuarioRetornar = new Usuario();
             usuarioRetornar.nombreUsuario=usuarioBD.nombreUsuario;
@@ -196,26 +352,18 @@ namespace yourFirstJobBackend.Logica
             usuarioRetornar.telefono = usuarioBD.telefono;
             usuarioRetornar.fechaNacimiento = usuarioBD.fechaNacimiento;
             usuarioRetornar.sitioWeb = usuarioBD.sitioWeb;
-            usuarioRetornar.nombreInstitucion = usuarioBD.nombreInstitucion;
-            usuarioRetornar.gradoAcademico = usuarioBD.gradoAcademico;
-            usuarioRetornar.fechaInicioEstudio = (DateTime)usuarioBD.fechaInicioEstudio;
-            usuarioRetornar.fechaFinEstudio = (DateTime)usuarioBD.fechaFinEstudio;
-            usuarioRetornar._nombreArchivo = usuarioBD.nombreArchivo;
-            usuarioRetornar.archivo = usuarioBD.archivo;  //en entidad usuario estaba como byte, cambie a binary
-            usuarioRetornar.tipo = usuarioBD.tipo;
-            usuarioRetornar.categoria = usuarioBD.categoria;
-            usuarioRetornar.descripcion = usuarioBD.descripcion;
-            usuarioRetornar.idioma = usuarioBD.idioma;
-            usuarioRetornar.nivel= usuarioBD.nivel;
-            usuarioRetornar.puestoLaboral = usuarioBD.puestoLaboral;
-            usuarioRetornar.nombreEmpresa = usuarioBD.nombreEmpresa;
-            usuarioRetornar.responsabilidades = usuarioBD.  responsabilidades;
-            usuarioRetornar.fechaInicioExperiencia = (DateTime)usuarioBD.fechaInicioExperiencia;
-            usuarioRetornar.fechaFinExperiencia = (DateTime)usuarioBD.fechaFinExperiencia;
+            usuarioRetornar.idRegion = usuarioBD.idRegion;
+            usuarioRetornar.idUsuario= usuarioBD.idUsuario;
+            usuarioRetornar.contrasena = usuarioBD.contrasena;
+
+           
             return usuarioRetornar;
 
 
         }
+
+
+
         #endregion
 
 

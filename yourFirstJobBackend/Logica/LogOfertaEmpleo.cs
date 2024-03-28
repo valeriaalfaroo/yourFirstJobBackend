@@ -229,6 +229,8 @@ namespace yourFirstJobBackend.Logica
             return res; 
         }
 
+
+
         public ResBuscarOfertasPorTitulo buscarOfertasEmpleoPorTitulo(ReqBuscarOfertasPorTitulo req)
         {
 
