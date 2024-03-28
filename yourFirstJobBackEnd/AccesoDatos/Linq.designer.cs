@@ -62,11 +62,33 @@ namespace yourFirstJobBackend.AccesoDatos
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertarOfertaEmpleo")]
-		public ISingleResult<InsertarOfertaEmpleoResult> InsertarOfertaEmpleo([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idEmpresa, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string tituloEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string descripcionEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string ubicacionEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string tipoEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string experiencia, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaPublicacion)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.BuscarOfertasEmpleoPorTitulo")]
+		public ISingleResult<BuscarOfertasEmpleoPorTituloResult> BuscarOfertasEmpleoPorTitulo([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string tituloEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idEmpresa, tituloEmpleo, descripcionEmpleo, ubicacionEmpleo, tipoEmpleo, experiencia, fechaPublicacion);
-			return ((ISingleResult<InsertarOfertaEmpleoResult>)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tituloEmpleo, errorOccurred, errorMensaje);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(1)));
+			errorMensaje = ((string)(result.GetParameterValue(2)));
+			return ((ISingleResult<BuscarOfertasEmpleoPorTituloResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.DeleteUsuario")]
+		public ISingleResult<DeleteUsuarioResult> DeleteUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LineasBorradas", DbType="Int")] ref System.Nullable<int> lineasBorradas)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, errorOccurred, errorMensaje, lineasBorradas);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(1)));
+			errorMensaje = ((string)(result.GetParameterValue(2)));
+			lineasBorradas = ((System.Nullable<int>)(result.GetParameterValue(3)));
+			return ((ISingleResult<DeleteUsuarioResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertarOfertaEmpleo")]
+		public int InsertarOfertaEmpleo([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idEmpresa, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string tituloEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string descripcionEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string ubicacionEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string tipoEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string experiencia, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaPublicacion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdReturn", DbType="Int")] ref System.Nullable<int> idReturn)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idEmpresa, tituloEmpleo, descripcionEmpleo, ubicacionEmpleo, tipoEmpleo, experiencia, fechaPublicacion, errorOccurred, errorMensaje, idReturn);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(7)));
+			errorMensaje = ((string)(result.GetParameterValue(8)));
+			idReturn = ((System.Nullable<int>)(result.GetParameterValue(9)));
+			return ((int)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertUsuario")]
@@ -80,31 +102,30 @@ namespace yourFirstJobBackend.AccesoDatos
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ObtenerInformacionUsuario")]
-		public ISingleResult<ObtenerInformacionUsuarioResult> ObtenerInformacionUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario)
+		public ISingleResult<ObtenerInformacionUsuarioResult> ObtenerInformacionUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, errorOccurred, errorMensaje);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(1)));
+			errorMensaje = ((string)(result.GetParameterValue(2)));
 			return ((ISingleResult<ObtenerInformacionUsuarioResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.BuscarOfertasEmpleoPorTitulo")]
-		public ISingleResult<BuscarOfertasEmpleoPorTituloResult> BuscarOfertasEmpleoPorTitulo([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string tituloEmpleo)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ObtenerTodasLasOfertasEmpleo")]
+		public ISingleResult<ObtenerTodasLasOfertasEmpleoResult> ObtenerTodasLasOfertasEmpleo([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tituloEmpleo);
-			return ((ISingleResult<BuscarOfertasEmpleoPorTituloResult>)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), errorOccurred, errorMensaje);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(0)));
+			errorMensaje = ((string)(result.GetParameterValue(1)));
+			return ((ISingleResult<ObtenerTodasLasOfertasEmpleoResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UpdateUsuario")]
-		public ISingleResult<UpdateUsuarioResult> UpdateUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string nombreUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string apellidos, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string correo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> telefono, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaNacimiento, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idRegion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string contrasena, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string sitioWeb)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Select_Habilidades_Oferta")]
+		public ISingleResult<Select_Habilidades_OfertaResult> Select_Habilidades_Oferta([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idOferta, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, nombreUsuario, apellidos, correo, telefono, fechaNacimiento, idRegion, contrasena, sitioWeb);
-			return ((ISingleResult<UpdateUsuarioResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.DeleteUsuario")]
-		public ISingleResult<DeleteUsuarioResult> DeleteUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario);
-			return ((ISingleResult<DeleteUsuarioResult>)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idOferta, errorOccurred, errorMensaje);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(1)));
+			errorMensaje = ((string)(result.GetParameterValue(2)));
+			return ((ISingleResult<Select_Habilidades_OfertaResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Select_Idiomas_Oferta")]
@@ -125,22 +146,166 @@ namespace yourFirstJobBackend.AccesoDatos
 			return ((ISingleResult<Select_Profeciones_OfertaResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Select_Habilidades_Oferta")]
-		public ISingleResult<Select_Habilidades_OfertaResult> Select_Habilidades_Oferta([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idOferta, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UpdateUsuario")]
+		public ISingleResult<UpdateUsuarioResult> UpdateUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string nombreUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string apellidos, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string correo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> telefono, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaNacimiento, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idRegion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string contrasena, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string sitioWeb, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CamposActualizados", DbType="Int")] ref System.Nullable<int> camposActualizados)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idOferta, errorOccurred, errorMensaje);
-			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(1)));
-			errorMensaje = ((string)(result.GetParameterValue(2)));
-			return ((ISingleResult<Select_Habilidades_OfertaResult>)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, nombreUsuario, apellidos, correo, telefono, fechaNacimiento, idRegion, contrasena, sitioWeb, errorOccurred, errorMensaje, camposActualizados);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(9)));
+			errorMensaje = ((string)(result.GetParameterValue(10)));
+			camposActualizados = ((System.Nullable<int>)(result.GetParameterValue(11)));
+			return ((ISingleResult<UpdateUsuarioResult>)(result.ReturnValue));
+		}
+	}
+	
+	public partial class BuscarOfertasEmpleoPorTituloResult
+	{
+		
+		private int _idOfertas;
+		
+		private int _idEmpresa;
+		
+		private string _tituloEmpleo;
+		
+		private string _descripcionEmpleo;
+		
+		private string _ubicacionEmpleo;
+		
+		private string _tipoEmpleo;
+		
+		private string _experiencia;
+		
+		private System.DateTime _fechaPublicacion;
+		
+		public BuscarOfertasEmpleoPorTituloResult()
+		{
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ObtenerTodasLasOfertasEmpleo")]
-		public ISingleResult<ObtenerTodasLasOfertasEmpleoResult> ObtenerTodasLasOfertasEmpleo([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idOfertas", DbType="Int NOT NULL")]
+		public int idOfertas
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), errorOccurred, errorMensaje);
-			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(0)));
-			errorMensaje = ((string)(result.GetParameterValue(1)));
-			return ((ISingleResult<ObtenerTodasLasOfertasEmpleoResult>)(result.ReturnValue));
+			get
+			{
+				return this._idOfertas;
+			}
+			set
+			{
+				if ((this._idOfertas != value))
+				{
+					this._idOfertas = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEmpresa", DbType="Int NOT NULL")]
+		public int idEmpresa
+		{
+			get
+			{
+				return this._idEmpresa;
+			}
+			set
+			{
+				if ((this._idEmpresa != value))
+				{
+					this._idEmpresa = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tituloEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string tituloEmpleo
+		{
+			get
+			{
+				return this._tituloEmpleo;
+			}
+			set
+			{
+				if ((this._tituloEmpleo != value))
+				{
+					this._tituloEmpleo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcionEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string descripcionEmpleo
+		{
+			get
+			{
+				return this._descripcionEmpleo;
+			}
+			set
+			{
+				if ((this._descripcionEmpleo != value))
+				{
+					this._descripcionEmpleo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ubicacionEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string ubicacionEmpleo
+		{
+			get
+			{
+				return this._ubicacionEmpleo;
+			}
+			set
+			{
+				if ((this._ubicacionEmpleo != value))
+				{
+					this._ubicacionEmpleo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tipoEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string tipoEmpleo
+		{
+			get
+			{
+				return this._tipoEmpleo;
+			}
+			set
+			{
+				if ((this._tipoEmpleo != value))
+				{
+					this._tipoEmpleo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_experiencia", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string experiencia
+		{
+			get
+			{
+				return this._experiencia;
+			}
+			set
+			{
+				if ((this._experiencia != value))
+				{
+					this._experiencia = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaPublicacion", DbType="Date NOT NULL")]
+		public System.DateTime fechaPublicacion
+		{
+			get
+			{
+				return this._fechaPublicacion;
+			}
+			set
+			{
+				if ((this._fechaPublicacion != value))
+				{
+					this._fechaPublicacion = value;
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_InformacionUsuario")]
@@ -189,27 +354,27 @@ namespace yourFirstJobBackend.AccesoDatos
 		}
 	}
 	
-	public partial class InsertarOfertaEmpleoResult
+	public partial class DeleteUsuarioResult
 	{
 		
-		private string _ErrorMessage;
+		private string _Message;
 		
-		public InsertarOfertaEmpleoResult()
+		public DeleteUsuarioResult()
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ErrorMessage", DbType="NVarChar(4000)")]
-		public string ErrorMessage
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string Message
 		{
 			get
 			{
-				return this._ErrorMessage;
+				return this._Message;
 			}
 			set
 			{
-				if ((this._ErrorMessage != value))
+				if ((this._Message != value))
 				{
-					this._ErrorMessage = value;
+					this._Message = value;
 				}
 			}
 		}
@@ -645,396 +810,6 @@ namespace yourFirstJobBackend.AccesoDatos
 		}
 	}
 	
-	public partial class BuscarOfertasEmpleoPorTituloResult
-	{
-		
-		private int _idOfertas;
-		
-		private int _idEmpresa;
-		
-		private string _tituloEmpleo;
-		
-		private string _descripcionEmpleo;
-		
-		private string _ubicacionEmpleo;
-		
-		private string _tipoEmpleo;
-		
-		private string _experiencia;
-		
-		private System.DateTime _fechaPublicacion;
-		
-		public BuscarOfertasEmpleoPorTituloResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idOfertas", DbType="Int NOT NULL")]
-		public int idOfertas
-		{
-			get
-			{
-				return this._idOfertas;
-			}
-			set
-			{
-				if ((this._idOfertas != value))
-				{
-					this._idOfertas = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEmpresa", DbType="Int NOT NULL")]
-		public int idEmpresa
-		{
-			get
-			{
-				return this._idEmpresa;
-			}
-			set
-			{
-				if ((this._idEmpresa != value))
-				{
-					this._idEmpresa = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tituloEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string tituloEmpleo
-		{
-			get
-			{
-				return this._tituloEmpleo;
-			}
-			set
-			{
-				if ((this._tituloEmpleo != value))
-				{
-					this._tituloEmpleo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcionEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string descripcionEmpleo
-		{
-			get
-			{
-				return this._descripcionEmpleo;
-			}
-			set
-			{
-				if ((this._descripcionEmpleo != value))
-				{
-					this._descripcionEmpleo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ubicacionEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string ubicacionEmpleo
-		{
-			get
-			{
-				return this._ubicacionEmpleo;
-			}
-			set
-			{
-				if ((this._ubicacionEmpleo != value))
-				{
-					this._ubicacionEmpleo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tipoEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string tipoEmpleo
-		{
-			get
-			{
-				return this._tipoEmpleo;
-			}
-			set
-			{
-				if ((this._tipoEmpleo != value))
-				{
-					this._tipoEmpleo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_experiencia", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string experiencia
-		{
-			get
-			{
-				return this._experiencia;
-			}
-			set
-			{
-				if ((this._experiencia != value))
-				{
-					this._experiencia = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaPublicacion", DbType="Date NOT NULL")]
-		public System.DateTime fechaPublicacion
-		{
-			get
-			{
-				return this._fechaPublicacion;
-			}
-			set
-			{
-				if ((this._fechaPublicacion != value))
-				{
-					this._fechaPublicacion = value;
-				}
-			}
-		}
-	}
-	
-	public partial class UpdateUsuarioResult
-	{
-		
-		private string _ErrorMessage;
-		
-		public UpdateUsuarioResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ErrorMessage", DbType="NVarChar(4000)")]
-		public string ErrorMessage
-		{
-			get
-			{
-				return this._ErrorMessage;
-			}
-			set
-			{
-				if ((this._ErrorMessage != value))
-				{
-					this._ErrorMessage = value;
-				}
-			}
-		}
-	}
-	
-	public partial class DeleteUsuarioResult
-	{
-		
-		private string _ErrorMessage;
-		
-		public DeleteUsuarioResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ErrorMessage", DbType="NVarChar(4000)")]
-		public string ErrorMessage
-		{
-			get
-			{
-				return this._ErrorMessage;
-			}
-			set
-			{
-				if ((this._ErrorMessage != value))
-				{
-					this._ErrorMessage = value;
-				}
-			}
-		}
-	}
-	
-	public partial class Select_Idiomas_OfertaResult
-	{
-		
-		private int _idIdioma;
-		
-		private string _idioma;
-		
-		private string _nivel;
-		
-		public Select_Idiomas_OfertaResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idIdioma", DbType="Int NOT NULL")]
-		public int idIdioma
-		{
-			get
-			{
-				return this._idIdioma;
-			}
-			set
-			{
-				if ((this._idIdioma != value))
-				{
-					this._idIdioma = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idioma", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string idioma
-		{
-			get
-			{
-				return this._idioma;
-			}
-			set
-			{
-				if ((this._idioma != value))
-				{
-					this._idioma = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nivel", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string nivel
-		{
-			get
-			{
-				return this._nivel;
-			}
-			set
-			{
-				if ((this._nivel != value))
-				{
-					this._nivel = value;
-				}
-			}
-		}
-	}
-	
-	public partial class Select_Profeciones_OfertaResult
-	{
-		
-		private int _idProfesion;
-		
-		private string _nombreProfesion;
-		
-		private string _descripcion;
-		
-		public Select_Profeciones_OfertaResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idProfesion", DbType="Int NOT NULL")]
-		public int idProfesion
-		{
-			get
-			{
-				return this._idProfesion;
-			}
-			set
-			{
-				if ((this._idProfesion != value))
-				{
-					this._idProfesion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombreProfesion", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string nombreProfesion
-		{
-			get
-			{
-				return this._nombreProfesion;
-			}
-			set
-			{
-				if ((this._nombreProfesion != value))
-				{
-					this._nombreProfesion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcion", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string descripcion
-		{
-			get
-			{
-				return this._descripcion;
-			}
-			set
-			{
-				if ((this._descripcion != value))
-				{
-					this._descripcion = value;
-				}
-			}
-		}
-	}
-	
-	public partial class Select_Habilidades_OfertaResult
-	{
-		
-		private int _idHabilidades;
-		
-		private string _categoria;
-		
-		private string _descripcion;
-		
-		public Select_Habilidades_OfertaResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idHabilidades", DbType="Int NOT NULL")]
-		public int idHabilidades
-		{
-			get
-			{
-				return this._idHabilidades;
-			}
-			set
-			{
-				if ((this._idHabilidades != value))
-				{
-					this._idHabilidades = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_categoria", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string categoria
-		{
-			get
-			{
-				return this._categoria;
-			}
-			set
-			{
-				if ((this._categoria != value))
-				{
-					this._categoria = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcion", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string descripcion
-		{
-			get
-			{
-				return this._descripcion;
-			}
-			set
-			{
-				if ((this._descripcion != value))
-				{
-					this._descripcion = value;
-				}
-			}
-		}
-	}
-	
 	public partial class ObtenerTodasLasOfertasEmpleoResult
 	{
 		
@@ -1326,6 +1101,218 @@ namespace yourFirstJobBackend.AccesoDatos
 				if ((this._nombreRegion != value))
 				{
 					this._nombreRegion = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Select_Habilidades_OfertaResult
+	{
+		
+		private int _idHabilidades;
+		
+		private string _categoria;
+		
+		private string _descripcion;
+		
+		public Select_Habilidades_OfertaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idHabilidades", DbType="Int NOT NULL")]
+		public int idHabilidades
+		{
+			get
+			{
+				return this._idHabilidades;
+			}
+			set
+			{
+				if ((this._idHabilidades != value))
+				{
+					this._idHabilidades = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_categoria", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string categoria
+		{
+			get
+			{
+				return this._categoria;
+			}
+			set
+			{
+				if ((this._categoria != value))
+				{
+					this._categoria = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcion", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string descripcion
+		{
+			get
+			{
+				return this._descripcion;
+			}
+			set
+			{
+				if ((this._descripcion != value))
+				{
+					this._descripcion = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Select_Idiomas_OfertaResult
+	{
+		
+		private int _idIdioma;
+		
+		private string _idioma;
+		
+		private string _nivel;
+		
+		public Select_Idiomas_OfertaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idIdioma", DbType="Int NOT NULL")]
+		public int idIdioma
+		{
+			get
+			{
+				return this._idIdioma;
+			}
+			set
+			{
+				if ((this._idIdioma != value))
+				{
+					this._idIdioma = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idioma", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string idioma
+		{
+			get
+			{
+				return this._idioma;
+			}
+			set
+			{
+				if ((this._idioma != value))
+				{
+					this._idioma = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nivel", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string nivel
+		{
+			get
+			{
+				return this._nivel;
+			}
+			set
+			{
+				if ((this._nivel != value))
+				{
+					this._nivel = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Select_Profeciones_OfertaResult
+	{
+		
+		private int _idProfesion;
+		
+		private string _nombreProfesion;
+		
+		private string _descripcion;
+		
+		public Select_Profeciones_OfertaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idProfesion", DbType="Int NOT NULL")]
+		public int idProfesion
+		{
+			get
+			{
+				return this._idProfesion;
+			}
+			set
+			{
+				if ((this._idProfesion != value))
+				{
+					this._idProfesion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombreProfesion", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string nombreProfesion
+		{
+			get
+			{
+				return this._nombreProfesion;
+			}
+			set
+			{
+				if ((this._nombreProfesion != value))
+				{
+					this._nombreProfesion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcion", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string descripcion
+		{
+			get
+			{
+				return this._descripcion;
+			}
+			set
+			{
+				if ((this._descripcion != value))
+				{
+					this._descripcion = value;
+				}
+			}
+		}
+	}
+	
+	public partial class UpdateUsuarioResult
+	{
+		
+		private string _Message;
+		
+		public UpdateUsuarioResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(26) NOT NULL", CanBeNull=false)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this._Message = value;
 				}
 			}
 		}

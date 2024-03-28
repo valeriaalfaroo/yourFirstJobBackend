@@ -56,27 +56,29 @@ namespace yourFirstJobBackend.Logica
 
                    
                     LinqDataContext conexion = new LinqDataContext();
-                    //int? idReturn = 0;
-                    //int? errorId = 0;
-                   // string errorDescripcion = "";
+                    int? idReturn = 0;
+                    int? errorId = 0;
+                    string errorDescripcion = "";
 
                     // conexion a SP 
 
-                    conexion.InsertarOfertaEmpleo(req.empleo.empresa.idEmpresa, req.empleo.tituloEmpleo, req.empleo.descripcionEmpleo, req.empleo.ubicacionEmpleo, req.empleo.tipoEmpleo, req.empleo.experiencia, req.empleo.fechaPublicacion/*ref idReturn, ref errorId, ref errorDescripcion*/);
-                    //if (idReturn == 0)
-                    //{
-                    //    //Error en base de datos
-                    //    //No se hizo la publicacion
-                    //    res.resultado = false;
-                    //    res.listaDeErrores.Add(errorDescripcion);
-                    //}
-                    //else
-                    //{
-                    //    res.resultado = true;
-                    //}
+                    conexion.InsertarOfertaEmpleo(req.empleo.empresa.idEmpresa, req.empleo.tituloEmpleo, req.empleo.descripcionEmpleo, req.empleo.ubicacionEmpleo, req.empleo.tipoEmpleo, req.empleo.experiencia, req.empleo.fechaPublicacion, ref errorId, ref errorDescripcion, ref idReturn);
+                    
+                    if (idReturn == 0)
+                    {
+                        //Error en base de datos
+                        //No se hizo la publicacion
+                        res.resultado = false;
+                        res.listaDeErrores.Add(errorDescripcion);
+                    }
+                    else
+                    {
+                        res.resultado = true;
+                    }
                 }
 
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 res.resultado = false;
                 res.listaDeErrores.Add(ex.ToString());
@@ -244,12 +246,26 @@ namespace yourFirstJobBackend.Logica
 
                 string tituloEmpleo = "Electrisista"; //Titulo quemado temporalmente
 
-                List<BuscarOfertasEmpleoPorTituloResult> empleosDeBD = conexion.BuscarOfertasEmpleoPorTitulo(tituloEmpleo).ToList();
+                int? errorId = 0;
+                string errorDescripcion = "";
+
+                List<BuscarOfertasEmpleoPorTituloResult> empleosDeBD = conexion.BuscarOfertasEmpleoPorTitulo(tituloEmpleo, ref errorId, ref errorDescripcion).ToList();
+
+                if (errorId == 1)
+                {
+                    //Error en base de datos
+                    //No se hizo la publicacion
+                    res.resultado = false;
+                    res.listaDeErrores.Add(errorDescripcion);
+                }
+                else
+                {
+                    res.resultado = true;
+                }
 
                 foreach (BuscarOfertasEmpleoPorTituloResult cadaTC in empleosDeBD)
                     res.empleos.Add(this.crearEmpleoT(cadaTC));
-
-                res.resultado = true;
+                    res.resultado = true;
 
             }
             catch (Exception ex)

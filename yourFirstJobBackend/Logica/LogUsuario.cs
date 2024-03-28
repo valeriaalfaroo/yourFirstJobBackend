@@ -142,10 +142,38 @@ namespace yourFirstJobBackend.Logica
 
                 int idUsuario = 3; //dato quemado
 
+                int? errorId = 0;
+                string errorDescripcion = "";
+
                 SP_InformacionUsuarioResult usuarioBD = conexion.SP_InformacionUsuario(idUsuario, ref errorId, ref errorDescripcion).FirstOrDefault();
 
-                if (usuarioBD != null)
+
+                ObtenerInformacionUsuarioResult usuarioBD = conexion.ObtenerInformacionUsuario(idUsuario, ref errorId, ref errorDescripcion).FirstOrDefault();
+
+                if (errorId != 0)
                 {
+
+                    //Error en base de datos
+                    //No se hizo la publicacion
+                    res.resultado = false;
+                    res.listaDeErrores.Add(errorDescripcion);
+                }
+                else
+                {
+                    if (usuarioBD != null)
+                    {
+                        res.usuario = traerUsuario(usuarioBD);
+                        res.resultado = true;
+                    } else
+                    {
+                        res.resultado = false;
+                    }
+
+                    
+                }
+
+                
+
                     //lista 
                     List<Idiomas> listaIdiomas = new List<Idiomas>();
                     List<Habilidades> listaHabilidad = new List<Habilidades>();
@@ -352,19 +380,44 @@ namespace yourFirstJobBackend.Logica
                 //  int idUsuario = req.idUsuario;  Obtener el idUsuario desde el objeto req
                 int idUsuario = 1; //dato quemado
 
+                int? lineasBorradas = 0;
+                int? errorId = 0;
+                string errorDescripcion = "";
 
-                DeleteUsuarioResult resultado = conexion.DeleteUsuario(idUsuario).SingleOrDefault();
 
-                if (resultado != null)
+                DeleteUsuarioResult resultado = conexion.DeleteUsuario(idUsuario, ref errorId, ref errorDescripcion, ref lineasBorradas).SingleOrDefault();
+
+                if (errorId != 0)
                 {
-                    res.resultado = true;
-                    // res.mensaje = resultado.ErrorMessage; 
+                    //Error en base de datos
+                    //No se hizo la publicacion
+                    res.resultado = false;
+                    res.listaDeErrores.Add(errorDescripcion);
                 }
                 else
                 {
-                    res.resultado = false;
-                    res.listaDeErrores.Add("No se encontró el usuario.");
+                    if (resultado != null)
+                    {
+                        if (lineasBorradas == 0)
+                        {
+                            res.resultado = true;
+                        } else
+                        {
+                            res.resultado = false;
+                            res.listaDeErrores.Add("No se elimino.");
+                        }
+                        
+                        // res.mensaje = resultado.ErrorMessage; 
+                    }
+                    else
+                    {
+                        res.resultado = false;
+                        res.listaDeErrores.Add("No se encontró el usuario.");
+                    }
+
+                    res.resultado = true;
                 }
+                
             }
             catch (Exception ex)
             {
