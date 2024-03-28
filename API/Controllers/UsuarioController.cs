@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+
 using yourFirstJobBackend.Entidades.entities;
+
 using yourFirstJobBackend.Entidades.Request;
 using yourFirstJobBackend.Entidades.Response;
 using yourFirstJobBackend.Logica;
@@ -15,6 +17,7 @@ namespace API.Controllers
         //ingresar usuario
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/usuario/ingresarUsuario")]
+
         public ResIngresarUsuario insertUsuario([FromBody] Usuario usuario)
         {
 
@@ -30,6 +33,7 @@ namespace API.Controllers
             LogUsuario logica = new LogUsuario(); 
             return logica.IngresarUsuario(usuario);
             
+
         }
 
 
