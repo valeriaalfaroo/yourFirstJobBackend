@@ -229,7 +229,85 @@ namespace yourFirstJobBackend.Logica
             return res; 
         }
 
+        public ResUpdateOfertaEmpleo updateOfertaEmpleo(ReqUpdateOfertaEmpleo req)
+        {
+            ResUpdateOfertaEmpleo res = new ResUpdateOfertaEmpleo();
+            try
+            {
+                res.resultado = false;
+                res.listaDeErrores = new List<string>();
 
+                if (req == null)
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("Request nulo"); //Aca puede ir un enum 
+                }
+                else
+                {
+                    if (req.updateEmpleo.empresa.idEmpresa == 0)
+                    {
+                        res.resultado = false;
+                        res.listaDeErrores.Add("No se recibio la empresa");
+                    }
+                    if (String.IsNullOrEmpty(req.updateEmpleo.tipoEmpleo))
+                    {
+                        res.resultado = false;
+                        res.listaDeErrores.Add("Tipo de Empleo Faltante");
+                    }
+                    if (String.IsNullOrEmpty(req.updateEmpleo.descripcionEmpleo))
+                    {
+                        res.resultado = false;
+                        res.listaDeErrores.Add("Descripcion de empleo faltante");
+                    }
+                    if (String.IsNullOrEmpty(req.updateEmpleo.experiencia))
+                    {
+                        res.resultado = false;
+                        res.listaDeErrores.Add("Experiencia faltante");
+                    }
+                }
+                if (res.listaDeErrores.Any())
+                {
+                    res.resultado = false;
+                }
+                else
+                {
+                    //llamar base de datos 
+
+
+                    LinqDataContext conexion = new LinqDataContext();
+                    int? idReturn = 0;
+                    int? errorId = 0;
+                    string errorDescripcion = "";
+
+                    // conexion a SP 
+                    //Falta SP Update 
+                  //  conexion.InsertarOfertaEmpleo(req.empleo.empresa.idEmpresa, req.empleo.tituloEmpleo, req.empleo.descripcionEmpleo, req.empleo.ubicacionEmpleo, req.empleo.tipoEmpleo, req.empleo.experiencia, req.empleo.fechaPublicacion, ref errorId, ref errorDescripcion, ref idReturn);
+
+                    if (idReturn == 0)
+                    {
+                        //Error en base de datos
+                        //No se hizo la publicacion
+                        res.resultado = false;
+                        res.listaDeErrores.Add(errorDescripcion);
+                    }
+                    else
+                    {
+                        res.resultado = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+            }
+            finally
+            {
+                //Bitacora 
+            }
+            return res;
+        }
 
         public ResBuscarOfertasPorTitulo buscarOfertasEmpleoPorTitulo(ReqBuscarOfertasPorTitulo req)
         {
