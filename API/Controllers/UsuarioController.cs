@@ -36,8 +36,6 @@ namespace API.Controllers
 
         }
 
-
-
         //  ver usuario
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("api/usuario/ObtenerUsuario")]
@@ -46,13 +44,24 @@ namespace API.Controllers
             LogUsuario logicaBackend = new LogUsuario();
             return logicaBackend.obtenerUsuario(null);
         }
+
         //delete usuario (en espera del manejo del delete)
-        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpDelete]
         [System.Web.Http.Route("api/usuario/eliminarUsuario")]
         public ResEliminarUsuario eliminarUsuario()
         {
             LogUsuario logicaBackend = new LogUsuario();
             return logicaBackend.eliminarUsuario(null);
         }
+
+        //actualizar usuario
+        [System.Web.Http.HttpPatch] //patch permite actualizaciones parciales (no todos los datos)
+        [System.Web.Http.Route("api/usuario/actualizarUsuario")]
+        public ResUpdateUsuario actualizarUsuario([FromBody] Usuario usuario)
+        {
+            LogUsuario logicaBackend = new LogUsuario();
+            return logicaBackend.actualizarUsuario(usuario);
+        }
+
     }
 }
