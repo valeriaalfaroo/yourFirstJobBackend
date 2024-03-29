@@ -141,7 +141,7 @@ namespace yourFirstJobBackend.Logica
                     int? errorIdIdiomas = 0;
                     string errorDescripcionIdiomas = "";
 
-                    foreach (var idiomaInfo in conexion.Select_Idiomas_Oferta(usuarioBD.idUsuario, ref errorIdIdiomas, ref errorDescripcionIdiomas))
+                    foreach (var idiomaInfo in conexion.Select_Idiomas_Oferta(usuarioBD.idUsuario, ref errorIdIdiomas, ref errorDescripcionIdiomas)) //agregar + controles de errores a sp
                     {
                         if (errorIdIdiomas == 1)
                         {
@@ -318,7 +318,7 @@ namespace yourFirstJobBackend.Logica
 
 
 
-        //eliminr usuario
+        //eliminr usuario (en espera del manejo en bd)
         public ResEliminarUsuario eliminarUsuario(ReqEliminarUsuario req)
         {
             ResEliminarUsuario res = new ResEliminarUsuario();
@@ -357,18 +357,45 @@ namespace yourFirstJobBackend.Logica
 
             //actualizar un usuario
         }
-        public ResUpdateUsuario actualizarUsuario(ReqUpdateUsuario req)
+
+
+        public ResUpdateUsuario actualizarUsuario(Usuario usuario)
         {
             ResUpdateUsuario res = new ResUpdateUsuario();
             res.listaDeErrores = new List<string>();
+            int? errorId = 0;
+            string errorDescripcion = "";
 
             try
             {
+                LinqDataContext conexion = new LinqDataContext();
 
+                int idUsuario = 10; //dato quemado
+
+                // Obtener los datos actualizados del usuario
+                string nombreUsuario = usuario.nombreUsuario, apellidos = usuario.apellidos, correo = usuario.correo, contrasena = usuario.contrasena , 
+                    sitioWeb =usuario.sitioWeb , errorOccurred = ""; ;
+                int telefono = usuario.telefono, idRegion = usuario.idRegion;
+                DateTime fechaNacimiento=usuario.fechaNacimiento;
+                int? camposActualizados = 0;
+                int? errorMessage=0;
+
+                UpdateUsuarioResult usuarioBD = conexion.UpdateUsuario(idUsuario, nombreUsuario,apellidos,correo,
+                   telefono,fechaNacimiento, idRegion, contrasena, sitioWeb,  ref errorMessage, ref errorOccurred, ref camposActualizados).FirstOrDefault();
+
+                if (usuarioBD != null && camposActualizados > 0)
+                {
+                    res.resultado = true;
+                }
+                else
+                {
+                    res.resultado = false;
+                }
             }
             catch (Exception ex)
             {
-
+                res.resultado = false;
+                res.listaDeErrores.Add("Error al actualizar el usuario: " + ex.Message);
             }
             return res;
 
