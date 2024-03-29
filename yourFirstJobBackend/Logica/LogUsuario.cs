@@ -14,7 +14,7 @@ namespace yourFirstJobBackend.Logica
 {
     public class LogUsuario
     {
-        
+
         public ResIngresarUsuario IngresarUsuario(Usuario usuario)
         {
             ResIngresarUsuario res = new ResIngresarUsuario();
@@ -47,11 +47,11 @@ namespace yourFirstJobBackend.Logica
                     {
                         res.listaDeErrores.Add("No se ingreso el correo");
                     }
-                    if (usuario.telefono == 0) 
+                    if (usuario.telefono == 0)
                     {
                         res.listaDeErrores.Add("No se ingreso el numero de telefono");
                     }
-                    if (usuario.fechaNacimiento == DateTime.MinValue) 
+                    if (usuario.fechaNacimiento == DateTime.MinValue)
                     {
                         res.listaDeErrores.Add("No se ingreso la fecha de nacimiento");
                     }
@@ -119,53 +119,25 @@ namespace yourFirstJobBackend.Logica
 
                 int idUsuario = 3; //dato quemado
 
-                int? errorId = 0;
-                string errorDescripcion = "";
-
                 SP_InformacionUsuarioResult usuarioBD = conexion.SP_InformacionUsuario(idUsuario, ref errorId, ref errorDescripcion).FirstOrDefault();
 
-
-                ObtenerInformacionUsuarioResult usuarioBD = conexion.ObtenerInformacionUsuario(idUsuario, ref errorId, ref errorDescripcion).FirstOrDefault();
-
-                if (errorId != 0)
+                if (usuarioBD != null)
                 {
-
-                    //Error en base de datos
-                    //No se hizo la publicacion
-                    res.resultado = false;
-                    res.listaDeErrores.Add(errorDescripcion);
-                }
-                else
-                {
-                    if (usuarioBD != null)
-                    {
-                        res.usuario = traerUsuario(usuarioBD);
-                        res.resultado = true;
-                    } else
-                    {
-                        res.resultado = false;
-                    }
-
-                    
-                }
-
-                
-
                     //lista 
                     List<Idiomas> listaIdiomas = new List<Idiomas>();
                     List<Habilidades> listaHabilidad = new List<Habilidades>();
                     List<Estudios> listaEstudio = new List<Estudios>();
                     List<ArchivosUsuario> listaArchivoUsuario = new List<ArchivosUsuario>();
                     List<ExperienciaLaboral> listaExperienciaLaboral = new List<ExperienciaLaboral>();
-                    res.resultado=true;
+                    res.resultado = true;
                     res.usuario = traerUsuario(usuarioBD);
                     res.usuario.listaIdiomas = listaIdiomas;
                     res.usuario.listaHabilidades = listaHabilidad;
                     res.usuario.listaEstudios = listaEstudio;
                     res.usuario.listaArchivosUsuarios = listaArchivoUsuario;
                     res.usuario.listaExperienciaLaboral = listaExperienciaLaboral;
-                    
-                   
+
+
                     int? errorIdIdiomas = 0;
                     string errorDescripcionIdiomas = "";
 
@@ -205,11 +177,11 @@ namespace yourFirstJobBackend.Logica
                         }
                         else
                         {
-                         Habilidades habilidades = new Habilidades();
+                            Habilidades habilidades = new Habilidades();
                             habilidades.idHabilidades = habilidadInfo.idHabilidades;
-                           habilidades.categoria = habilidadInfo.categoria;
-                            habilidades .descripcion= habilidadInfo.descripcion;
-                            
+                            habilidades.categoria = habilidadInfo.categoria;
+                            habilidades.descripcion = habilidadInfo.descripcion;
+
                             listaHabilidad.Add(habilidades);
 
                         }
@@ -262,7 +234,7 @@ namespace yourFirstJobBackend.Logica
                             archivUsuario.archivo = ArchivosInfo.archivo;
                             archivUsuario.tipo = ArchivosInfo.tipo;
 
-                       listaArchivoUsuario.Add(archivUsuario);
+                            listaArchivoUsuario.Add(archivUsuario);
                         }
 
                     }
@@ -298,9 +270,9 @@ namespace yourFirstJobBackend.Logica
 
 
                 }
-               
-                
-               
+
+
+
 
             }
             catch (Exception ex)
@@ -319,21 +291,21 @@ namespace yourFirstJobBackend.Logica
 
         #region
 
-        
+
         private Usuario traerUsuario(SP_InformacionUsuarioResult usuarioBD)
         {
             Usuario usuarioRetornar = new Usuario();
-            usuarioRetornar.nombreUsuario=usuarioBD.nombreUsuario;
+            usuarioRetornar.nombreUsuario = usuarioBD.nombreUsuario;
             usuarioRetornar.apellidos = usuarioBD.apellidos;
             usuarioRetornar.correo = usuarioBD.correo;
             usuarioRetornar.telefono = usuarioBD.telefono;
             usuarioRetornar.fechaNacimiento = usuarioBD.fechaNacimiento;
             usuarioRetornar.sitioWeb = usuarioBD.sitioWeb;
             usuarioRetornar.idRegion = usuarioBD.idRegion;
-            usuarioRetornar.idUsuario= usuarioBD.idUsuario;
+            usuarioRetornar.idUsuario = usuarioBD.idUsuario;
             usuarioRetornar.contrasena = usuarioBD.contrasena;
 
-           
+
             return usuarioRetornar;
 
 
@@ -356,45 +328,23 @@ namespace yourFirstJobBackend.Logica
                 LinqDataContext conexion = new LinqDataContext();
                 //  int idUsuario = req.idUsuario;  Obtener el idUsuario desde el objeto req
                 int idUsuario = 1; //dato quemado
+                int? errorOccured =0;
+                string errorMessage ="";
+                int? lineasBorradas=0;
 
-                int? lineasBorradas = 0;
-                int? errorId = 0;
-                string errorDescripcion = "";
 
+                DeleteUsuarioResult resultado = conexion.DeleteUsuario(idUsuario, ref errorOccured, ref errorMessage, ref lineasBorradas).SingleOrDefault();
 
-                DeleteUsuarioResult resultado = conexion.DeleteUsuario(idUsuario, ref errorId, ref errorDescripcion, ref lineasBorradas).SingleOrDefault();
-
-                if (errorId != 0)
+                if (resultado != null)
                 {
-                    //Error en base de datos
-                    //No se hizo la publicacion
-                    res.resultado = false;
-                    res.listaDeErrores.Add(errorDescripcion);
+                    res.resultado = true;
+                    // res.mensaje = resultado.ErrorMessage; 
                 }
                 else
                 {
-                    if (resultado != null)
-                    {
-                        if (lineasBorradas == 0)
-                        {
-                            res.resultado = true;
-                        } else
-                        {
-                            res.resultado = false;
-                            res.listaDeErrores.Add("No se elimino.");
-                        }
-                        
-                        // res.mensaje = resultado.ErrorMessage; 
-                    }
-                    else
-                    {
-                        res.resultado = false;
-                        res.listaDeErrores.Add("No se encontró el usuario.");
-                    }
-
-                    res.resultado = true;
+                    res.resultado = false;
+                    res.listaDeErrores.Add("No se encontró el usuario.");
                 }
-                
             }
             catch (Exception ex)
             {
@@ -416,7 +366,8 @@ namespace yourFirstJobBackend.Logica
             {
 
             }
-            catch (Exception ex){
+            catch (Exception ex)
+            {
 
             }
             return res;
