@@ -31,5 +31,7 @@ namespace yourFirstJobBackend.Entidades.entities
         //Profesiones
         public List<Profesion> lstProfesiones { get; set; }
 
+        //Archivos
+        public List<ArchivosOferta> lstArchivos { get; set; }
     }
 }

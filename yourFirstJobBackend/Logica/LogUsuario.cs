@@ -218,7 +218,7 @@ namespace yourFirstJobBackend.Logica
 
                     int? errorIdArchivosU = 0;
                     string errorDescripcionidArchivosU = "";
-                    foreach (var ArchivosInfo in conexion.Select_Archivos_Usuario(usuarioBD.idUsuario, ref errorIdEstudios, ref errorDescripcionidEstudios))
+                    foreach (var ArchivosInfo in conexion.Select_Archivos_Usuario(usuarioBD.idUsuario, ref errorIdArchivosU, ref errorDescripcionidArchivosU))
                     {
                         if (errorIdEstudios == 1)
                         {

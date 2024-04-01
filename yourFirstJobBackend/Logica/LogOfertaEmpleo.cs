@@ -205,9 +205,39 @@ namespace yourFirstJobBackend.Logica
 
                         }
 
+                        //Saco Archivos
+                        int? errorArchivos = 0;
+                        string errorDescripcionArchivos = "";
+
+                        List<ArchivosOferta> lstArchivosDeCada = new List<ArchivosOferta>();
+
+                        foreach (var archivoInfo in conexion.Select_Archivos_Oferta(cadaTC.idOfertas, ref errorArchivos, ref errorDescripcionArchivos))
+                        {
+                            if (errorIdIdiomas == 1)
+                            {
+                                //Error SP Archivos
+                                res.resultado = false;
+                                res.listaDeErrores.Add(errorDescripcionArchivos);
+
+                            }
+                            else
+                            {
+                                ArchivosOferta archivoOferta = new ArchivosOferta();
+
+                                archivoOferta.idArchivosOferta = archivoInfo.idArchivosOferta;
+                                archivoOferta.idOferta = archivoInfo.idOfertas;
+                                archivoOferta.nombreArchivo = archivoInfo.nombreArchivo;
+                                archivoOferta.archivo = archivoInfo.archivo;
+                                archivoOferta.tipo = archivoInfo.tipo;
+
+                                lstArchivosDeCada.Add(archivoOferta); // Agrega el archivo a la lista
+
+                            }
+
+                        }
 
                         //Meto lista
-                        res.empleos.Add(this.crearEmpleo(cadaTC, lstIdiomasDeCada, lstProfesionDeCada, lstHabilidadesDeCada));
+                        res.empleos.Add(this.crearEmpleo(cadaTC, lstIdiomasDeCada, lstProfesionDeCada, lstHabilidadesDeCada, lstArchivosDeCada));
 
 
                     }
@@ -315,6 +345,8 @@ namespace yourFirstJobBackend.Logica
             ResBuscarOfertasPorTitulo res = new ResBuscarOfertasPorTitulo();
 
             res.listaDeErrores = new List<string>();
+            int? errorId = 0;
+            string errorDescripcion = "";
 
             res.empleos = new List<Empleo>();
 
@@ -322,28 +354,150 @@ namespace yourFirstJobBackend.Logica
             {
                 LinqDataContext conexion = new LinqDataContext();
 
-                string tituloEmpleo = "Electrisista"; //Titulo quemado temporalmente
-
-                int? errorId = 0;
-                string errorDescripcion = "";
-
-                List<BuscarOfertasEmpleoPorTituloResult> empleosDeBD = conexion.BuscarOfertasEmpleoPorTitulo(tituloEmpleo, ref errorId, ref errorDescripcion).ToList();
+                List<BuscarOfertasEmpleoPorTituloResult> empleosDeBD = conexion.BuscarOfertasEmpleoPorTitulo(req.titulo, ref errorId, ref errorDescripcion).ToList();
 
                 if (errorId == 1)
                 {
                     //Error en base de datos
-                    //No se hizo la publicacion
                     res.resultado = false;
                     res.listaDeErrores.Add(errorDescripcion);
                 }
                 else
                 {
+
+                    //Todo funciona
                     res.resultado = true;
+
+                    foreach (BuscarOfertasEmpleoPorTituloResult cadaTC in empleosDeBD)
+                    {
+                        //Cada oferta
+
+                        //Saco Idiomas
+                        int? errorIdIdiomas = 0;
+                        string errorDescripcionIdiomas = "";
+
+                        List<Idiomas> lstIdiomasDeCada = new List<Idiomas>();
+
+                        foreach (var idiomaInfo in conexion.Select_Idiomas_Oferta(cadaTC.idOfertas, ref errorIdIdiomas, ref errorDescripcionIdiomas))
+                        {
+                            if (errorIdIdiomas == 1)
+                            {
+                                //Error SP Idiomas
+                                res.resultado = false;
+                                res.listaDeErrores.Add(errorDescripcionIdiomas);
+
+                            }
+                            else
+                            {
+                                Idiomas idioma = new Idiomas();
+
+                                idioma.idIdioma = idiomaInfo.idIdioma;
+                                idioma.idioma = idiomaInfo.idioma;
+                                idioma.nivel = idiomaInfo.nivel;
+
+                                lstIdiomasDeCada.Add(idioma); // Agrega el idioma a la lista
+
+                            }
+
+                        }
+
+                        //Saco Profesion
+                        int? errorIdProfesion = 0;
+                        string errorDescripcionProfesion = "";
+
+                        List<Profesion> lstProfesionDeCada = new List<Profesion>();
+
+                        foreach (var profesionInfo in conexion.Select_Profeciones_Oferta(cadaTC.idOfertas, ref errorIdProfesion, ref errorDescripcionProfesion))
+                        {
+                            if (errorIdProfesion == 1)
+                            {
+                                //Error SP Idiomas
+                                res.resultado = false;
+                                res.listaDeErrores.Add(errorDescripcionProfesion);
+
+                            }
+                            else
+                            {
+                                Profesion profesion = new Profesion();
+
+                                profesion.idProfesion = profesionInfo.idProfesion;
+                                profesion.nombreProfesion = profesionInfo.nombreProfesion;
+                                profesion.descripcion = profesionInfo.descripcion;
+
+                                lstProfesionDeCada.Add(profesion); // Agrega la profesion a la lista
+
+                            }
+
+                        }
+
+                        //Saco Habilidades
+                        int? errorIdHabilidades = 0;
+                        string errorDescripcionHabilidades = "";
+
+                        List<Habilidades> lstHabilidadesDeCada = new List<Habilidades>();
+
+                        foreach (var habilidadesInfo in conexion.Select_Habilidades_Oferta(cadaTC.idOfertas, ref errorIdHabilidades, ref errorDescripcionHabilidades))
+                        {
+                            if (errorIdHabilidades == 1)
+                            {
+                                //Error SP Idiomas
+                                res.resultado = false;
+                                res.listaDeErrores.Add(errorDescripcionHabilidades);
+
+                            }
+                            else
+                            {
+                                Habilidades habilidades = new Habilidades();
+
+                                habilidades.idHabilidades = habilidadesInfo.idHabilidades;
+                                habilidades.descripcion = habilidadesInfo.descripcion;
+                                habilidades.categoria = habilidadesInfo.categoria;
+
+                                lstHabilidadesDeCada.Add(habilidades); // Agrega la habilidad a la lista
+
+                            }
+
+                        }
+
+                        //Saco Archivos
+                        int? errorArchivos = 0;
+                        string errorDescripcionArchivos = "";
+
+                        List<ArchivosOferta> lstArchivosDeCada = new List<ArchivosOferta>();
+
+                        foreach (var archivoInfo in conexion.Select_Archivos_Oferta(cadaTC.idOfertas, ref errorArchivos, ref errorDescripcionArchivos))
+                        {
+                            if (errorIdIdiomas == 1)
+                            {
+                                //Error SP Archivos
+                                res.resultado = false;
+                                res.listaDeErrores.Add(errorDescripcionArchivos);
+
+                            }
+                            else
+                            {
+                                ArchivosOferta archivoOferta = new ArchivosOferta();
+
+                                archivoOferta.idArchivosOferta = archivoInfo.idArchivosOferta;
+                                archivoOferta.idOferta = archivoInfo.idOfertas;
+                                archivoOferta.nombreArchivo = archivoInfo.nombreArchivo;
+                                archivoOferta.archivo = archivoInfo.archivo;
+                                archivoOferta.tipo = archivoInfo.tipo;
+
+                                lstArchivosDeCada.Add(archivoOferta); // Agrega el archivo a la lista
+
+                            }
+
+                        }
+
+                        //Meto lista
+                        res.empleos.Add(this.crearEmpleoT(cadaTC, lstIdiomasDeCada, lstProfesionDeCada, lstHabilidadesDeCada, lstArchivosDeCada));
+
+
+                    }
+
                 }
 
-                foreach (BuscarOfertasEmpleoPorTituloResult cadaTC in empleosDeBD)
-                    res.empleos.Add(this.crearEmpleoT(cadaTC));
-                    res.resultado = true;
 
             }
             catch (Exception ex)
@@ -363,7 +517,7 @@ namespace yourFirstJobBackend.Logica
         #region
 
         //Factoria Todos los Empleos
-        private Empleo crearEmpleo(ObtenerTodasLasOfertasEmpleoResult empleosDeBD, List<Idiomas>lstIdiomas, List<Profesion> lstProfesiones, List<Habilidades> lstHabilidades)
+        private Empleo crearEmpleo(ObtenerTodasLasOfertasEmpleoResult empleosDeBD, List<Idiomas>lstIdiomas, List<Profesion> lstProfesiones, List<Habilidades> lstHabilidades, List<ArchivosOferta> lstArchivos)
         {
             Empleo empleoRetornar= new Empleo();
 
@@ -406,23 +560,59 @@ namespace yourFirstJobBackend.Logica
             //Habilidades
             empleoRetornar.lstHabilidades = lstHabilidades;
 
+            //Habilidades
+            empleoRetornar.lstArchivos = lstArchivos;
+
 
             return empleoRetornar;    
         }
 
-        //Factoria Todos los Empleos
-        private Empleo crearEmpleoT(BuscarOfertasEmpleoPorTituloResult empleosDeBD)
+        //Factoria titulo empleos
+        private Empleo crearEmpleoT(BuscarOfertasEmpleoPorTituloResult empleosDeBD, List<Idiomas> lstIdiomas, List<Profesion> lstProfesiones, List<Habilidades> lstHabilidades, List<ArchivosOferta> lstArchivos)
         {
             Empleo empleoRetornar = new Empleo();
 
             empleoRetornar.idOfertas = empleosDeBD.idOfertas;
-            empleoRetornar.empresa.idEmpresa = (int)empleosDeBD.idEmpresa;
             empleoRetornar.tituloEmpleo = empleosDeBD.tituloEmpleo;
             empleoRetornar.descripcionEmpleo = empleosDeBD.descripcionEmpleo;
             empleoRetornar.ubicacionEmpleo = empleosDeBD.ubicacionEmpleo;
             empleoRetornar.tipoEmpleo = empleosDeBD.tipoEmpleo;
             empleoRetornar.experiencia = empleosDeBD.experiencia;
             empleoRetornar.fechaPublicacion = (DateTime)empleosDeBD.fechaPublicacion;
+
+            //Empresa
+            Empresa empresaRetornar = new Empresa();
+
+
+            empresaRetornar.idEmpresa = empleosDeBD.idEmpresa;
+            empresaRetornar.nombreEmpresa = empleosDeBD.nombreEmpresa;
+            empresaRetornar.telefonoEmpresa = empleosDeBD.telefonoEmpresa;
+            empresaRetornar.cedulaJuridica = empleosDeBD.cedulaJuridica;
+            empresaRetornar.descripcion = empleosDeBD.descripcion;
+            empresaRetornar.fechaRegistro = empleosDeBD.fechaRegitro;
+
+            //Region
+            Region regionRetornar = new Region();
+            regionRetornar.idRegion = empleosDeBD.idRegion;
+            regionRetornar.nombreRegion = empleosDeBD.nombreRegion;
+
+            //Meto region a empresa
+            empresaRetornar.region = regionRetornar;
+
+            //Meto empresa a oferta 
+            empleoRetornar.empresa = empresaRetornar;
+
+            //Idiomas
+            empleoRetornar.lstIdiomas = lstIdiomas;
+
+            //Profesiones
+            empleoRetornar.lstProfesiones = lstProfesiones;
+
+            //Habilidades
+            empleoRetornar.lstHabilidades = lstHabilidades;
+
+            //Habilidades
+            empleoRetornar.lstArchivos = lstArchivos;
 
 
             return empleoRetornar;

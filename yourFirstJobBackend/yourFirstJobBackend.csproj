@@ -50,9 +50,10 @@
     </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="Entidades\entities\Aplicaciones.cs" />
+    <Compile Include="Entidades\entities\ArchivosOferta.cs" />
     <Compile Include="Entidades\entities\ArchivosUsuario.cs" />
-    <Compile Include="Entidades\entities\bitacoraEmpresa.cs" />
-    <Compile Include="Entidades\entities\bitacoraUsuario.cs" />
+    <Compile Include="Entidades\entities\BitacoraEmpresa.cs" />
+    <Compile Include="Entidades\entities\BitacoraUsuario.cs" />
     <Compile Include="Entidades\entities\Empleo.cs" />
     <Compile Include="Entidades\entities\Empresa.cs" />
     <Compile Include="Entidades\entities\Estudios.cs" />
