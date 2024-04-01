@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 namespace yourFirstJobBackend.Entidades.Request
 {
     public class ReqBuscarOfertasPorTitulo {
+        public string titulo {  get; set; }
     }
 }
