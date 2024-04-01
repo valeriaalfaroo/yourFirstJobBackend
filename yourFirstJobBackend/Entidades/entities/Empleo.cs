@@ -17,7 +17,7 @@ namespace yourFirstJobBackend.Entidades.entities
         public string experiencia { get; set; }
         public DateTime fechaPublicacion { get; set; }
 
-        public int estado { get; set; }
+        public Boolean estado { get; set; }
 
         //Relaciones
 
