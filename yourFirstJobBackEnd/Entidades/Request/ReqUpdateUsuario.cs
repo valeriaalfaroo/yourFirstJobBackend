@@ -7,7 +7,8 @@ using yourFirstJobBackend.Entidades.entities;
 
 namespace yourFirstJobBackend.Entidades.Request
 {
-    public class ReqUpdateUsuario :Usuario
+    public class ReqUpdateUsuario : Usuario
     {
+
     }
 }

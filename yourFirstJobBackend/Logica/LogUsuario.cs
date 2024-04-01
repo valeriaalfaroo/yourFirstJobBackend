@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -328,9 +329,9 @@ namespace yourFirstJobBackend.Logica
                 LinqDataContext conexion = new LinqDataContext();
                 //  int idUsuario = req.idUsuario;  Obtener el idUsuario desde el objeto req
                 int idUsuario = 1; //dato quemado
-                int? errorOccured =0;
-                string errorMessage ="";
-                int? lineasBorradas=0;
+                int? errorOccured = 0;
+                string errorMessage = "";
+                int? lineasBorradas = 0;
 
 
                 DeleteUsuarioResult resultado = conexion.DeleteUsuario(idUsuario, ref errorOccured, ref errorMessage, ref lineasBorradas).SingleOrDefault();
@@ -359,7 +360,143 @@ namespace yourFirstJobBackend.Logica
         }
 
 
-        public ResUpdateUsuario actualizarUsuario(Usuario usuario)
+        /* public ResUpdateUsuario actualizarUsuario(Usuario usuario)
+         {
+             ResUpdateUsuario res = new ResUpdateUsuario();
+             res.listaDeErrores = new List<string>();
+
+             try
+             {
+                 using (LinqDataContext conexion = new LinqDataContext())
+                 {
+                     conexion.Connection.Open();
+                     using (var transaction = conexion.Connection.BeginTransaction())
+                     {
+                         try
+                         {
+                             // Actualizar el usuario principal
+                             int idUsuario = 1; // Obtener el ID del usuario actualizado
+                             int? errorId = 0;
+                             string errorDescripcion = "";
+                             int? camposActualizados = 0;
+                             int? errorMessage = 0;
+
+                             UpdateUsuarioResult usuarioBD = conexion.UpdateUsuario(idUsuario, usuario.nombreUsuario, usuario.apellidos, usuario.correo,
+                                usuario.telefono, usuario.fechaNacimiento, usuario.idRegion, usuario.contrasena, usuario.sitioWeb,
+                                ref errorMessage, ref errorDescripcion, ref camposActualizados).FirstOrDefault();
+
+                             if (usuarioBD != null && camposActualizados > 0)
+                             {
+                                 res.resultado = true;
+
+                                 // Actualizar tablas relacionadas
+                                 actualizarIdiomas(usuario.listaIdiomas, idUsuario, conexion);
+                                 actualizarHabilidades(usuario.listaHabilidades, idUsuario, conexion);
+
+                                 transaction.Commit();
+                             }
+                             else
+                             {
+                                 transaction.Rollback();
+                                 res.resultado = false;
+                                 res.listaDeErrores.Add("Error al actualizar el usuario principal.");
+                             }
+                         }
+                         catch (Exception ex)
+                         {
+                             transaction.Rollback();
+                             res.resultado = false;
+                             res.listaDeErrores.Add("Error al actualizar: " + ex.Message);
+                         }
+                     }
+                 }
+             }
+             catch (Exception ex)
+             {
+                 res.resultado = false;
+                 res.listaDeErrores.Add("Error de conexión: " + ex.Message);
+             }
+
+             return res;
+         }
+
+         private void actualizarIdiomas(List<Idiomas> listaIdiomas, int idUsuario, LinqDataContext conexion)
+         {
+             // Lógica para actualizar la tabla Idiomas relacionada con el usuario
+             ResUpdateUsuario res = new ResUpdateUsuario();
+
+             res.listaDeErrores = new List<string>();
+
+             try
+             {
+                 foreach (var idioma in listaIdiomas)
+                 {
+                     string errorOccurred = "";
+                     int? camposActualizados = 0;
+                     int? errorMessage = 0;
+
+                     Actualizar_Idiomas_UsuarioResult resultado = conexion.Actualizar_Idiomas_Usuario(idUsuario, idioma.idioma, idioma.nivel,
+                         ref errorMessage, ref errorOccurred, ref camposActualizados).FirstOrDefault();
+
+                     if (resultado != null && camposActualizados > 0)
+                     {
+                         // La actualización del idioma fue exitosa
+                         // Puedes agregar más lógica aquí si es necesario
+                     }
+                     else
+                     {
+                         // La actualización del idioma falló
+                         res.listaDeErrores.Add($"Error al actualizar el idioma {idioma.idioma}.");
+                     }
+                 }
+             }
+             catch (Exception ex)
+             {
+                 // Manejar errores de excepción
+                 res.listaDeErrores.Add($"Error al actualizar idiomas: {ex.Message}");
+             }
+         }
+
+         private void actualizarHabilidades(List<Habilidades> listaHabilidades, int idUsuario, LinqDataContext conexion)
+         {
+             // Lógica para actualizar la tabla Habilidades relacionada con el usuario
+             ResUpdateUsuario res = new ResUpdateUsuario();
+             res.listaDeErrores = new List<string>();
+
+             try
+             {
+                 foreach (var habilidad in listaHabilidades)
+                 {
+                     string errorOccurred = "";
+                     int? camposActualizados = 0;
+                     int? errorMessage = 0;
+
+                     Actualizar_Habilidades_UsuarioResult resultado = conexion.Actualizar_Habilidades_Usuario(idUsuario, habilidad.categoria, habilidad.descripcion,
+                         ref errorMessage, ref errorOccurred, ref camposActualizados).FirstOrDefault();
+
+                     if (resultado != null && camposActualizados > 0)
+                     {
+                         // La actualización de la habilidad fue exitosa
+                         // Puedes agregar más lógica aquí si es necesario
+                     }
+                     else
+                     {
+                         // La actualización de la habilidad falló
+                         res.listaDeErrores.Add($"Error al actualizar la habilidad {habilidad.descripcion}.");
+                     }
+                 }
+             }
+             catch (Exception ex)
+             {
+                 // Manejar errores de excepción
+                 res.listaDeErrores.Add($"Error al actualizar habilidades: {ex.Message}");
+             }
+         }*/
+
+
+        /*  ////////////////////////FUNCIONAL
+         *  /////////////////////////
+           public ResUpdateUsuario actualizarUsuario(Usuario usuario)
         {
             ResUpdateUsuario res = new ResUpdateUsuario();
             res.listaDeErrores = new List<string>();
@@ -400,8 +537,82 @@ namespace yourFirstJobBackend.Logica
             return res;
 
         }
+         
+         ////////////////////////FUNCIONAL
+         *  /////////////////////////
+         */
+
+        public ResUpdateUsuario actualizarUsuario(Usuario usuario)
+        {
+            ResUpdateUsuario res = new ResUpdateUsuario();
+            res.listaDeErrores = new List<string>();
+
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+                int idUsuario = 1; // Dato quemado
+
+                // Obtener los datos del usuario a actualizar
+                string nombreUsuario = usuario.nombreUsuario, apellidos = usuario.apellidos, correo = usuario.correo, contrasena = usuario.contrasena,
+                       sitioWeb = usuario.sitioWeb, errorOccurred = "";
+                int telefono = usuario.telefono, idRegion = usuario.idRegion;
+                DateTime fechaNacimiento = usuario.fechaNacimiento;
+
+                // Actualizar los datos del usuario
+                int? camposActualizados = 0;
+                int? errorMessage = 0;
+                int? errorOcurred = 0;
+                string errorMensaje = "";
+                UpdateUsuarioResult usuarioBD = conexion.UpdateUsuario(idUsuario, nombreUsuario, apellidos, correo,
+                 telefono, fechaNacimiento, idRegion, contrasena, sitioWeb, ref errorMessage, ref errorOccurred, ref camposActualizados).FirstOrDefault();
+               // conexion.UpdateUsuario(idUsuario, nombreUsuario, apellidos, correo, contrasena, sitioWeb, telefono, fechaNacimiento, idRegion, ref camposActualizados, ref errorMessage);
+
+                if (usuarioBD != null && camposActualizados > 0)
+                {
+                    // Actualizar los idiomas del usuario
+                    foreach (var idiomas in usuario.listaIdiomas)
+                    {
+                        string idioma = idiomas.idioma, nivel = idiomas.nivel;
+
+                        Actualizar_Idiomas_UsuarioResult usuarioIdioma = conexion.Actualizar_Idiomas_Usuario(idUsuario,idioma,nivel, ref errorOcurred, ref errorMensaje, ref camposActualizados).FirstOrDefault(); 
+                        if (errorMessage > 0)
+                        {
+                            res.listaDeErrores.Add($"Error al actualizar el idioma: {idiomas.idIdioma}");
+                        }
+                    }
+
+                    // Actualizar las habilidades del usuario
+                    foreach (var habilidad in usuario.listaHabilidades)
+                    {
+                        string categoria = habilidad.categoria, descripcion = habilidad.descripcion;
+
+                        Actualizar_Habilidades_UsuarioResult usuarioHabilidad = (Actualizar_Habilidades_UsuarioResult)conexion.Actualizar_Habilidades_Usuario(idUsuario, categoria,descripcion,ref errorOcurred, ref errorMensaje, ref camposActualizados);
+                        if (errorMessage > 0)
+                        {
+                            res.listaDeErrores.Add($"Error al actualizar la habilidad: {habilidad.idHabilidades}");
+                        }
+                    }
+
+                    res.resultado = true;
+                }
+                else
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("Error al actualizar el usuario principal.");
+                }
+            }
+            catch (Exception ex)
+            {
+                res.listaDeErrores.Add("Error al actualizar: " + ex.Message);
+            }
+
+            return res;
+        }
+
+
+
+
 
     }
-
 
 }
