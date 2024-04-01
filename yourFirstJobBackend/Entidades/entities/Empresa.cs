@@ -15,6 +15,8 @@ namespace yourFirstJobBackend.Entidades.entities
         public Region region {  get; set; }
         public string descripcion {  get; set; }
         public DateTime fechaRegistro { get; set; }
+        public int estado { get; set; }
+
 
     }
 }

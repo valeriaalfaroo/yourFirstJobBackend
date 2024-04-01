@@ -19,6 +19,8 @@ namespace yourFirstJobBackend.Entidades.entities
         public string contrasena { get; set; }
         public string sitioWeb { get; set; }
         public DateTime fechaRegistro { get; set; }
+        public int estado { get; set; }
+
 
         //agregar listas
         //Idiomas
