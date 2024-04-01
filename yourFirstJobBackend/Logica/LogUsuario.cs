@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Linq;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -590,6 +591,47 @@ namespace yourFirstJobBackend.Logica
                         if (errorMessage > 0)
                         {
                             res.listaDeErrores.Add($"Error al actualizar la habilidad: {habilidad.idHabilidades}");
+                        }
+                    }
+
+                    //actualizar estudios de usuario
+                    foreach (var estudios in usuario.listaEstudios)
+                    {
+                        string nombreInstitucion = estudios.nombreInstitucion, gradoAcademico = estudios.gradoAcademico;
+                        DateTime fechaInicio = estudios.fechaInicio, fechaFinalizacion = estudios.fechaFinalizacion;
+                        //sp
+
+                        if (errorMessage > 0)
+                        {
+                             res.listaDeErrores.Add($"Error al actualizar la habilidad: {estudios.idEstudios}");
+                        }
+                    }
+
+                    //actualizar archivos de usuario
+                    foreach (var archivosUsers in usuario.listaArchivosUsuarios)
+                    {
+                        string nombreArcivo= archivosUsers.nombreArchivo, tipo = archivosUsers.tipo;
+                        Binary archivo = archivosUsers.archivo;
+                        //sp
+
+
+                        if (errorMessage > 0)
+                        {
+                            res.listaDeErrores.Add($"Error al actualizar la habilidad: {archivosUsers.idArchivosUsuarios}");
+                        }
+                    }
+
+                    //actualizar experiencia Laboral usuario
+                    foreach (var experienciaLabUser in usuario.listaExperienciaLaboral)
+                    {
+                        string puesto = experienciaLabUser.puesto, nombreEmpresa = experienciaLabUser.nombreEmpresa, responsabilidades= experienciaLabUser.responsabilidades;
+                        DateTime fechaInicio = experienciaLabUser.fechaInicio, fechaFinalizacion = experienciaLabUser.fechaFinalizacion;
+                        //sp
+
+
+                        if (errorMessage > 0)
+                        {
+                            res.listaDeErrores.Add($"Error al actualizar la habilidad: {experienciaLabUser.idExperiencia}");
                         }
                     }
 

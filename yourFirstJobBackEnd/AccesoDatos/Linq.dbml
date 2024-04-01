@@ -149,26 +149,6 @@
       <Column Name="Message" Type="System.String" DbType="VarChar(26) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.SP_InformacionUsuario" Method="SP_InformacionUsuario">
-    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
-    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
-    <ElementType Name="SP_InformacionUsuarioResult">
-      <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nombreUsuario" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="apellidos" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="correo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="telefono" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="fechaNacimiento" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="idRegion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="contrasena" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="sitioWeb" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="fechaRegitro" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="idRegion1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nombreRegion" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="nombreRegion1" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.Select_Habilidad_Usuario" Method="Select_Habilidad_Usuario">
     <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
     <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
@@ -295,6 +275,27 @@
     <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
     <ElementType Name="Actualizar_Usuario_RelacionesResult">
       <Column Name="Message" Type="System.String" DbType="VarChar(34) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_InformacionUsuario" Method="SP_InformacionUsuario">
+    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <ElementType Name="SP_InformacionUsuarioResult">
+      <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nombreUsuario" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="apellidos" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="correo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="telefono" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fechaNacimiento" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="idRegion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="contrasena" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="sitioWeb" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="fechaRegitro" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="idRegion1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nombreRegion" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="nombreRegion1" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>
