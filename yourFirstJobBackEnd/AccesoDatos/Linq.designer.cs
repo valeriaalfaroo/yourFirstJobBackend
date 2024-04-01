@@ -2399,5 +2399,83 @@ namespace yourFirstJobBackend.AccesoDatos
 			}
 		}
 	}
+	
+	public partial class Actualizar_Habilidades_UsuarioResult
+	{
+		
+		private string _Message;
+		
+		public Actualizar_Habilidades_UsuarioResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this._Message = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Actualizar_Idiomas_UsuarioResult
+	{
+		
+		private string _Message;
+		
+		public Actualizar_Idiomas_UsuarioResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this._Message = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Actualizar_Usuario_RelacionesResult
+	{
+		
+		private string _Message;
+		
+		public Actualizar_Usuario_RelacionesResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(34) NOT NULL", CanBeNull=false)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this._Message = value;
+				}
+			}
+		}
+	}
 }
 #pragma warning restore 1591

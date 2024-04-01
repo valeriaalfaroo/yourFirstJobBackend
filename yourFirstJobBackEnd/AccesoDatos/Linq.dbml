@@ -255,4 +255,46 @@
       <Column Name="nombreRegion" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.Actualizar_Habilidades_Usuario" Method="Actualizar_Habilidades_Usuario">
+    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="categoria" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="descripcion" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="CamposActualizados" Parameter="camposActualizados" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="Actualizar_Habilidades_UsuarioResult">
+      <Column Name="Message" Type="System.String" DbType="VarChar(35) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Actualizar_Idiomas_Usuario" Method="Actualizar_Idiomas_Usuario">
+    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idioma" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="nivel" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="CamposActualizados" Parameter="camposActualizados" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="Actualizar_Idiomas_UsuarioResult">
+      <Column Name="Message" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Actualizar_Usuario_Relaciones" Method="Actualizar_Usuario_Relaciones">
+    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nombreUsuario" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="apellidos" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="correo" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="telefono" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fechaNacimiento" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="idRegion" Type="System.Int32" DbType="Int" />
+    <Parameter Name="contrasena" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="sitioWeb" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="idioma" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="nivel" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="categoria" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="descripcion" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <ElementType Name="Actualizar_Usuario_RelacionesResult">
+      <Column Name="Message" Type="System.String" DbType="VarChar(34) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>
