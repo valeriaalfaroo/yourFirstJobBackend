@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Linq;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -142,7 +143,7 @@ namespace yourFirstJobBackend.Logica
                     int? errorIdIdiomas = 0;
                     string errorDescripcionIdiomas = "";
 
-                    foreach (var idiomaInfo in conexion.Select_Idiomas_Oferta(usuarioBD.idUsuario, ref errorIdIdiomas, ref errorDescripcionIdiomas)) //agregar + controles de errores a sp
+                    foreach (var idiomaInfo in conexion.Select_Idiomas_Usuario(usuarioBD.idUsuario, ref errorIdIdiomas, ref errorDescripcionIdiomas)) //agregar + controles de errores a sp
                     {
                         if (errorIdIdiomas == 1)
                         {
@@ -374,7 +375,10 @@ namespace yourFirstJobBackend.Logica
 
         #endregion
 
-        //eliminr usuario (en espera del manejo en bd)
+
+
+
+        //eliminr usuario (en bd se hace update al campo estado =0 para decir q el usuario ya no existe)
         public ResEliminarUsuario eliminarUsuario(ReqEliminarUsuario req)
         {
             ResEliminarUsuario res = new ResEliminarUsuario();
@@ -383,13 +387,13 @@ namespace yourFirstJobBackend.Logica
             {
                 LinqDataContext conexion = new LinqDataContext();
                 //  int idUsuario = req.idUsuario;  Obtener el idUsuario desde el objeto req
-                int idUsuario = 1; //dato quemado
+                int idUsuario = 10; //dato quemado
                 int? errorOccured = 0;
                 string errorMessage = "";
-                int? lineasBorradas = 0;
+                int? lineasActualizadas = 0;
 
 
-                DeleteUsuarioResult resultado = conexion.DeleteUsuario(idUsuario, ref errorOccured, ref errorMessage, ref lineasBorradas).SingleOrDefault();
+                DesactivarUsuarioResult resultado = conexion.DesactivarUsuario(idUsuario, ref errorOccured, ref errorMessage, ref lineasActualizadas).SingleOrDefault();
 
                 if (resultado != null)
                 {
@@ -411,8 +415,10 @@ namespace yourFirstJobBackend.Logica
 
 
 
-            //actualizar un usuario
+  
         }
+
+        //actualizar un usuario
 
 
         /* public ResUpdateUsuario actualizarUsuario(Usuario usuario)
@@ -645,6 +651,47 @@ namespace yourFirstJobBackend.Logica
                         if (errorMessage > 0)
                         {
                             res.listaDeErrores.Add($"Error al actualizar la habilidad: {habilidad.idHabilidades}");
+                        }
+                    }
+
+                    //actualizar estudios de usuario
+                    foreach (var estudios in usuario.listaEstudios)
+                    {
+                        string nombreInstitucion = estudios.nombreInstitucion, gradoAcademico = estudios.gradoAcademico;
+                        DateTime fechaInicio = estudios.fechaInicio, fechaFinalizacion = estudios.fechaFinalizacion;
+                        //sp
+
+                        if (errorMessage > 0)
+                        {
+                             res.listaDeErrores.Add($"Error al actualizar la habilidad: {estudios.idEstudios}");
+                        }
+                    }
+
+                    //actualizar archivos de usuario
+                    foreach (var archivosUsers in usuario.listaArchivosUsuarios)
+                    {
+                        string nombreArcivo= archivosUsers.nombreArchivo, tipo = archivosUsers.tipo;
+                        Binary archivo = archivosUsers.archivo;
+                        //sp
+
+
+                        if (errorMessage > 0)
+                        {
+                            res.listaDeErrores.Add($"Error al actualizar la habilidad: {archivosUsers.idArchivosUsuarios}");
+                        }
+                    }
+
+                    //actualizar experiencia Laboral usuario
+                    foreach (var experienciaLabUser in usuario.listaExperienciaLaboral)
+                    {
+                        string puesto = experienciaLabUser.puesto, nombreEmpresa = experienciaLabUser.nombreEmpresa, responsabilidades= experienciaLabUser.responsabilidades;
+                        DateTime fechaInicio = experienciaLabUser.fechaInicio, fechaFinalizacion = experienciaLabUser.fechaFinalizacion;
+                        //sp
+
+
+                        if (errorMessage > 0)
+                        {
+                            res.listaDeErrores.Add($"Error al actualizar la habilidad: {experienciaLabUser.idExperiencia}");
                         }
                     }
 

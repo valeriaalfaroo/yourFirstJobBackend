@@ -77,7 +77,7 @@ namespace API.Controllers
 
         }
 
-        //delete usuario (en espera del manejo del delete)
+        //delete usuario (se actualiza estado a 0)
         [System.Web.Http.HttpDelete]
         [System.Web.Http.Route("api/usuario/eliminarUsuario")]
         public ResEliminarUsuario eliminarUsuario()
