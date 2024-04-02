@@ -31,7 +31,7 @@ namespace API.Controllers
 
         //Update empleo 
 
-        [System.Web.Http.HttpPut]
+        [System.Web.Http.HttpPatch]
         [System.Web.Http.Route("api/empleo/updateEmpleo")]
         public ResUpdateOfertaEmpleo ingresarEmpleo(ReqUpdateOfertaEmpleo req)
         {
