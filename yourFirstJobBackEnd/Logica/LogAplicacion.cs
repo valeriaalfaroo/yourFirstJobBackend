@@ -63,12 +63,11 @@ namespace yourFirstJobBackend.Logica
 
                     // conexion a SP 
 
-                    conexion.InsertarAplicacion(req.empleo.empresa.idEmpresa, req.empleo.tituloEmpleo, req.empleo.descripcionEmpleo, req.empleo.ubicacionEmpleo, req.empleo.tipoEmpleo, req.empleo.experiencia, req.empleo.fechaPublicacion, req.empleo.estado, ref errorId, ref errorDescripcion, ref idReturn);
+                    conexion.InsertarAplicacion(req.aplicacion.usuario.idUsuario,req.aplicacion.empleo.idOfertas,req.aplicacion.estadoAplicacion,req.aplicacion.fechaAplicacion, ref errorId, ref errorDescripcion, ref idReturn);
 
                     if (idReturn == 0)
                     {
                         //Error en base de datos
-                        //No se hizo la publicacion
                         res.resultado = false;
                         res.listaDeErrores.Add(errorDescripcion);
                     }
@@ -90,7 +89,7 @@ namespace yourFirstJobBackend.Logica
             }
             return res;
         }
- 
+        public 
         
     }
 }

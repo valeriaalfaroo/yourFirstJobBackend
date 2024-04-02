@@ -69,6 +69,7 @@
     <Compile Include="Entidades\Request\ReqIngresarEmpleo.cs" />
     <Compile Include="Entidades\Request\ReqIngresarUsuario.cs" />
     <Compile Include="Entidades\Request\ReqLogin.cs" />
+    <Compile Include="Entidades\Request\ReqObtenerAplicacion.cs" />
     <Compile Include="Entidades\Request\ReqObtenerTodosLosEmpleos.cs" />
     <Compile Include="Entidades\Request\ReqObtenerUsuario.cs" />
     <Compile Include="Entidades\Request\ReqUpdateOfertaEmpleo.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Entidades\Response\ResIngresarEmpleo.cs" />
     <Compile Include="Entidades\Response\ResIngresarUsuario.cs" />
     <Compile Include="Entidades\Response\ResLogin.cs" />
+    <Compile Include="Entidades\Response\ResObtenerAplicaciones.cs" />
     <Compile Include="Entidades\Response\ResObtenerPerfilUsuario.cs" />
     <Compile Include="Entidades\Response\ResObtenerTodosLosEmpleos.cs" />
     <Compile Include="Entidades\Response\ResUpdateOfertaEmpleo.cs" />

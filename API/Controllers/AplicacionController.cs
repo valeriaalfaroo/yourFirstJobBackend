@@ -11,6 +11,12 @@ namespace API.Controllers
 {
     public class AplicacionController : ApiController
     {
-
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/aplicacion/ingresarAplicacion")]
+        public ResIngresarAplicacion ingresarAplicacion(ReqIngresarAplicacion req)
+        {
+            LogAplicacion logicaBackend = new LogAplicacion();
+            return logicaBackend.ingresarAplicacion(req);
+        }
     }
 }
