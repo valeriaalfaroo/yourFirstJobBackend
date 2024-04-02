@@ -316,6 +316,15 @@ namespace yourFirstJobBackend.AccesoDatos
 			idReturn = ((System.Nullable<int>)(result.GetParameterValue(5)));
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ObtenerAplicacionesUsuario")]
+		public ISingleResult<ObtenerAplicacionesUsuarioResult> ObtenerAplicacionesUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, errorOccurred, errorMensaje);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(1)));
+			errorMensaje = ((string)(result.GetParameterValue(2)));
+			return ((ISingleResult<ObtenerAplicacionesUsuarioResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class DeleteUsuarioResult
@@ -2703,6 +2712,140 @@ namespace yourFirstJobBackend.AccesoDatos
 				if ((this._Message != value))
 				{
 					this._Message = value;
+				}
+			}
+		}
+	}
+	
+	public partial class ObtenerAplicacionesUsuarioResult
+	{
+		
+		private int _idAplicacion;
+		
+		private int _idUsuario;
+		
+		private int _idOfertaEmpleo;
+		
+		private string _estadoAplicacion;
+		
+		private System.DateTime _fechaAplicacion;
+		
+		private string _tituloEmpleo;
+		
+		private string _descripcionEmpleo;
+		
+		public ObtenerAplicacionesUsuarioResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idAplicacion", DbType="Int NOT NULL")]
+		public int idAplicacion
+		{
+			get
+			{
+				return this._idAplicacion;
+			}
+			set
+			{
+				if ((this._idAplicacion != value))
+				{
+					this._idAplicacion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUsuario", DbType="Int NOT NULL")]
+		public int idUsuario
+		{
+			get
+			{
+				return this._idUsuario;
+			}
+			set
+			{
+				if ((this._idUsuario != value))
+				{
+					this._idUsuario = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idOfertaEmpleo", DbType="Int NOT NULL")]
+		public int idOfertaEmpleo
+		{
+			get
+			{
+				return this._idOfertaEmpleo;
+			}
+			set
+			{
+				if ((this._idOfertaEmpleo != value))
+				{
+					this._idOfertaEmpleo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_estadoAplicacion", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string estadoAplicacion
+		{
+			get
+			{
+				return this._estadoAplicacion;
+			}
+			set
+			{
+				if ((this._estadoAplicacion != value))
+				{
+					this._estadoAplicacion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaAplicacion", DbType="Date NOT NULL")]
+		public System.DateTime fechaAplicacion
+		{
+			get
+			{
+				return this._fechaAplicacion;
+			}
+			set
+			{
+				if ((this._fechaAplicacion != value))
+				{
+					this._fechaAplicacion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tituloEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string tituloEmpleo
+		{
+			get
+			{
+				return this._tituloEmpleo;
+			}
+			set
+			{
+				if ((this._tituloEmpleo != value))
+				{
+					this._tituloEmpleo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcionEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string descripcionEmpleo
+		{
+			get
+			{
+				return this._descripcionEmpleo;
+			}
+			set
+			{
+				if ((this._descripcionEmpleo != value))
+				{
+					this._descripcionEmpleo = value;
 				}
 			}
 		}

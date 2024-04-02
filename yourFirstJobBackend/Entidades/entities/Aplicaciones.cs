@@ -12,6 +12,6 @@ namespace yourFirstJobBackend.Entidades.entities
         public Usuario usuario { get; set; }    
         public Empleo empleo { get; set; }
         public string estadoAplicacion { get; set; }
-        public DateTime fechaAplicacion { get; set; }
+        
     }
 }

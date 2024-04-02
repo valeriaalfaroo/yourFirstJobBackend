@@ -41,11 +41,7 @@ namespace yourFirstJobBackend.Logica
                         res.resultado = false;
                         res.listaDeErrores.Add("Estado de aplicacion faltante");
                     }
-                    if (req.aplicacion.fechaAplicacion == DateTime.MinValue)
-                    {
-                        res.resultado = false;
-                        res.listaDeErrores.Add("Fecha de publicacion faltante");
-                    }
+                    
                 }
                 if (res.listaDeErrores.Any())
                 {
@@ -63,7 +59,7 @@ namespace yourFirstJobBackend.Logica
 
                     // conexion a SP 
 
-                    conexion.InsertarAplicacion(req.aplicacion.usuario.idUsuario,req.aplicacion.empleo.idOfertas,req.aplicacion.estadoAplicacion,req.aplicacion.fechaAplicacion, ref errorId, ref errorDescripcion, ref idReturn);
+                    conexion.InsertarAplicacion(req.aplicacion.usuario.idUsuario,req.aplicacion.empleo.idOfertas,req.aplicacion.estadoAplicacion, ref errorId, ref errorDescripcion, ref idReturn);
 
                     if (idReturn == 0)
                     {
@@ -89,7 +85,7 @@ namespace yourFirstJobBackend.Logica
             }
             return res;
         }
-        public 
+        
         
     }
 }
