@@ -351,4 +351,22 @@
       <Column Name="Message" Type="System.String" DbType="VarChar(34) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.InsertarAplicacion" Method="InsertarAplicacion">
+    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idOfertaEmpleo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="estadoAplicacion" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="fechaAplicacion" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="IdReturn" Parameter="idReturn" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ActualizarEstadoAplicacion" Method="ActualizarEstadoAplicacion">
+    <Parameter Name="idAplicacion" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nuevoEstado" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="CamposActualizados" Parameter="camposActualizados" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>
