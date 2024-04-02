@@ -23,6 +23,16 @@ namespace API.Controllers
         [System.Web.Http.Route("api/aplicacion/obtenerAplicacionesUsuario")]
         public ResObtenerAplicaciones obtenerAplicaciones(ReqObtenerAplicacion req)
         {
+            if (req == null)
+            {
+
+                return new ResObtenerAplicaciones
+                {
+                    resultado = false,
+                    listaDeErrores = new List<string> { "Request nulo" }
+                };
+
+            }
             LogAplicacion logicaBackend = new LogAplicacion();
             return logicaBackend.obtenerAplicacionesUsuario(req);
         }
