@@ -8,5 +8,6 @@ namespace yourFirstJobBackend.Entidades.Request
 {
     public class ReqObtenerAplicacion
     {
+        public int idUser {  get; set; }
     }
 }

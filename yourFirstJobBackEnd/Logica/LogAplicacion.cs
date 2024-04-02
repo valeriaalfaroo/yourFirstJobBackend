@@ -86,6 +86,51 @@ namespace yourFirstJobBackend.Logica
             return res;
         }
         
+        public ResObtenerAplicaciones obtenerAplicacionesUsuario(ReqObtenerAplicacion req)
+        {
+           
+
+            ResObtenerAplicaciones res = new ResObtenerAplicaciones();
+
+            res.listaDeErrores = new List<string>();
+            int? errorId = 0;
+            string errorDescripcion = "";
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+
+                List<ObtenerAplicacionesUsuarioResult> aplicacionesDeBD = conexion.ObtenerAplicacionesUsuario(req.idUser, ref errorId, ref errorDescripcion).ToList();
+
+                if (errorId == 1)
+                {
+                    //Error en base de datos
+                    res.resultado = false;
+                    res.listaDeErrores.Add(errorDescripcion);
+                }
+                else
+                {
+                    res.resultado = true;
+                    foreach (ObtenerAplicacionesUsuarioResult cadaTC in aplicacionesDeBD)
+                    {
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+
+            }
+            finally
+            {
+                //Bitacorear
+            }
+            return res;
+        }
+            
+           
+        
         
     }
 }
