@@ -46,6 +46,11 @@ namespace yourFirstJobBackend.Logica
                         res.resultado=false;
                         res.listaDeErrores.Add("Experiencia faltante");
                     }
+                    if (req.empleo.fechaPublicacion == DateTime.MinValue)
+                    {
+                        res.resultado = false;
+                        res.listaDeErrores.Add("Fecha de publicacion faltante");
+                    }
                 }
                 if (res.listaDeErrores.Any()) {
                     res.resultado = false;
