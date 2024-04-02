@@ -16,7 +16,7 @@ namespace yourFirstJobBackend.Logica
 {
     public class LogUsuario
     {
-
+        //Ingresar Usuario
         public ResIngresarUsuario IngresarUsuario(Usuario usuario)
         {
             ResIngresarUsuario res = new ResIngresarUsuario();
@@ -80,7 +80,7 @@ namespace yourFirstJobBackend.Logica
                     string errorDescripcion = "";
 
                     conexion.InsertUsuario(usuario.nombreUsuario, usuario.apellidos, usuario.correo, usuario.telefono,
-                        usuario.fechaNacimiento, usuario.idRegion, usuario.contrasena, ref errorId, ref errorDescripcion, ref idReturn);
+                        usuario.fechaNacimiento, usuario.idRegion, Utilitarios.encriptar(usuario.contrasena), ref errorId, ref errorDescripcion, ref idReturn);
 
                     if (idReturn == 0)
                     {
@@ -105,8 +105,6 @@ namespace yourFirstJobBackend.Logica
             return res;
         }
 
-
-
         //traer un usuario
         public ResObtenerPerfilUsuario obtenerUsuario(ReqObtenerUsuario req)
         {
@@ -119,9 +117,7 @@ namespace yourFirstJobBackend.Logica
             {
                 LinqDataContext conexion = new LinqDataContext();
 
-                int idUsuario = 3; //dato quemado
-
-                SP_InformacionUsuarioResult usuarioBD = conexion.SP_InformacionUsuario(idUsuario, ref errorId, ref errorDescripcion).FirstOrDefault();
+                SP_InformacionUsuarioResult usuarioBD = conexion.SP_InformacionUsuario(req.idUser, ref errorId, ref errorDescripcion).FirstOrDefault();
 
                 if (usuarioBD != null)
                 {
@@ -317,7 +313,66 @@ namespace yourFirstJobBackend.Logica
 
         #endregion
 
+        //Login
+        public ResLogin loginUser(ReqLogin req)
+        {
+            ResLogin res = new ResLogin();
 
+            res.listaDeErrores = new List<string>();
+
+            int? errorId = 0;
+            int? idReturn = 0;
+            string errorDescripcion = "";
+
+
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+
+                Login_UserResult usuarioBD = conexion.Login_User(req.username, Utilitarios.encriptar(req.password), ref errorId, ref errorDescripcion, ref idReturn).FirstOrDefault();
+
+                if (usuarioBD != null)
+                {
+                    //Errores
+                    if (errorId != 0)
+                    {
+                        //Paso un error
+                        res.listaDeErrores.Add(errorDescripcion);
+                    }
+                    else if (idReturn == 0)
+                    {
+                        //Vino vacio el ID Return
+                        res.listaDeErrores.Add("Usuario no encontrado");
+                    }
+                    else
+                    {
+                        //Todo bien
+                        res.idReturn = idReturn ?? default(int); ;
+                    }
+
+                }
+                else
+                {
+                    //Null
+                    res.listaDeErrores.Add("Usuario nulo");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+
+            }
+            finally
+            {
+
+                //Bitacora
+
+            }
+            return res;
+        }
 
 
         //eliminr usuario (en bd se hace update al campo estado =0 para decir q el usuario ya no existe)
