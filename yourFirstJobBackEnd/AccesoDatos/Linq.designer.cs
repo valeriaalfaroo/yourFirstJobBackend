@@ -306,6 +306,16 @@ namespace yourFirstJobBackend.AccesoDatos
 			idReturn = ((System.Nullable<int>)(result.GetParameterValue(6)));
 			return ((ISingleResult<InsertarAplicacionResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ActualizarEstadoAplicacion")]
+		public int ActualizarEstadoAplicacion([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idAplicacion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string nuevoEstado, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CamposActualizados", DbType="Int")] ref System.Nullable<int> camposActualizados)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idAplicacion, nuevoEstado, errorOccurred, errorMensaje, camposActualizados);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(2)));
+			errorMensaje = ((string)(result.GetParameterValue(3)));
+			camposActualizados = ((System.Nullable<int>)(result.GetParameterValue(4)));
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	public partial class DeleteUsuarioResult
