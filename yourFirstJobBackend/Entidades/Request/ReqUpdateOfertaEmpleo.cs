@@ -9,6 +9,6 @@ namespace yourFirstJobBackend.Entidades.Request
 {
     public class ReqUpdateOfertaEmpleo
     {
-        public Empleo updateEmpleo { get; set; }
+        public Empleo empleo { get; set; }
     }
 }
