@@ -113,7 +113,7 @@ namespace yourFirstJobBackend.Logica
                     res.resultado = true;
                     foreach (ObtenerAplicacionesUsuarioResult cadaTC in aplicacionesDeBD)
                     {
-                        res.aplicaciones.Add(this.obtenerAplicacionesUsuario()); 
+                        res.aplicaciones.Add(this.crearAplicacion(cadaTC)); 
                     }
                     
 
