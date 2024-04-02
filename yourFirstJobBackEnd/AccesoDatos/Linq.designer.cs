@@ -218,6 +218,45 @@ namespace yourFirstJobBackend.AccesoDatos
 			errorMensaje = ((string)(result.GetParameterValue(2)));
 			return ((ISingleResult<BuscarOfertasEmpleoPorTituloResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Actualizar_Habilidades_Usuario")]
+		public ISingleResult<Actualizar_Habilidades_UsuarioResult> Actualizar_Habilidades_Usuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string categoria, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string descripcion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CamposActualizados", DbType="Int")] ref System.Nullable<int> camposActualizados)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, categoria, descripcion, errorOccurred, errorMensaje, camposActualizados);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(3)));
+			errorMensaje = ((string)(result.GetParameterValue(4)));
+			camposActualizados = ((System.Nullable<int>)(result.GetParameterValue(5)));
+			return ((ISingleResult<Actualizar_Habilidades_UsuarioResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Actualizar_Idiomas_Usuario")]
+		public ISingleResult<Actualizar_Idiomas_UsuarioResult> Actualizar_Idiomas_Usuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string idioma, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string nivel, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CamposActualizados", DbType="Int")] ref System.Nullable<int> camposActualizados)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, idioma, nivel, errorOccurred, errorMensaje, camposActualizados);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(3)));
+			errorMensaje = ((string)(result.GetParameterValue(4)));
+			camposActualizados = ((System.Nullable<int>)(result.GetParameterValue(5)));
+			return ((ISingleResult<Actualizar_Idiomas_UsuarioResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Actualizar_Usuario_Relaciones")]
+		public ISingleResult<Actualizar_Usuario_RelacionesResult> Actualizar_Usuario_Relaciones([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string nombreUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string apellidos, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string correo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> telefono, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaNacimiento, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idRegion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string contrasena, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string sitioWeb, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string idioma, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string nivel, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string categoria, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string descripcion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, nombreUsuario, apellidos, correo, telefono, fechaNacimiento, idRegion, contrasena, sitioWeb, idioma, nivel, categoria, descripcion, errorOccurred, errorMensaje);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(13)));
+			errorMensaje = ((string)(result.GetParameterValue(14)));
+			return ((ISingleResult<Actualizar_Usuario_RelacionesResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Login_User")]
+		public ISingleResult<Login_UserResult> Login_User([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> idReturn)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username, password, errorOccurred, errorMensaje, idReturn);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(2)));
+			errorMensaje = ((string)(result.GetParameterValue(3)));
+			idReturn = ((System.Nullable<int>)(result.GetParameterValue(4)));
+			return ((ISingleResult<Login_UserResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class DeleteUsuarioResult
@@ -2462,6 +2501,32 @@ namespace yourFirstJobBackend.AccesoDatos
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(34) NOT NULL", CanBeNull=false)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this._Message = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Login_UserResult
+	{
+		
+		private string _Message;
+		
+		public Login_UserResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(44) NOT NULL", CanBeNull=false)]
 		public string Message
 		{
 			get

@@ -7,10 +7,8 @@ using yourFirstJobBackend.Entidades.entities;
 
 namespace yourFirstJobBackend.Entidades.Response
 {
-    public class ResObtenerPerfilUsuario : ResBase
+    public class ResLogin : ResBase
     {
-
-        public Usuario usuario { get; set; }
+        public int idUsuarioReturn { get; set; }
     }
 }
-

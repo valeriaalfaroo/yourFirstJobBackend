@@ -118,9 +118,7 @@ namespace yourFirstJobBackend.Logica
             {
                 LinqDataContext conexion = new LinqDataContext();
 
-                int idUsuario = 3; //dato quemado
-
-                SP_InformacionUsuarioResult usuarioBD = conexion.SP_InformacionUsuario(idUsuario, ref errorId, ref errorDescripcion).FirstOrDefault();
+                SP_InformacionUsuarioResult usuarioBD = conexion.SP_InformacionUsuario(req.idUser, ref errorId, ref errorDescripcion).FirstOrDefault();
 
                 if (usuarioBD != null)
                 {
@@ -290,6 +288,64 @@ namespace yourFirstJobBackend.Logica
 
         }
 
+        //Login
+        public ResLogin loginUser(ReqLogin req)
+        {
+            ResLogin res = new ResLogin();
+
+            res.listaDeErrores = new List<string>();
+
+            int? errorId = 0;
+            int? idReturn = 0;
+            string errorDescripcion = "";
+
+
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+
+                Login_UserResult usuarioBD = conexion.Login_User(req.username, req.password, ref errorId, ref errorDescripcion, ref idReturn).FirstOrDefault();
+
+                if (usuarioBD != null)
+                {
+                    //Errores
+                    if (errorId != 0)
+                    {
+                        //Paso un error
+                        res.listaDeErrores.Add(errorDescripcion);
+                    } else if (idReturn == 0) 
+                    {
+                        //Vino vacio el ID Return
+                        res.listaDeErrores.Add("Usuario no encontrado");
+                    } else
+                    {
+                        //Todo bien
+                        res.idUsuarioReturn = idReturn ?? default(int); ;
+                    }
+
+                } else
+                {
+                    //Null
+                    res.listaDeErrores.Add("Usuario nulo");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+
+            }
+            finally
+            {
+
+                //Bitacora
+
+            }
+            return res;
+        }
+
         #region
 
 
@@ -315,9 +371,6 @@ namespace yourFirstJobBackend.Logica
 
 
         #endregion
-
-
-
 
         //eliminr usuario (en espera del manejo en bd)
         public ResEliminarUsuario eliminarUsuario(ReqEliminarUsuario req)

@@ -297,4 +297,14 @@
       <Column Name="Message" Type="System.String" DbType="VarChar(34) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.Login_User" Method="Login_User">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="idReturn" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="Login_UserResult">
+      <Column Name="Message" Type="System.String" DbType="VarChar(44) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>
