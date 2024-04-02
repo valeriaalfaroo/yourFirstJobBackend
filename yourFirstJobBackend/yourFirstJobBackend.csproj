@@ -65,6 +65,7 @@
     <Compile Include="Entidades\entities\Usuario.cs" />
     <Compile Include="Entidades\Request\ReqBuscarOfertasPorTitulo.cs" />
     <Compile Include="Entidades\Request\ReqEliminarUsuario.cs" />
+    <Compile Include="Entidades\Request\ReqIngresarAplicacion.cs" />
     <Compile Include="Entidades\Request\ReqIngresarEmpleo.cs" />
     <Compile Include="Entidades\Request\ReqIngresarUsuario.cs" />
     <Compile Include="Entidades\Request\ReqLogin.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Entidades\Response\ResBase.cs" />
     <Compile Include="Entidades\Response\ResBuscarOfertasPorTitulo.cs" />
     <Compile Include="Entidades\Response\ResEliminarUsuario.cs" />
+    <Compile Include="Entidades\Response\ResIngresarAplicacion.cs" />
     <Compile Include="Entidades\Response\ResIngresarEmpleo.cs" />
     <Compile Include="Entidades\Response\ResIngresarUsuario.cs" />
     <Compile Include="Entidades\Response\ResLogin.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Entidades\Response\ResObtenerTodosLosEmpleos.cs" />
     <Compile Include="Entidades\Response\ResUpdateOfertaEmpleo.cs" />
     <Compile Include="Entidades\Response\ResUpdateUsuario.cs" />
+    <Compile Include="Logica\LogAplicacion.cs" />
     <Compile Include="Logica\LogOfertaEmpleo.cs" />
     <Compile Include="Logica\LogUsuario.cs" />
     <Compile Include="Logica\Utilitarios.cs" />

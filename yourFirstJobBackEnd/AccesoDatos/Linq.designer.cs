@@ -296,6 +296,16 @@ namespace yourFirstJobBackend.AccesoDatos
 			lineasActualizadas = ((System.Nullable<int>)(result.GetParameterValue(3)));
 			return ((ISingleResult<DesactivarUsuarioResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertarAplicacion")]
+		public ISingleResult<InsertarAplicacionResult> InsertarAplicacion([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string nombreUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string tituloOfertaEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string estadoAplicacion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaAplicacion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdReturn", DbType="Int")] ref System.Nullable<int> idReturn)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombreUsuario, tituloOfertaEmpleo, estadoAplicacion, fechaAplicacion, errorOccurred, errorMensaje, idReturn);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(4)));
+			errorMensaje = ((string)(result.GetParameterValue(5)));
+			idReturn = ((System.Nullable<int>)(result.GetParameterValue(6)));
+			return ((ISingleResult<InsertarAplicacionResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class DeleteUsuarioResult
@@ -2672,6 +2682,32 @@ namespace yourFirstJobBackend.AccesoDatos
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(34) NOT NULL", CanBeNull=false)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this._Message = value;
+				}
+			}
+		}
+	}
+	
+	public partial class InsertarAplicacionResult
+	{
+		
+		private string _Message;
+		
+		public InsertarAplicacionResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(27) NOT NULL", CanBeNull=false)]
 		public string Message
 		{
 			get

@@ -351,4 +351,16 @@
       <Column Name="Message" Type="System.String" DbType="VarChar(34) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.InsertarAplicacion" Method="InsertarAplicacion">
+    <Parameter Name="nombreUsuario" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="tituloOfertaEmpleo" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="estadoAplicacion" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="fechaAplicacion" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="IdReturn" Parameter="idReturn" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="InsertarAplicacionResult">
+      <Column Name="Message" Type="System.String" DbType="VarChar(27) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>
