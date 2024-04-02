@@ -267,6 +267,25 @@ namespace yourFirstJobBackend.AccesoDatos
 			camposActualizados = ((System.Nullable<int>)(result.GetParameterValue(4)));
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Select_Idiomas_Usuario")]
+		public ISingleResult<Select_Idiomas_UsuarioResult> Select_Idiomas_Usuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, errorOccurred, errorMensaje);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(1)));
+			errorMensaje = ((string)(result.GetParameterValue(2)));
+			return ((ISingleResult<Select_Idiomas_UsuarioResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.DesactivarUsuario")]
+		public ISingleResult<DesactivarUsuarioResult> DesactivarUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LineasActualizadas", DbType="Int")] ref System.Nullable<int> lineasActualizadas)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, errorOccurred, errorMensaje, lineasActualizadas);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(1)));
+			errorMensaje = ((string)(result.GetParameterValue(2)));
+			lineasActualizadas = ((System.Nullable<int>)(result.GetParameterValue(3)));
+			return ((ISingleResult<DesactivarUsuarioResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class DeleteUsuarioResult
@@ -2540,6 +2559,94 @@ namespace yourFirstJobBackend.AccesoDatos
 				if ((this._nombreRegion1 != value))
 				{
 					this._nombreRegion1 = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Select_Idiomas_UsuarioResult
+	{
+		
+		private int _idIdioma;
+		
+		private string _idioma;
+		
+		private string _nivel;
+		
+		public Select_Idiomas_UsuarioResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idIdioma", DbType="Int NOT NULL")]
+		public int idIdioma
+		{
+			get
+			{
+				return this._idIdioma;
+			}
+			set
+			{
+				if ((this._idIdioma != value))
+				{
+					this._idIdioma = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idioma", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string idioma
+		{
+			get
+			{
+				return this._idioma;
+			}
+			set
+			{
+				if ((this._idioma != value))
+				{
+					this._idioma = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nivel", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string nivel
+		{
+			get
+			{
+				return this._nivel;
+			}
+			set
+			{
+				if ((this._nivel != value))
+				{
+					this._nivel = value;
+				}
+			}
+		}
+	}
+	
+	public partial class DesactivarUsuarioResult
+	{
+		
+		private string _Message;
+		
+		public DesactivarUsuarioResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(34) NOT NULL", CanBeNull=false)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this._Message = value;
 				}
 			}
 		}

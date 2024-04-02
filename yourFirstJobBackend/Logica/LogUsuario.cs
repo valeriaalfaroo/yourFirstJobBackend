@@ -143,7 +143,7 @@ namespace yourFirstJobBackend.Logica
                     int? errorIdIdiomas = 0;
                     string errorDescripcionIdiomas = "";
 
-                    foreach (var idiomaInfo in conexion.Select_Idiomas_Oferta(usuarioBD.idUsuario, ref errorIdIdiomas, ref errorDescripcionIdiomas)) //agregar + controles de errores a sp
+                    foreach (var idiomaInfo in conexion.Select_Idiomas_Usuario(usuarioBD.idUsuario, ref errorIdIdiomas, ref errorDescripcionIdiomas)) //agregar + controles de errores a sp
                     {
                         if (errorIdIdiomas == 1)
                         {
@@ -320,7 +320,7 @@ namespace yourFirstJobBackend.Logica
 
 
 
-        //eliminr usuario (en espera del manejo en bd)
+        //eliminr usuario (en bd se hace update al campo estado =0 para decir q el usuario ya no existe)
         public ResEliminarUsuario eliminarUsuario(ReqEliminarUsuario req)
         {
             ResEliminarUsuario res = new ResEliminarUsuario();
@@ -329,13 +329,13 @@ namespace yourFirstJobBackend.Logica
             {
                 LinqDataContext conexion = new LinqDataContext();
                 //  int idUsuario = req.idUsuario;  Obtener el idUsuario desde el objeto req
-                int idUsuario = 1; //dato quemado
+                int idUsuario = 10; //dato quemado
                 int? errorOccured = 0;
                 string errorMessage = "";
-                int? lineasBorradas = 0;
+                int? lineasActualizadas = 0;
 
 
-                DeleteUsuarioResult resultado = conexion.DeleteUsuario(idUsuario, ref errorOccured, ref errorMessage, ref lineasBorradas).SingleOrDefault();
+                DesactivarUsuarioResult resultado = conexion.DesactivarUsuario(idUsuario, ref errorOccured, ref errorMessage, ref lineasActualizadas).SingleOrDefault();
 
                 if (resultado != null)
                 {
@@ -357,8 +357,10 @@ namespace yourFirstJobBackend.Logica
 
 
 
-            //actualizar un usuario
+  
         }
+
+        //actualizar un usuario
 
 
         /* public ResUpdateUsuario actualizarUsuario(Usuario usuario)
