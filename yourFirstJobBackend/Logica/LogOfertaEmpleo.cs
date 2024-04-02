@@ -274,22 +274,22 @@ namespace yourFirstJobBackend.Logica
                 }
                 else
                 {
-                    if (req.updateEmpleo.empresa.idEmpresa == 0)
+                    if (req.empleo.empresa.idEmpresa == 0)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se recibio la empresa");
                     }
-                    if (String.IsNullOrEmpty(req.updateEmpleo.tipoEmpleo))
+                    if (String.IsNullOrEmpty(req.empleo.tipoEmpleo))
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("Tipo de Empleo Faltante");
                     }
-                    if (String.IsNullOrEmpty(req.updateEmpleo.descripcionEmpleo))
+                    if (String.IsNullOrEmpty(req.empleo.descripcionEmpleo))
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("Descripcion de empleo faltante");
                     }
-                    if (String.IsNullOrEmpty(req.updateEmpleo.experiencia))
+                    if (String.IsNullOrEmpty(req.empleo.experiencia))
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("Experiencia faltante");
@@ -305,15 +305,15 @@ namespace yourFirstJobBackend.Logica
 
 
                     LinqDataContext conexion = new LinqDataContext();
-                    int? idReturn = 0;
+                    
                     int? errorId = 0;
                     string errorDescripcion = "";
-
+                    int? camposActualizados = 0; 
                     // conexion a SP 
                     //Falta SP Update 
-                  //  conexion.InsertarOfertaEmpleo(req.empleo.empresa.idEmpresa, req.empleo.tituloEmpleo, req.empleo.descripcionEmpleo, req.empleo.ubicacionEmpleo, req.empleo.tipoEmpleo, req.empleo.experiencia, req.empleo.fechaPublicacion, ref errorId, ref errorDescripcion, ref idReturn);
+                    conexion.ActualizarOfertaEmpleo(req.empleo.idOfertas,req.empleo.empresa.idEmpresa, req.empleo.tituloEmpleo, req.empleo.descripcionEmpleo, req.empleo.ubicacionEmpleo, req.empleo.tipoEmpleo, req.empleo.experiencia, req.empleo.fechaPublicacion, req.empleo.estado,ref errorId, ref errorDescripcion,ref camposActualizados);
 
-                    if (idReturn == 0)
+                    if (camposActualizados == 0)
                     {
                         //Error en base de datos
                         //No se hizo la publicacion
