@@ -18,5 +18,14 @@ namespace API.Controllers
             LogAplicacion logicaBackend = new LogAplicacion();
             return logicaBackend.ingresarAplicacion(req);
         }
+
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/aplicacion/obtenerAplicacionesUsuario")]
+        public ResObtenerAplicaciones obtenerAplicaciones(ReqObtenerAplicacion req)
+        {
+            LogAplicacion logicaBackend = new LogAplicacion();
+            return logicaBackend.obtenerAplicacionesUsuario(req);
+        }
+
     }
 }
