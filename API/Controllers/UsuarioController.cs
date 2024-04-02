@@ -37,44 +37,12 @@ namespace API.Controllers
         }
 
         //  ver usuario
-        [System.Web.Http.HttpPost]
+        [System.Web.Http.HttpGet]
         [System.Web.Http.Route("api/usuario/ObtenerUsuario")]
-        public ResObtenerPerfilUsuario obtenerUsuario([FromBody] ReqObtenerUsuario req)
+        public ResObtenerPerfilUsuario obtenerUsuario()
         {
-            if (req == null)
-            {
-
-                return new ResObtenerPerfilUsuario
-                {
-                    resultado = false,
-                    listaDeErrores = new List<string> { "Request nulo" }
-                };
-
-            }
-
             LogUsuario logicaBackend = new LogUsuario();
-            return logicaBackend.obtenerUsuario(req);
-
-        }
-
-        //Login
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.Route("api/usuario/login")]
-        public ResLogin loginUser(ReqLogin req)
-        {
-            if (req == null)
-            {
-                return new ResLogin
-                {
-                    resultado = false,
-                    listaDeErrores = new List<string> { "Request nulo" }
-                };
-
-            }
-
-            LogUsuario logicaBackend = new LogUsuario();
-            return logicaBackend.loginUser(req);
-
+            return logicaBackend.obtenerUsuario(null);
         }
 
         //delete usuario (se actualiza estado a 0)

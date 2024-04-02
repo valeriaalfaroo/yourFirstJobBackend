@@ -104,6 +104,21 @@
       <Column Name="fechaFinalizacion" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.InsertUsuario" Method="InsertUsuario">
+    <Parameter Name="nombreUsuario" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="apellidos" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="correo" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="telefono" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fechaNacimiento" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="idRegion" Type="System.Int32" DbType="Int" />
+    <Parameter Name="contrasena" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="IdReturn" Parameter="idReturn" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="InsertUsuarioResult">
+      <Column Name="Message" Type="System.String" DbType="VarChar(27) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.UpdateUsuario" Method="UpdateUsuario">
     <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
     <Parameter Name="nombreUsuario" Type="System.String" DbType="VarChar(255)" />
@@ -249,32 +264,6 @@
       <Column Name="Message" Type="System.String" DbType="VarChar(34) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-
-  <Function Name="dbo.Login_User" Method="Login_User">
-    <Parameter Name="username" Type="System.String" DbType="VarChar(255)" />
-    <Parameter Name="password" Type="System.String" DbType="VarChar(MAX)" />
-    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
-    <Parameter Name="idReturn" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <ElementType Name="Login_UserResult">
-      <Column Name="Message" Type="System.String" DbType="VarChar(44) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.InsertUsuario" Method="InsertUsuario">
-    <Parameter Name="nombreUsuario" Type="System.String" DbType="VarChar(255)" />
-    <Parameter Name="apellidos" Type="System.String" DbType="VarChar(255)" />
-    <Parameter Name="correo" Type="System.String" DbType="VarChar(255)" />
-    <Parameter Name="telefono" Type="System.Int32" DbType="Int" />
-    <Parameter Name="fechaNacimiento" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="idRegion" Type="System.Int32" DbType="Int" />
-    <Parameter Name="contrasena" Type="System.String" DbType="VarChar(MAX)" />
-    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
-    <Parameter Name="IdReturn" Parameter="idReturn" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <ElementType Name="InsertUsuarioResult">
-      <Column Name="Message" Type="System.String" DbType="VarChar(27) NOT NULL" CanBeNull="false" />
-    </ElementType>
-
   <Function Name="dbo.SP_InformacionUsuario" Method="SP_InformacionUsuario">
     <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
     <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
