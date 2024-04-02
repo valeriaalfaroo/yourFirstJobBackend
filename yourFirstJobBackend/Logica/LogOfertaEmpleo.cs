@@ -72,7 +72,7 @@ namespace yourFirstJobBackend.Logica
                     if (idReturn == 0)
                     {
                         //Error en base de datos
-                        //No se hizo la publicacion
+                       
                         res.resultado = false;
                         res.listaDeErrores.Add(errorDescripcion);
                     }
@@ -321,7 +321,7 @@ namespace yourFirstJobBackend.Logica
                     if (camposActualizados == 0)
                     {
                         //Error en base de datos
-                        //No se hizo la publicacion
+                       
                         res.resultado = false;
                         res.listaDeErrores.Add(errorDescripcion);
                     }
