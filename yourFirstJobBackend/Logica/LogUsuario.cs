@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -73,13 +74,14 @@ namespace yourFirstJobBackend.Logica
                 // Si no hay errores de validación, intenta insertar el usuario en la base de datos
                 if (!res.listaDeErrores.Any())
                 {
+
                     LinqDataContext conexion = new LinqDataContext();
                     int? idReturn = 0;
                     int? errorId = 0;
-                    string errorDescripcion = "";
+                    string errorDescripcion = "";      
 
                     conexion.InsertUsuario(usuario.nombreUsuario, usuario.apellidos, usuario.correo, usuario.telefono,
-                        usuario.fechaNacimiento, usuario.idRegion, usuario.contrasena, ref errorId, ref errorDescripcion, ref idReturn);
+                        usuario.fechaNacimiento, usuario.idRegion, Utilitarios.encriptar(usuario.contrasena), ref errorId, ref errorDescripcion, ref idReturn);
 
                     if (idReturn == 0)
                     {
@@ -304,7 +306,7 @@ namespace yourFirstJobBackend.Logica
             {
                 LinqDataContext conexion = new LinqDataContext();
 
-                Login_UserResult usuarioBD = conexion.Login_User(req.username, req.password, ref errorId, ref errorDescripcion, ref idReturn).FirstOrDefault();
+                Login_UserResult usuarioBD = conexion.Login_User(req.username, Utilitarios.encriptar(req.password), ref errorId, ref errorDescripcion, ref idReturn).FirstOrDefault();
 
                 if (usuarioBD != null)
                 {

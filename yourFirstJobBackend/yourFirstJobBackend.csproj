@@ -84,6 +84,7 @@
     <Compile Include="Entidades\Response\ResUpdateUsuario.cs" />
     <Compile Include="Logica\LogOfertaEmpleo.cs" />
     <Compile Include="Logica\LogUsuario.cs" />
+    <Compile Include="Logica\Utilitarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
