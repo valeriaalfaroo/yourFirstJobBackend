@@ -63,7 +63,7 @@ namespace yourFirstJobBackend.Logica
 
                     // conexion a SP 
 
-                    conexion.InsertarOfertaEmpleo(req.empleo.empresa.idEmpresa, req.empleo.tituloEmpleo, req.empleo.descripcionEmpleo, req.empleo.ubicacionEmpleo, req.empleo.tipoEmpleo, req.empleo.experiencia, req.empleo.fechaPublicacion, req.empleo.estado, ref errorId, ref errorDescripcion, ref idReturn);
+                    conexion.Insertar(req.empleo.empresa.idEmpresa, req.empleo.tituloEmpleo, req.empleo.descripcionEmpleo, req.empleo.ubicacionEmpleo, req.empleo.tipoEmpleo, req.empleo.experiencia, req.empleo.fechaPublicacion, req.empleo.estado, ref errorId, ref errorDescripcion, ref idReturn);
 
                     if (idReturn == 0)
                     {
