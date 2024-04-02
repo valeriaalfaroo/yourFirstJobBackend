@@ -67,6 +67,7 @@
     <Compile Include="Entidades\Request\ReqEliminarUsuario.cs" />
     <Compile Include="Entidades\Request\ReqIngresarEmpleo.cs" />
     <Compile Include="Entidades\Request\ReqIngresarUsuario.cs" />
+    <Compile Include="Entidades\Request\ReqLogin.cs" />
     <Compile Include="Entidades\Request\ReqObtenerTodosLosEmpleos.cs" />
     <Compile Include="Entidades\Request\ReqObtenerUsuario.cs" />
     <Compile Include="Entidades\Request\ReqUpdateOfertaEmpleo.cs" />
@@ -76,12 +77,14 @@
     <Compile Include="Entidades\Response\ResEliminarUsuario.cs" />
     <Compile Include="Entidades\Response\ResIngresarEmpleo.cs" />
     <Compile Include="Entidades\Response\ResIngresarUsuario.cs" />
+    <Compile Include="Entidades\Response\ResLogin.cs" />
     <Compile Include="Entidades\Response\ResObtenerPerfilUsuario.cs" />
     <Compile Include="Entidades\Response\ResObtenerTodosLosEmpleos.cs" />
     <Compile Include="Entidades\Response\ResUpdateOfertaEmpleo.cs" />
     <Compile Include="Entidades\Response\ResUpdateUsuario.cs" />
     <Compile Include="Logica\LogOfertaEmpleo.cs" />
     <Compile Include="Logica\LogUsuario.cs" />
+    <Compile Include="Logica\Utilitarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

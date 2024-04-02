@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Linq;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,13 +75,14 @@ namespace yourFirstJobBackend.Logica
                 // Si no hay errores de validación, intenta insertar el usuario en la base de datos
                 if (!res.listaDeErrores.Any())
                 {
+
                     LinqDataContext conexion = new LinqDataContext();
                     int? idReturn = 0;
                     int? errorId = 0;
-                    string errorDescripcion = "";
+                    string errorDescripcion = "";      
 
                     conexion.InsertUsuario(usuario.nombreUsuario, usuario.apellidos, usuario.correo, usuario.telefono,
-                        usuario.fechaNacimiento, usuario.idRegion, usuario.contrasena, ref errorId, ref errorDescripcion, ref idReturn);
+                        usuario.fechaNacimiento, usuario.idRegion, Utilitarios.encriptar(usuario.contrasena), ref errorId, ref errorDescripcion, ref idReturn);
 
                     if (idReturn == 0)
                     {
@@ -119,9 +121,7 @@ namespace yourFirstJobBackend.Logica
             {
                 LinqDataContext conexion = new LinqDataContext();
 
-                int idUsuario = 3; //dato quemado
-
-                SP_InformacionUsuarioResult usuarioBD = conexion.SP_InformacionUsuario(idUsuario, ref errorId, ref errorDescripcion).FirstOrDefault();
+                SP_InformacionUsuarioResult usuarioBD = conexion.SP_InformacionUsuario(req.idUser, ref errorId, ref errorDescripcion).FirstOrDefault();
 
                 if (usuarioBD != null)
                 {
@@ -289,6 +289,64 @@ namespace yourFirstJobBackend.Logica
 
             return res;
 
+        }
+
+        //Login
+        public ResLogin loginUser(ReqLogin req)
+        {
+            ResLogin res = new ResLogin();
+
+            res.listaDeErrores = new List<string>();
+
+            int? errorId = 0;
+            int? idReturn = 0;
+            string errorDescripcion = "";
+
+
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+
+                Login_UserResult usuarioBD = conexion.Login_User(req.username, Utilitarios.encriptar(req.password), ref errorId, ref errorDescripcion, ref idReturn).FirstOrDefault();
+
+                if (usuarioBD != null)
+                {
+                    //Errores
+                    if (errorId != 0)
+                    {
+                        //Paso un error
+                        res.listaDeErrores.Add(errorDescripcion);
+                    } else if (idReturn == 0) 
+                    {
+                        //Vino vacio el ID Return
+                        res.listaDeErrores.Add("Usuario no encontrado");
+                    } else
+                    {
+                        //Todo bien
+                        res.idUsuarioReturn = idReturn ?? default(int); ;
+                    }
+
+                } else
+                {
+                    //Null
+                    res.listaDeErrores.Add("Usuario nulo");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+
+            }
+            finally
+            {
+
+                //Bitacora
+
+            }
+            return res;
         }
 
         #region
