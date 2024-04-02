@@ -7,7 +7,7 @@ using yourFirstJobBackend.Entidades.entities;
 
 namespace yourFirstJobBackend.Entidades.Response
 {
-    public class ResObtenerAplicaciones
+    public class ResObtenerAplicaciones : ResBase
     {
         public List<Aplicaciones> aplicaciones { get; set; }
     }
