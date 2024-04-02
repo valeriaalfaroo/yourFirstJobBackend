@@ -29,6 +29,16 @@ namespace API.Controllers
             return logicaBackend.ingresarEmpleo(req);
         }
 
+        //Update empleo 
+
+        [System.Web.Http.HttpPut]
+        [System.Web.Http.Route("api/empleo/updateEmpleo")]
+        public ResUpdateOfertaEmpleo ingresarEmpleo(ReqUpdateOfertaEmpleo req)
+        {
+            LogOfertaEmpleo logicaBackend = new LogOfertaEmpleo();
+            return logicaBackend.updateOfertaEmpleo(req);
+        }
+
         //Buscar empleo por titulo
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/empleo/obtenerEmpleosTitulo")]

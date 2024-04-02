@@ -9,19 +9,6 @@
       <Column Name="Message" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.InsertarOfertaEmpleo" Method="InsertarOfertaEmpleo">
-    <Parameter Name="idEmpresa" Type="System.Int32" DbType="Int" />
-    <Parameter Name="tituloEmpleo" Type="System.String" DbType="VarChar(255)" />
-    <Parameter Name="descripcionEmpleo" Type="System.String" DbType="VarChar(255)" />
-    <Parameter Name="ubicacionEmpleo" Type="System.String" DbType="VarChar(255)" />
-    <Parameter Name="tipoEmpleo" Type="System.String" DbType="VarChar(255)" />
-    <Parameter Name="experiencia" Type="System.String" DbType="VarChar(255)" />
-    <Parameter Name="fechaPublicacion" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
-    <Parameter Name="IdReturn" Parameter="idReturn" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Return Type="System.Int32" />
-  </Function>
   <Function Name="dbo.ObtenerInformacionUsuario" Method="ObtenerInformacionUsuario">
     <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
     <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
@@ -321,23 +308,18 @@
     <Parameter Name="CamposActualizados" Parameter="camposActualizados" Type="System.Int32" DbType="Int" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.Select_Idiomas_Usuario" Method="Select_Idiomas_Usuario">
-    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
+  <Function Name="dbo.InsertarOfertaEmpleo" Method="InsertarOfertaEmpleo">
+    <Parameter Name="idEmpresa" Type="System.Int32" DbType="Int" />
+    <Parameter Name="tituloEmpleo" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="descripcionEmpleo" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="ubicacionEmpleo" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="tipoEmpleo" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="experiencia" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="fechaPublicacion" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="estado" Type="System.Boolean" DbType="Bit" />
     <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
     <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
-    <ElementType Name="Select_Idiomas_UsuarioResult">
-      <Column Name="idIdioma" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="idioma" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="nivel" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.DesactivarUsuario" Method="DesactivarUsuario">
-    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
-    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
-    <Parameter Name="LineasActualizadas" Parameter="lineasActualizadas" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <ElementType Name="DesactivarUsuarioResult">
-      <Column Name="Message" Type="System.String" DbType="VarChar(34) NOT NULL" CanBeNull="false" />
-    </ElementType>
+    <Parameter Name="IdReturn" Parameter="idReturn" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>

@@ -72,16 +72,6 @@ namespace yourFirstJobBackend.AccesoDatos
 			return ((ISingleResult<DeleteUsuarioResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertarOfertaEmpleo")]
-		public int InsertarOfertaEmpleo([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idEmpresa, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string tituloEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string descripcionEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string ubicacionEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string tipoEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string experiencia, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaPublicacion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdReturn", DbType="Int")] ref System.Nullable<int> idReturn)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idEmpresa, tituloEmpleo, descripcionEmpleo, ubicacionEmpleo, tipoEmpleo, experiencia, fechaPublicacion, errorOccurred, errorMensaje, idReturn);
-			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(7)));
-			errorMensaje = ((string)(result.GetParameterValue(8)));
-			idReturn = ((System.Nullable<int>)(result.GetParameterValue(9)));
-			return ((int)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ObtenerInformacionUsuario")]
 		public ISingleResult<ObtenerInformacionUsuarioResult> ObtenerInformacionUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje)
 		{
@@ -268,23 +258,14 @@ namespace yourFirstJobBackend.AccesoDatos
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Select_Idiomas_Usuario")]
-		public ISingleResult<Select_Idiomas_UsuarioResult> Select_Idiomas_Usuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertarOfertaEmpleo")]
+		public int InsertarOfertaEmpleo([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idEmpresa, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string tituloEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string descripcionEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string ubicacionEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string tipoEmpleo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string experiencia, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaPublicacion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> estado, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdReturn", DbType="Int")] ref System.Nullable<int> idReturn)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, errorOccurred, errorMensaje);
-			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(1)));
-			errorMensaje = ((string)(result.GetParameterValue(2)));
-			return ((ISingleResult<Select_Idiomas_UsuarioResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.DesactivarUsuario")]
-		public ISingleResult<DesactivarUsuarioResult> DesactivarUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LineasActualizadas", DbType="Int")] ref System.Nullable<int> lineasActualizadas)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, errorOccurred, errorMensaje, lineasActualizadas);
-			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(1)));
-			errorMensaje = ((string)(result.GetParameterValue(2)));
-			lineasActualizadas = ((System.Nullable<int>)(result.GetParameterValue(3)));
-			return ((ISingleResult<DesactivarUsuarioResult>)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idEmpresa, tituloEmpleo, descripcionEmpleo, ubicacionEmpleo, tipoEmpleo, experiencia, fechaPublicacion, estado, errorOccurred, errorMensaje, idReturn);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(8)));
+			errorMensaje = ((string)(result.GetParameterValue(9)));
+			idReturn = ((System.Nullable<int>)(result.GetParameterValue(10)));
+			return ((int)(result.ReturnValue));
 		}
 	}
 	
