@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using yourFirstJobBackend.Entidades.entities;
 
 namespace yourFirstJobBackend.Entidades.Request
 {
-    public class ReqObtenerUsuario
+    public class ReqLogin
     {
-        public int idUser {  get; set; }
+        public string username {  get; set; }
+        public string password { get; set; }
     }
 }
