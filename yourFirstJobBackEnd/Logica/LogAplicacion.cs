@@ -117,6 +117,7 @@ namespace yourFirstJobBackend.Logica
                     }
                     
 
+
                 }
             }
             catch (Exception ex)
