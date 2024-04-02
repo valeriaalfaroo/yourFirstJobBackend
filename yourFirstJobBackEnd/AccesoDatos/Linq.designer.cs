@@ -2544,5 +2544,93 @@ namespace yourFirstJobBackend.AccesoDatos
 			}
 		}
 	}
+	
+	public partial class Select_Idiomas_UsuarioResult
+	{
+		
+		private int _idIdioma;
+		
+		private string _idioma;
+		
+		private string _nivel;
+		
+		public Select_Idiomas_UsuarioResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idIdioma", DbType="Int NOT NULL")]
+		public int idIdioma
+		{
+			get
+			{
+				return this._idIdioma;
+			}
+			set
+			{
+				if ((this._idIdioma != value))
+				{
+					this._idIdioma = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idioma", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string idioma
+		{
+			get
+			{
+				return this._idioma;
+			}
+			set
+			{
+				if ((this._idioma != value))
+				{
+					this._idioma = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nivel", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string nivel
+		{
+			get
+			{
+				return this._nivel;
+			}
+			set
+			{
+				if ((this._nivel != value))
+				{
+					this._nivel = value;
+				}
+			}
+		}
+	}
+	
+	public partial class DesactivarUsuarioResult
+	{
+		
+		private string _Message;
+		
+		public DesactivarUsuarioResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(34) NOT NULL", CanBeNull=false)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this._Message = value;
+				}
+			}
+		}
+	}
 }
 #pragma warning restore 1591
