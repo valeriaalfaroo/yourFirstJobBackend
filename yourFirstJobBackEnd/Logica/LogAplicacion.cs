@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using yourFirstJobBackend.AccesoDatos;
+using yourFirstJobBackend.Entidades.entities;
 using yourFirstJobBackend.Entidades.Request;
 using yourFirstJobBackend.Entidades.Response;
 
@@ -112,8 +113,10 @@ namespace yourFirstJobBackend.Logica
                     res.resultado = true;
                     foreach (ObtenerAplicacionesUsuarioResult cadaTC in aplicacionesDeBD)
                     {
-
+                        res.aplicaciones.Add(this.obtenerAplicacionesUsuario()); 
                     }
+                    
+
                 }
             }
             catch (Exception ex)
@@ -128,10 +131,23 @@ namespace yourFirstJobBackend.Logica
             }
             return res;
         }
-            
-           
-        
-        
+
+
+        #region
+        private Aplicaciones crearAplicacion(ObtenerAplicacionesUsuarioResult aplicacionesDeBD)
+        {
+            Aplicaciones aplicacionARetornar=new Aplicaciones();
+
+            aplicacionARetornar.idAplicacion = aplicacionesDeBD.idAplicacion;
+            aplicacionARetornar.estadoAplicacion = aplicacionesDeBD.estadoAplicacion;
+            aplicacionARetornar.empleo.tituloEmpleo=aplicacionesDeBD.tituloEmpleo;
+            aplicacionARetornar.empleo.descripcionEmpleo = aplicacionesDeBD.descripcionEmpleo;
+
+            return aplicacionARetornar; 
+        }
+        #endregion
+
     }
+
 }
 
