@@ -90,7 +90,7 @@ namespace API.Controllers
         public ResUpdateUsuario actualizarUsuario([FromBody] Usuario usuario)
         {
             LogUsuario logicaBackend = new LogUsuario();
-            return logicaBackend.actualizarUsuario(usuario);
+            return logicaBackend.actualizarUsuarioCompleto(usuario);
         }
 
     }

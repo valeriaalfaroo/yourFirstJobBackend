@@ -325,6 +325,45 @@ namespace yourFirstJobBackend.AccesoDatos
 			errorMensaje = ((string)(result.GetParameterValue(2)));
 			return ((ISingleResult<ObtenerAplicacionesUsuarioResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.complete_Update_Usuario")]
+		public int complete_Update_Usuario(
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdUsuario", DbType="Int")] System.Nullable<int> idUsuario, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NewNombre", DbType="NVarChar(100)")] string newNombre, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NewApellido", DbType="NVarChar(100)")] string newApellido, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NewCorreo", DbType="NVarChar(100)")] string newCorreo, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NewTelefono", DbType="Int")] System.Nullable<int> newTelefono, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NewFechaNacimiento", DbType="Date")] System.Nullable<System.DateTime> newFechaNacimiento, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NewIdRegion", DbType="Int")] System.Nullable<int> newIdRegion, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NewContrasena", DbType="VarChar(MAX)")] string newContrasena, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string newSitioWeb, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NewNivel", DbType="VarChar(50)")] string newNivel, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NewIdioma", DbType="VarChar(255)")] string newIdioma, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NewCategoria", DbType="NVarChar(100)")] string newCategoria, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string newDescripcion, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NewInstitucion", DbType="NVarChar(200)")] string newInstitucion, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NewGradoAcademico", DbType="NVarChar(100)")] string newGradoAcademico, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdProfesion", DbType="Int")] System.Nullable<int> idProfesion, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FechaInicio", DbType="Date")] System.Nullable<System.DateTime> fechaInicio, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FechaFinalizacion", DbType="Date")] System.Nullable<System.DateTime> fechaFinalizacion, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevoArchivoNombre", DbType="NVarChar(200)")] string nuevoArchivoNombre, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevoArchivo", DbType="VarBinary(MAX)")] System.Data.Linq.Binary nuevoArchivo, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NewTipo", DbType="VarChar(255)")] string newTipo, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevoPuesto", DbType="NVarChar(100)")] string nuevoPuesto, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevaEmpresa", DbType="NVarChar(200)")] string nuevaEmpresa, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevasResponsabilidades", DbType="NVarChar(MAX)")] string nuevasResponsabilidades, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevaFechaInicio", DbType="Date")] System.Nullable<System.DateTime> nuevaFechaInicio, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevaFechaFinalizacion", DbType="Date")] System.Nullable<System.DateTime> nuevaFechaFinalizacion, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CamposActualizados", DbType="Int")] ref System.Nullable<int> camposActualizados)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, newNombre, newApellido, newCorreo, newTelefono, newFechaNacimiento, newIdRegion, newContrasena, newSitioWeb, newNivel, newIdioma, newCategoria, newDescripcion, newInstitucion, newGradoAcademico, idProfesion, fechaInicio, fechaFinalizacion, nuevoArchivoNombre, nuevoArchivo, newTipo, nuevoPuesto, nuevaEmpresa, nuevasResponsabilidades, nuevaFechaInicio, nuevaFechaFinalizacion, errorOccurred, errorMensaje, camposActualizados);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(26)));
+			errorMensaje = ((string)(result.GetParameterValue(27)));
+			camposActualizados = ((System.Nullable<int>)(result.GetParameterValue(28)));
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	public partial class DeleteUsuarioResult
