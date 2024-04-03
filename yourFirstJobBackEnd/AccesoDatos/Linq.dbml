@@ -382,4 +382,36 @@
       <Column Name="descripcionEmpleo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.complete_Update_Usuario" Method="complete_Update_Usuario">
+    <Parameter Name="IdUsuario" Parameter="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="NewNombre" Parameter="newNombre" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="NewApellido" Parameter="newApellido" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="NewCorreo" Parameter="newCorreo" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="NewTelefono" Parameter="newTelefono" Type="System.Int32" DbType="Int" />
+    <Parameter Name="NewFechaNacimiento" Parameter="newFechaNacimiento" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="NewIdRegion" Parameter="newIdRegion" Type="System.Int32" DbType="Int" />
+    <Parameter Name="NewContrasena" Parameter="newContrasena" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="newSitioWeb" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="NewNivel" Parameter="newNivel" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="NewIdioma" Parameter="newIdioma" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="NewCategoria" Parameter="newCategoria" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="newDescripcion" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="NewInstitucion" Parameter="newInstitucion" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="NewGradoAcademico" Parameter="newGradoAcademico" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="IdProfesion" Parameter="idProfesion" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FechaInicio" Parameter="fechaInicio" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="FechaFinalizacion" Parameter="fechaFinalizacion" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="NuevoArchivoNombre" Parameter="nuevoArchivoNombre" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="NuevoArchivo" Parameter="nuevoArchivo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" />
+    <Parameter Name="NewTipo" Parameter="newTipo" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="NuevoPuesto" Parameter="nuevoPuesto" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="NuevaEmpresa" Parameter="nuevaEmpresa" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="NuevasResponsabilidades" Parameter="nuevasResponsabilidades" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="NuevaFechaInicio" Parameter="nuevaFechaInicio" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="NuevaFechaFinalizacion" Parameter="nuevaFechaFinalizacion" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="CamposActualizados" Parameter="camposActualizados" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>

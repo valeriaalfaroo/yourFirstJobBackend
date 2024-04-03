@@ -13,6 +13,7 @@ namespace yourFirstJobBackend.Entidades.entities
         public string nombreInstitucion { get; set; }
         public string gradoAcademico { get; set; }
      //   public Profesion profesion { get; set; }
+     public int idProfesion {get; set; }
         public DateTime fechaInicio { get; set; }
         public DateTime fechaFinalizacion { get; set; }
     }
