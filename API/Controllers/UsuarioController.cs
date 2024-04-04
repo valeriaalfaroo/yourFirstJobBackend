@@ -9,7 +9,6 @@ using yourFirstJobBackend.Entidades.entities;
 using yourFirstJobBackend.Entidades.Request;
 using yourFirstJobBackend.Entidades.Response;
 using yourFirstJobBackend.Logica;
-
 namespace API.Controllers
 {
     public class UsuarioController : ApiController
@@ -84,14 +83,34 @@ namespace API.Controllers
             return logicaBackend.eliminarUsuario(null);
         }
 
-        //actualizar usuario
-        [System.Web.Http.HttpPatch] //patch permite actualizaciones parciales (no todos los datos)
+       
+
+        [System.Web.Http.HttpPatch]
         [System.Web.Http.Route("api/usuario/actualizarUsuario")]
-        public ResUpdateUsuario actualizarUsuario([FromBody] Usuario usuario)
+        public ResUpdateUsuario actualizarUsuario([FromBody] ReqUpdateUsuario requestUpdateUsuario)
         {
+            if (requestUpdateUsuario == null || requestUpdateUsuario.usuario == null)
+            {
+                return new ResUpdateUsuario
+                {
+                    resultado = false,
+                    listaDeErrores = new List<string> { "Request nulo" }
+                };
+            }
+
+            var reqUpdateUsuario = new ReqUpdateUsuario(
+                requestUpdateUsuario.usuario,
+                requestUpdateUsuario.idiomas,
+                requestUpdateUsuario.habilidades,
+                requestUpdateUsuario.estudios,
+                requestUpdateUsuario.archivosUsuarios,
+                requestUpdateUsuario.experienciaLaboral
+            );
+
             LogUsuario logicaBackend = new LogUsuario();
-            return logicaBackend.actualizarUsuarioCompleto(usuario);
+            return logicaBackend.actualizarUsuarioCompleto(reqUpdateUsuario);
         }
+
 
     }
 }
