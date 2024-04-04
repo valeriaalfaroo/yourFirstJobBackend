@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using yourFirstJobBackend.Entidades.entities;
 
 namespace yourFirstJobBackend.Entidades.Response
 {
     public class ResLogin:ResBase
     {
-        public int idReturn {  get; set; }
+        public Usuario usuario {  get; set; }
     }
 }
