@@ -85,12 +85,51 @@ namespace API.Controllers
         }
 
         //actualizar usuario
-        [System.Web.Http.HttpPatch] //patch permite actualizaciones parciales (no todos los datos)
+
+        /*[System.Web.Http.HttpPatch]
         [System.Web.Http.Route("api/usuario/actualizarUsuario")]
-        public ResUpdateUsuario actualizarUsuario([FromBody] Usuario usuario)
+        public ResUpdateUsuario actualizarUsuario()
         {
             LogUsuario logicaBackend = new LogUsuario();
-            return logicaBackend.actualizarUsuarioCompleto(usuario);
+            return logicaBackend.actualizarUsuarioCompleto(null);
+        }
+
+
+*/
+
+
+        public class RequestUpdateUsuario
+        {
+            public Usuario usuario { get; set; }
+            public List<Idiomas> idiomas { get; set; }
+            public List<Habilidades> habilidades { get; set; }
+            public List<Estudios> estudios { get; set; }
+            public List<ArchivosUsuario> archivosUsuarios { get; set; }
+            public List<ExperienciaLaboral> experienciaLaboral { get; set; }
+        }
+
+        [System.Web.Http.HttpPatch]
+        [System.Web.Http.Route("api/usuario/actualizarUsuario")]
+        public ResUpdateUsuario actualizarUsuario([FromBody] RequestUpdateUsuario requestUpdateUsuario)
+        {
+            if (requestUpdateUsuario == null || requestUpdateUsuario.usuario == null)
+            {
+                return new ResUpdateUsuario
+                {
+                    resultado = false,
+                    listaDeErrores = new List<string> { "Request nulo" }
+                };
+            }
+
+            // Asignar las listas al objeto Usuario
+            requestUpdateUsuario.usuario.listaIdiomas = requestUpdateUsuario.idiomas;
+            requestUpdateUsuario.usuario.listaHabilidades = requestUpdateUsuario.habilidades;
+            requestUpdateUsuario.usuario.listaEstudios = requestUpdateUsuario.estudios;
+            requestUpdateUsuario.usuario.listaArchivosUsuarios = requestUpdateUsuario.archivosUsuarios;
+            requestUpdateUsuario.usuario.listaExperienciaLaboral = requestUpdateUsuario.experienciaLaboral;
+
+            LogUsuario logicaBackend = new LogUsuario();
+            return logicaBackend.actualizarUsuarioCompleto(new ReqUpdateUsuario { usuario = requestUpdateUsuario.usuario });
         }
 
     }

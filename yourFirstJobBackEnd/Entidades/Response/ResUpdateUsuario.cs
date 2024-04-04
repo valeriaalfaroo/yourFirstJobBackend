@@ -10,6 +10,7 @@ namespace yourFirstJobBackend.Entidades.Response
     public class ResUpdateUsuario :ResBase
     {
         public Usuario usuario { get; set; }
+       
 
     }
 }

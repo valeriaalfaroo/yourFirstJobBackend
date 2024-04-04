@@ -9,6 +9,7 @@ namespace yourFirstJobBackend.Entidades.Request
 {
     public class ReqUpdateUsuario : Usuario
     {
+        public Usuario usuario {  get; set; }
 
     }
 }
