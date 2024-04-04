@@ -10,7 +10,7 @@ namespace yourFirstJobBackend.Logica
 {
     public class Utilitarios
     {
-        public static string encriptar(string password)
+        public string encriptar(string password)
         {
             // Crear instancia de SHA256 para calcular el hash
             SHA256 sha256 = SHA256Managed.Create();

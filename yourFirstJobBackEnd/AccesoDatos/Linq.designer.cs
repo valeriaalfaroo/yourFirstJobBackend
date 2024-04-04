@@ -258,16 +258,6 @@ namespace yourFirstJobBackend.AccesoDatos
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Login_User")]
-		public ISingleResult<Login_UserResult> Login_User([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> idReturn)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username, password, errorOccurred, errorMensaje, idReturn);
-			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(2)));
-			errorMensaje = ((string)(result.GetParameterValue(3)));
-			idReturn = ((System.Nullable<int>)(result.GetParameterValue(4)));
-			return ((ISingleResult<Login_UserResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertUsuario")]
 		public ISingleResult<InsertUsuarioResult> InsertUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string nombreUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string apellidos, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string correo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> telefono, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaNacimiento, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idRegion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string contrasena, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdReturn", DbType="Int")] ref System.Nullable<int> idReturn)
 		{
@@ -363,6 +353,16 @@ namespace yourFirstJobBackend.AccesoDatos
 			errorMensaje = ((string)(result.GetParameterValue(27)));
 			camposActualizados = ((System.Nullable<int>)(result.GetParameterValue(28)));
 			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Login_User")]
+		public ISingleResult<Login_UserResult> Login_User([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> idReturn)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), username, password, errorOccurred, errorMensaje, idReturn);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(2)));
+			errorMensaje = ((string)(result.GetParameterValue(3)));
+			idReturn = ((System.Nullable<int>)(result.GetParameterValue(4)));
+			return ((ISingleResult<Login_UserResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -2616,32 +2616,6 @@ namespace yourFirstJobBackend.AccesoDatos
 		}
 	}
 	
-	public partial class Login_UserResult
-	{
-		
-		private string _Message;
-		
-		public Login_UserResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(44) NOT NULL", CanBeNull=false)]
-		public string Message
-		{
-			get
-			{
-				return this._Message;
-			}
-			set
-			{
-				if ((this._Message != value))
-				{
-					this._Message = value;
-				}
-			}
-		}
-	}
-	
 	public partial class InsertUsuarioResult
 	{
 		
@@ -2885,6 +2859,86 @@ namespace yourFirstJobBackend.AccesoDatos
 				if ((this._descripcionEmpleo != value))
 				{
 					this._descripcionEmpleo = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Login_UserResult
+	{
+		
+		private int _idUsuario;
+		
+		private string _nombreUsuario;
+		
+		private string _apellidos;
+		
+		private string _correo;
+		
+		public Login_UserResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUsuario", DbType="Int NOT NULL")]
+		public int idUsuario
+		{
+			get
+			{
+				return this._idUsuario;
+			}
+			set
+			{
+				if ((this._idUsuario != value))
+				{
+					this._idUsuario = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombreUsuario", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string nombreUsuario
+		{
+			get
+			{
+				return this._nombreUsuario;
+			}
+			set
+			{
+				if ((this._nombreUsuario != value))
+				{
+					this._nombreUsuario = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_apellidos", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string apellidos
+		{
+			get
+			{
+				return this._apellidos;
+			}
+			set
+			{
+				if ((this._apellidos != value))
+				{
+					this._apellidos = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_correo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string correo
+		{
+			get
+			{
+				return this._correo;
+			}
+			set
+			{
+				if ((this._correo != value))
+				{
+					this._correo = value;
 				}
 			}
 		}

@@ -80,8 +80,10 @@ namespace yourFirstJobBackend.Logica
                     int? errorId = 0;
                     string errorDescripcion = "";
 
+                    Utilitarios utl = new Utilitarios();
+
                     conexion.InsertUsuario(usuario.nombreUsuario, usuario.apellidos, usuario.correo, usuario.telefono,
-                        usuario.fechaNacimiento, usuario.idRegion, Utilitarios.encriptar(usuario.contrasena), ref errorId, ref errorDescripcion, ref idReturn);
+                        usuario.fechaNacimiento, usuario.idRegion, utl.encriptar(usuario.contrasena), ref errorId, ref errorDescripcion, ref idReturn);
 
                     if (idReturn == 0)
                     {
@@ -326,7 +328,9 @@ namespace yourFirstJobBackend.Logica
             {
                 LinqDataContext conexion = new LinqDataContext();
 
-                Login_UserResult usuarioBD = conexion.Login_User(req.username, Utilitarios.encriptar(req.password), ref errorId, ref errorDescripcion, ref idReturn).FirstOrDefault();
+                Utilitarios utl = new Utilitarios();
+
+                Login_UserResult usuarioBD = conexion.Login_User(req.username, utl.encriptar(req.password), ref errorId, ref errorDescripcion, ref idReturn).FirstOrDefault();
 
                 if (usuarioBD != null)
                 {
@@ -335,16 +339,27 @@ namespace yourFirstJobBackend.Logica
                     {
                         //Paso un error
                         res.listaDeErrores.Add(errorDescripcion);
+                        res.resultado = false;
                     }
                     else if (idReturn == 0)
                     {
                         //Vino vacio el ID Return
                         res.listaDeErrores.Add("Usuario no encontrado");
+                        res.resultado = false;
                     }
                     else
                     {
                         //Todo bien
-                        res.idReturn = idReturn ?? default(int); ;
+                        Usuario usuario = new Usuario();
+
+                        usuario.idUsuario = usuarioBD.idUsuario;
+                        usuario.nombreUsuario = usuarioBD.nombreUsuario;
+                        usuario.apellidos = usuarioBD.apellidos;
+                        usuario.correo = usuarioBD.correo;
+
+                        res.usuario = usuario;
+
+                        res.resultado = true;
                     }
 
                 }
@@ -352,6 +367,7 @@ namespace yourFirstJobBackend.Logica
                 {
                     //Null
                     res.listaDeErrores.Add("Usuario nulo");
+                    res.resultado = false;
 
                 }
 
@@ -372,7 +388,7 @@ namespace yourFirstJobBackend.Logica
         }
 
 
-        //eliminr usuario (en bd se hace update al campo estado =0 para decir q el usuario ya no existe)
+        //Eliminr usuario (en bd se hace update al campo estado =0 para decir q el usuario ya no existe)
         public ResEliminarUsuario eliminarUsuario(ReqEliminarUsuario req)
         {
             ResEliminarUsuario res = new ResEliminarUsuario();
@@ -410,6 +426,7 @@ namespace yourFirstJobBackend.Logica
 
         }
 
+        //Update usuario
         public ResUpdateUsuario actualizarUsuarioCompleto(ReqUpdateUsuario req)
         {
             ResUpdateUsuario res = new ResUpdateUsuario();
@@ -454,7 +471,7 @@ namespace yourFirstJobBackend.Logica
                     res.usuario.listaEstudios.FirstOrDefault()?.fechaFinalizacion ?? DateTime.MinValue,
                     res.usuario.listaArchivosUsuarios.FirstOrDefault()?.nombreArchivo ?? "",
                     res.usuario.listaArchivosUsuarios.FirstOrDefault()?.archivo != null ? res.usuario.listaArchivosUsuarios.FirstOrDefault()?.archivo.ToArray() : null,
-                   res.usuario.listaArchivosUsuarios.FirstOrDefault()?.tipo ?? "",
+                    res.usuario.listaArchivosUsuarios.FirstOrDefault()?.tipo ?? "",
                     res.usuario.listaExperienciaLaboral.FirstOrDefault()?.puesto ?? "",
                     res.usuario.listaExperienciaLaboral.FirstOrDefault()?.nombreEmpresa ?? "",
                     res.usuario.listaExperienciaLaboral.FirstOrDefault()?.responsabilidades ?? "",

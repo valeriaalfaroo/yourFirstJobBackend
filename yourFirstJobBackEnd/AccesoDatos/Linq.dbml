@@ -307,16 +307,6 @@
     <Parameter Name="IdReturn" Parameter="idReturn" Type="System.Int32" DbType="Int" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.Login_User" Method="Login_User">
-    <Parameter Name="username" Type="System.String" DbType="VarChar(255)" />
-    <Parameter Name="password" Type="System.String" DbType="VarChar(MAX)" />
-    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
-    <Parameter Name="idReturn" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <ElementType Name="Login_UserResult">
-      <Column Name="Message" Type="System.String" DbType="VarChar(44) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.InsertUsuario" Method="InsertUsuario">
     <Parameter Name="nombreUsuario" Type="System.String" DbType="VarChar(255)" />
     <Parameter Name="apellidos" Type="System.String" DbType="VarChar(255)" />
@@ -413,5 +403,18 @@
     <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
     <Parameter Name="CamposActualizados" Parameter="camposActualizados" Type="System.Int32" DbType="Int" Direction="InOut" />
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Login_User" Method="Login_User">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="idReturn" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="Login_UserResult">
+      <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nombreUsuario" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="apellidos" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="correo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
   </Function>
 </Database>
