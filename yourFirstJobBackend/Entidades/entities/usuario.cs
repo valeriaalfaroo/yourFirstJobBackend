@@ -23,7 +23,7 @@ namespace yourFirstJobBackend.Entidades.entities
 
 
         //agregar listas
-        //Idiomas
+        
 
         public List<Idiomas> listaIdiomas { get; set; }
 

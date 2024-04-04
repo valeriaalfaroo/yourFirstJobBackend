@@ -9,7 +9,6 @@ using yourFirstJobBackend.Entidades.entities;
 using yourFirstJobBackend.Entidades.Request;
 using yourFirstJobBackend.Entidades.Response;
 using yourFirstJobBackend.Logica;
-
 namespace API.Controllers
 {
     public class UsuarioController : ApiController
@@ -84,33 +83,11 @@ namespace API.Controllers
             return logicaBackend.eliminarUsuario(null);
         }
 
-        //actualizar usuario
-
-        /*[System.Web.Http.HttpPatch]
-        [System.Web.Http.Route("api/usuario/actualizarUsuario")]
-        public ResUpdateUsuario actualizarUsuario()
-        {
-            LogUsuario logicaBackend = new LogUsuario();
-            return logicaBackend.actualizarUsuarioCompleto(null);
-        }
-
-
-*/
-
-
-        public class RequestUpdateUsuario
-        {
-            public Usuario usuario { get; set; }
-            public List<Idiomas> idiomas { get; set; }
-            public List<Habilidades> habilidades { get; set; }
-            public List<Estudios> estudios { get; set; }
-            public List<ArchivosUsuario> archivosUsuarios { get; set; }
-            public List<ExperienciaLaboral> experienciaLaboral { get; set; }
-        }
+       
 
         [System.Web.Http.HttpPatch]
         [System.Web.Http.Route("api/usuario/actualizarUsuario")]
-        public ResUpdateUsuario actualizarUsuario([FromBody] RequestUpdateUsuario requestUpdateUsuario)
+        public ResUpdateUsuario actualizarUsuario([FromBody] ReqUpdateUsuario requestUpdateUsuario)
         {
             if (requestUpdateUsuario == null || requestUpdateUsuario.usuario == null)
             {
@@ -121,16 +98,19 @@ namespace API.Controllers
                 };
             }
 
-            // Asignar las listas al objeto Usuario
-            requestUpdateUsuario.usuario.listaIdiomas = requestUpdateUsuario.idiomas;
-            requestUpdateUsuario.usuario.listaHabilidades = requestUpdateUsuario.habilidades;
-            requestUpdateUsuario.usuario.listaEstudios = requestUpdateUsuario.estudios;
-            requestUpdateUsuario.usuario.listaArchivosUsuarios = requestUpdateUsuario.archivosUsuarios;
-            requestUpdateUsuario.usuario.listaExperienciaLaboral = requestUpdateUsuario.experienciaLaboral;
+            var reqUpdateUsuario = new ReqUpdateUsuario(
+                requestUpdateUsuario.usuario,
+                requestUpdateUsuario.idiomas,
+                requestUpdateUsuario.habilidades,
+                requestUpdateUsuario.estudios,
+                requestUpdateUsuario.archivosUsuarios,
+                requestUpdateUsuario.experienciaLaboral
+            );
 
             LogUsuario logicaBackend = new LogUsuario();
-            return logicaBackend.actualizarUsuarioCompleto(new ReqUpdateUsuario { usuario = requestUpdateUsuario.usuario });
+            return logicaBackend.actualizarUsuarioCompleto(reqUpdateUsuario);
         }
+
 
     }
 }
