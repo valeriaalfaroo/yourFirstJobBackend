@@ -83,13 +83,13 @@ namespace API.Controllers
             return logicaBackend.eliminarUsuario(null);
         }
 
-       
 
-        [System.Web.Http.HttpPatch]
+        //Update usuario
+        [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/usuario/actualizarUsuario")]
-        public ResUpdateUsuario actualizarUsuario([FromBody] ReqUpdateUsuario requestUpdateUsuario)
+        public ResUpdateUsuario actualizarUsuario([FromBody] ReqUpdateUsuario req)
         {
-            if (requestUpdateUsuario == null || requestUpdateUsuario.usuario == null)
+            if (req == null)
             {
                 return new ResUpdateUsuario
                 {
@@ -98,17 +98,26 @@ namespace API.Controllers
                 };
             }
 
-            var reqUpdateUsuario = new ReqUpdateUsuario(
-                requestUpdateUsuario.usuario,
-                requestUpdateUsuario.idiomas,
-                requestUpdateUsuario.habilidades,
-                requestUpdateUsuario.estudios,
-                requestUpdateUsuario.archivosUsuarios,
-                requestUpdateUsuario.experienciaLaboral
-            );
+            LogUsuario logica = new LogUsuario();
+            return logica.updateUsuario(req);
+        }
 
-            LogUsuario logicaBackend = new LogUsuario();
-            return logicaBackend.actualizarUsuarioCompleto(reqUpdateUsuario);
+        //Update idioma usuario
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/usuario/actualizarUsuarioIdioma")]
+        public ResUpdateUsuarioIdioma actualizarIdiomaUsuario([FromBody] List<ReqUpdateUsuarioIdioma> req)
+        {
+            if (req == null)
+            {
+                return new ResUpdateUsuarioIdioma
+                {
+                    resultado = false,
+                    listaDeErrores = new List<string> { "Request nulo" }
+                };
+            }
+
+            LogUsuario logica = new LogUsuario();
+            return logica.updateIdiomasUsuario(req);
         }
 
 
