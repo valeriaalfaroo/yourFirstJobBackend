@@ -625,5 +625,41 @@ namespace yourFirstJobBackend.Logica
 
         #endregion
 
+        public ResObtenerUnEmpleo ObtenerUnEmpleo(ReqObtenerUnEmpleo req)
+        {
+            ResObtenerUnEmpleo res = new ResObtenerUnEmpleo();
+
+            res.listaDeErrores = new List<string>();
+
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+
+                int idOfertas = 5; //pasar dato
+                int? errorOccured = 0;
+                string errorMessage = "";
+
+                ObtenerUnEmpleoResult empleo = conexion.ObtenerUnEmpleo(idOfertas, ref errorOccured, ref errorMessage).SingleOrDefault();
+
+                if (empleo != null && errorOccured == 0)
+                {
+                    res.resultado = true;
+                    res.Empleo = empleo; //asigno la respuesta a los campos
+                }
+                else
+                {
+                    res.resultado = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+            }
+
+            return res;
+        }
+
+
     }
 }
