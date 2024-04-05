@@ -79,11 +79,12 @@ namespace yourFirstJobBackend.Logica
                     int? idReturn = 0;
                     int? errorId = 0;
                     string errorDescripcion = "";
+                    bool estado = true;
 
                     Utilitarios utl = new Utilitarios();
 
                     conexion.InsertUsuario(usuario.nombreUsuario, usuario.apellidos, usuario.correo, usuario.telefono,
-                        usuario.fechaNacimiento, usuario.idRegion, utl.encriptar(usuario.contrasena), ref errorId, ref errorDescripcion, ref idReturn);
+                        usuario.fechaNacimiento, usuario.idRegion, utl.encriptar(usuario.contrasena), estado, ref errorId, ref errorDescripcion, ref idReturn);
 
                     if (idReturn == 0)
                     {
