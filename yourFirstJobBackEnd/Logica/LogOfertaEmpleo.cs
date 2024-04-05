@@ -218,7 +218,7 @@ namespace yourFirstJobBackend.Logica
 
                         foreach (var archivoInfo in conexion.Select_Archivos_Oferta(cadaTC.idOfertas, ref errorArchivos, ref errorDescripcionArchivos))
                         {
-                            if (errorIdIdiomas == 1)
+                            if (errorArchivos == 1)
                             {
                                 //Error SP Archivos
                                 res.resultado = false;
@@ -518,6 +518,161 @@ namespace yourFirstJobBackend.Logica
             return res;
         }
 
+        public ResObtenerUnEmpleo ObtenerUnEmpleo(ReqObtenerUnEmpleo req)
+        {
+            ResObtenerUnEmpleo res = new ResObtenerUnEmpleo();
+
+            res.listaDeErrores = new List<string>();
+            res.empleo = new Empleo();
+
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+
+                int? errorIdIdiomas = 0;
+                string errorDescripcionIdiomas = "";
+
+                int? errorOccured = 0;
+                string errorMessage = "";
+
+                ObtenerUnEmpleoResult empleo = conexion.ObtenerUnEmpleo(req.idOferta, ref errorOccured, ref errorMessage).SingleOrDefault();
+
+                if (empleo != null && errorOccured == 0)
+                {
+                    res.resultado = true;
+                    List<Idiomas> lstIdiomasDeCada = new List<Idiomas>();
+
+                    foreach (var idiomaInfo in conexion.Select_Idiomas_Oferta(req.idOferta, ref errorIdIdiomas, ref errorDescripcionIdiomas))
+                    {
+                        if (errorIdIdiomas == 1)
+                        {
+                            //Error SP Idiomas
+                            res.resultado = false;
+                            res.listaDeErrores.Add(errorDescripcionIdiomas);
+
+                        }
+                        else
+                        {
+                            Idiomas idioma = new Idiomas();
+
+                            idioma.idIdioma = idiomaInfo.idIdioma;
+                            idioma.idioma = idiomaInfo.idioma;
+                            idioma.nivel = idiomaInfo.nivel;
+
+                            lstIdiomasDeCada.Add(idioma); // Agrega el idioma a la lista
+
+                        }
+
+                    }
+
+                    //Saco Profesion
+                    int? errorIdProfesion = 0;
+                    string errorDescripcionProfesion = "";
+
+                    List<Profesion> lstProfesionDeCada = new List<Profesion>();
+
+                    foreach (var profesionInfo in conexion.Select_Profeciones_Oferta(req.idOferta, ref errorIdProfesion, ref errorDescripcionProfesion))
+                    {
+                        if (errorIdProfesion == 1)
+                        {
+                            //Error SP Idiomas
+                            res.resultado = false;
+                            res.listaDeErrores.Add(errorDescripcionProfesion);
+
+                        }
+                        else
+                        {
+                            Profesion profesion = new Profesion();
+
+                            profesion.idProfesion = profesionInfo.idProfesion;
+                            profesion.nombreProfesion = profesionInfo.nombreProfesion;
+                            profesion.descripcion = profesionInfo.descripcion;
+
+                            lstProfesionDeCada.Add(profesion); // Agrega la profesion a la lista
+
+                        }
+
+                    }
+
+                    //Saco Habilidades
+                    int? errorIdHabilidades = 0;
+                    string errorDescripcionHabilidades = "";
+
+                    List<Habilidades> lstHabilidadesDeCada = new List<Habilidades>();
+
+                    foreach (var habilidadesInfo in conexion.Select_Habilidades_Oferta(req.idOferta, ref errorIdHabilidades, ref errorDescripcionHabilidades))
+                    {
+                        if (errorIdHabilidades == 1)
+                        {
+                            //Error SP Idiomas
+                            res.resultado = false;
+                            res.listaDeErrores.Add(errorDescripcionHabilidades);
+
+                        }
+                        else
+                        {
+                            Habilidades habilidades = new Habilidades();
+
+                            habilidades.idHabilidades = habilidadesInfo.idHabilidades;
+                            habilidades.descripcion = habilidadesInfo.descripcion;
+                            habilidades.categoria = habilidadesInfo.categoria;
+
+                            lstHabilidadesDeCada.Add(habilidades); // Agrega la habilidad a la lista
+
+                        }
+
+                    }
+
+                    //Saco Archivos
+                    int? errorArchivos = 0;
+                    string errorDescripcionArchivos = "";
+
+                    List<ArchivosOferta> lstArchivosDeCada = new List<ArchivosOferta>();
+
+                    foreach (var archivoInfo in conexion.Select_Archivos_Oferta(req.idOferta, ref errorArchivos, ref errorDescripcionArchivos))
+                    {
+                        if (errorArchivos == 1)
+                        {
+                            //Error SP Archivos
+                            res.resultado = false;
+                            res.listaDeErrores.Add(errorDescripcionArchivos);
+
+                        }
+                        else
+                        {
+                            ArchivosOferta archivoOferta = new ArchivosOferta();
+
+                            archivoOferta.idArchivosOferta = archivoInfo.idArchivosOferta;
+                            archivoOferta.idOferta = archivoInfo.idOfertas;
+                            archivoOferta.nombreArchivo = archivoInfo.nombreArchivo;
+                            archivoOferta.archivo = archivoInfo.archivo;
+                            archivoOferta.tipo = archivoInfo.tipo;
+
+                            lstArchivosDeCada.Add(archivoOferta); // Agrega el archivo a la lista
+
+                        }
+
+                    }
+
+                    //Meto lista
+                    res.empleo= this.crearUnEmpleo(empleo,lstIdiomasDeCada, lstProfesionDeCada, lstHabilidadesDeCada, lstArchivosDeCada));
+
+
+                    //asigno la respuesta a los campos
+                }
+                else
+                {
+                    res.resultado = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+            }
+
+            return res;
+        }
 
         #region
 
@@ -570,6 +725,56 @@ namespace yourFirstJobBackend.Logica
 
 
             return empleoRetornar;    
+        }
+
+        private Empleo crearUnEmpleo(ObtenerUnEmpleoResult empleosDeBD, List<Idiomas> lstIdiomas, List<Profesion> lstProfesiones, List<Habilidades> lstHabilidades, List<ArchivosOferta> lstArchivos)
+        {
+            Empleo empleoRetornar = new Empleo();
+
+            empleoRetornar.idOfertas = empleosDeBD.idOfertas;
+            empleoRetornar.tituloEmpleo = empleosDeBD.tituloEmpleo;
+            empleoRetornar.descripcionEmpleo = empleosDeBD.descripcionEmpleo;
+            empleoRetornar.ubicacionEmpleo = empleosDeBD.ubicacionEmpleo;
+            empleoRetornar.tipoEmpleo = empleosDeBD.tipoEmpleo;
+            empleoRetornar.experiencia = empleosDeBD.experiencia;
+            empleoRetornar.fechaPublicacion = (DateTime)empleosDeBD.fechaPublicacion;
+
+            //Empresa
+            Empresa empresaRetornar = new Empresa();
+
+
+            empresaRetornar.idEmpresa = empleosDeBD.idEmpresa;
+            empresaRetornar.nombreEmpresa = empleosDeBD.nombreEmpresa;
+            empresaRetornar.telefonoEmpresa = empleosDeBD.telefonoEmpresa;
+            empresaRetornar.cedulaJuridica = empleosDeBD.cedulaJuridica;
+            empresaRetornar.descripcion = empleosDeBD.descripcion;
+            empresaRetornar.fechaRegistro = empleosDeBD.fechaRegitro;
+
+            //Region
+            Region regionRetornar = new Region();
+            regionRetornar.idRegion = empleosDeBD.idRegion;
+            regionRetornar.nombreRegion = empleosDeBD.nombreRegion;
+
+            //Meto region a empresa
+            empresaRetornar.region = regionRetornar;
+
+            //Meto empresa a oferta 
+            empleoRetornar.empresa = empresaRetornar;
+
+            //Idiomas
+            empleoRetornar.lstIdiomas = lstIdiomas;
+
+            //Profesiones
+            empleoRetornar.lstProfesiones = lstProfesiones;
+
+            //Habilidades
+            empleoRetornar.lstHabilidades = lstHabilidades;
+
+            //Habilidades
+            empleoRetornar.lstArchivos = lstArchivos;
+
+
+            return empleoRetornar;
         }
 
         //Factoria titulo empleos
@@ -625,40 +830,7 @@ namespace yourFirstJobBackend.Logica
 
         #endregion
 
-        public ResObtenerUnEmpleo ObtenerUnEmpleo(ReqObtenerUnEmpleo req)
-        {
-            ResObtenerUnEmpleo res = new ResObtenerUnEmpleo();
-
-            res.listaDeErrores = new List<string>();
-
-            try
-            {
-                LinqDataContext conexion = new LinqDataContext();
-
-                int idOfertas = 5; //pasar dato
-                int? errorOccured = 0;
-                string errorMessage = "";
-
-                ObtenerUnEmpleoResult empleo = conexion.ObtenerUnEmpleo(idOfertas, ref errorOccured, ref errorMessage).SingleOrDefault();
-
-                if (empleo != null && errorOccured == 0)
-                {
-                    res.resultado = true;
-                    res.Empleo = empleo; //asigno la respuesta a los campos
-                }
-                else
-                {
-                    res.resultado = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                res.resultado = false;
-                res.listaDeErrores.Add(ex.ToString());
-            }
-
-            return res;
-        }
+       
 
 
     }

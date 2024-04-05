@@ -10,8 +10,7 @@ namespace yourFirstJobBackend.Entidades.Response
 {
     public class ResObtenerUnEmpleo :ResBase
     {
-        Empleo empleo {  get; set; }
-        public ObtenerUnEmpleoResult Empleo { get; set; } //traer todos los campos necesarios y asignarlos a la respuesta
-
+       public Empleo empleo {  get; set; }
+       
     }
 }
