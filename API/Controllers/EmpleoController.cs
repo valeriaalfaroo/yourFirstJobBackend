@@ -61,5 +61,13 @@ namespace API.Controllers
             return logicaBackend.buscarOfertasEmpleoPorTitulo(req);
         }
 
+        //obtener un empleo
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/empleo/obtenerUnEmpleo")]
+        public ResObtenerUnEmpleo obtenerUnEmpleo()
+        {
+            LogOfertaEmpleo logicaBackend = new LogOfertaEmpleo();
+            return logicaBackend.ObtenerUnEmpleo(null);
+        }
     }
 } 

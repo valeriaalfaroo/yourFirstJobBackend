@@ -11,7 +11,6 @@ namespace yourFirstJobBackend.Entidades.Response
     {
 
         public Usuario usuario { get; set; }
-        //public List<Idiomas> listaIdiomas { get; set; }
 
 
     }

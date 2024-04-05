@@ -375,6 +375,15 @@ namespace yourFirstJobBackend.AccesoDatos
 			camposActualizados = ((System.Nullable<int>)(result.GetParameterValue(5)));
 			return ((ISingleResult<UpdateIdiomasUsuariosResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ObtenerUnEmpleo")]
+		public ISingleResult<ObtenerUnEmpleoResult> ObtenerUnEmpleo([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idOfertas, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idOfertas, errorOccurred, errorMensaje);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(1)));
+			errorMensaje = ((string)(result.GetParameterValue(2)));
+			return ((ISingleResult<ObtenerUnEmpleoResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class DeleteUsuarioResult
@@ -2976,6 +2985,338 @@ namespace yourFirstJobBackend.AccesoDatos
 				if ((this._Message != value))
 				{
 					this._Message = value;
+				}
+			}
+		}
+	}
+	
+	public partial class ObtenerUnEmpleoResult
+	{
+		
+		private int _idOfertas;
+		
+		private int _idEmpresa;
+		
+		private string _tituloEmpleo;
+		
+		private string _descripcionEmpleo;
+		
+		private string _ubicacionEmpleo;
+		
+		private string _tipoEmpleo;
+		
+		private string _experiencia;
+		
+		private System.DateTime _fechaPublicacion;
+		
+		private System.Nullable<bool> _estado;
+		
+		private int _idEmpresa1;
+		
+		private string _nombreEmpresa;
+		
+		private int _telefonoEmpresa;
+		
+		private int _cedulaJuridica;
+		
+		private int _idRegion;
+		
+		private string _descripcion;
+		
+		private System.DateTime _fechaRegitro;
+		
+		private System.Nullable<bool> _estado1;
+		
+		private string _nombreRegion;
+		
+		public ObtenerUnEmpleoResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idOfertas", DbType="Int NOT NULL")]
+		public int idOfertas
+		{
+			get
+			{
+				return this._idOfertas;
+			}
+			set
+			{
+				if ((this._idOfertas != value))
+				{
+					this._idOfertas = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEmpresa", DbType="Int NOT NULL")]
+		public int idEmpresa
+		{
+			get
+			{
+				return this._idEmpresa;
+			}
+			set
+			{
+				if ((this._idEmpresa != value))
+				{
+					this._idEmpresa = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tituloEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string tituloEmpleo
+		{
+			get
+			{
+				return this._tituloEmpleo;
+			}
+			set
+			{
+				if ((this._tituloEmpleo != value))
+				{
+					this._tituloEmpleo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcionEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string descripcionEmpleo
+		{
+			get
+			{
+				return this._descripcionEmpleo;
+			}
+			set
+			{
+				if ((this._descripcionEmpleo != value))
+				{
+					this._descripcionEmpleo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ubicacionEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string ubicacionEmpleo
+		{
+			get
+			{
+				return this._ubicacionEmpleo;
+			}
+			set
+			{
+				if ((this._ubicacionEmpleo != value))
+				{
+					this._ubicacionEmpleo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tipoEmpleo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string tipoEmpleo
+		{
+			get
+			{
+				return this._tipoEmpleo;
+			}
+			set
+			{
+				if ((this._tipoEmpleo != value))
+				{
+					this._tipoEmpleo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_experiencia", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string experiencia
+		{
+			get
+			{
+				return this._experiencia;
+			}
+			set
+			{
+				if ((this._experiencia != value))
+				{
+					this._experiencia = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaPublicacion", DbType="Date NOT NULL")]
+		public System.DateTime fechaPublicacion
+		{
+			get
+			{
+				return this._fechaPublicacion;
+			}
+			set
+			{
+				if ((this._fechaPublicacion != value))
+				{
+					this._fechaPublicacion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_estado", DbType="Bit")]
+		public System.Nullable<bool> estado
+		{
+			get
+			{
+				return this._estado;
+			}
+			set
+			{
+				if ((this._estado != value))
+				{
+					this._estado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEmpresa1", DbType="Int NOT NULL")]
+		public int idEmpresa1
+		{
+			get
+			{
+				return this._idEmpresa1;
+			}
+			set
+			{
+				if ((this._idEmpresa1 != value))
+				{
+					this._idEmpresa1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombreEmpresa", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string nombreEmpresa
+		{
+			get
+			{
+				return this._nombreEmpresa;
+			}
+			set
+			{
+				if ((this._nombreEmpresa != value))
+				{
+					this._nombreEmpresa = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_telefonoEmpresa", DbType="Int NOT NULL")]
+		public int telefonoEmpresa
+		{
+			get
+			{
+				return this._telefonoEmpresa;
+			}
+			set
+			{
+				if ((this._telefonoEmpresa != value))
+				{
+					this._telefonoEmpresa = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cedulaJuridica", DbType="Int NOT NULL")]
+		public int cedulaJuridica
+		{
+			get
+			{
+				return this._cedulaJuridica;
+			}
+			set
+			{
+				if ((this._cedulaJuridica != value))
+				{
+					this._cedulaJuridica = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idRegion", DbType="Int NOT NULL")]
+		public int idRegion
+		{
+			get
+			{
+				return this._idRegion;
+			}
+			set
+			{
+				if ((this._idRegion != value))
+				{
+					this._idRegion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcion", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string descripcion
+		{
+			get
+			{
+				return this._descripcion;
+			}
+			set
+			{
+				if ((this._descripcion != value))
+				{
+					this._descripcion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaRegitro", DbType="DateTime NOT NULL")]
+		public System.DateTime fechaRegitro
+		{
+			get
+			{
+				return this._fechaRegitro;
+			}
+			set
+			{
+				if ((this._fechaRegitro != value))
+				{
+					this._fechaRegitro = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_estado1", DbType="Bit")]
+		public System.Nullable<bool> estado1
+		{
+			get
+			{
+				return this._estado1;
+			}
+			set
+			{
+				if ((this._estado1 != value))
+				{
+					this._estado1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombreRegion", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string nombreRegion
+		{
+			get
+			{
+				return this._nombreRegion;
+			}
+			set
+			{
+				if ((this._nombreRegion != value))
+				{
+					this._nombreRegion = value;
 				}
 			}
 		}
