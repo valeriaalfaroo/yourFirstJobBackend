@@ -655,7 +655,7 @@ namespace yourFirstJobBackend.Logica
                     }
 
                     //Meto lista
-                    res.empleo= this.crearUnEmpleo(empleo,lstIdiomasDeCada, lstProfesionDeCada, lstHabilidadesDeCada, lstArchivosDeCada));
+                    res.empleo= this.crearUnEmpleo(empleo,lstIdiomasDeCada, lstProfesionDeCada, lstHabilidadesDeCada, lstArchivosDeCada);
 
 
                     //asigno la respuesta a los campos

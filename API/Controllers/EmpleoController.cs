@@ -64,7 +64,7 @@ namespace API.Controllers
         //obtener un empleo
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/empleo/obtenerUnEmpleo")]
-        public ResObtenerUnEmpleo obtenerUnEmpleo(ReqObtenerUsuario req)
+        public ResObtenerUnEmpleo obtenerUnEmpleo(ReqObtenerUnEmpleo req)
         {
             LogOfertaEmpleo logicaBackend = new LogOfertaEmpleo();
             return logicaBackend.ObtenerUnEmpleo(req);
