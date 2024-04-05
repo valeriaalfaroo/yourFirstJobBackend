@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using yourFirstJobBackend.Entidades.entities;
 
 namespace yourFirstJobBackend.Entidades.Request
 {
-    public class ReqUpdateUsuario
+    public class ReqUpdateUsuarioIdioma
     {
-        public Usuario usuario { get; set; }
+        public int idUsuario {  get; set; }
+        public int idIdioma { get; set; }
+        public int idIdiomaNuevo { get; set; }
 
     }
-
 }

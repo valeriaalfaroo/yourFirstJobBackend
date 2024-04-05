@@ -210,6 +210,12 @@ namespace yourFirstJobBackend.Logica
                             estudios.fechaInicio = EstudiosInfo.fechaInicio;
                             estudios.fechaFinalizacion = EstudiosInfo.fechaFinalizacion;
 
+                            Profesion profesion = new Profesion();
+                            profesion.idProfesion = EstudiosInfo.idProfesion;
+                            profesion.nombreProfesion = EstudiosInfo.nombreProfesion;
+                            profesion.descripcion = EstudiosInfo.descripcion;
+
+                            estudios.profesion = profesion;
 
                             listaEstudio.Add(estudios);
                         }
@@ -257,12 +263,18 @@ namespace yourFirstJobBackend.Logica
                             ExperienciaLaboral exLaboral = new ExperienciaLaboral();
                             exLaboral.idExperiencia = ExperienciaInfo.idExperiencia;
                             exLaboral.idUsuario = ExperienciaInfo.idUsuario;
-                            exLaboral.idProfesion = ExperienciaInfo.idProfesion;
                             exLaboral.puesto = ExperienciaInfo.puesto;
                             exLaboral.nombreEmpresa = ExperienciaInfo.nombreEmpresa;
                             exLaboral.responsabilidades = ExperienciaInfo.responsabilidades;
                             exLaboral.fechaInicio = ExperienciaInfo.fechaInicio;
                             exLaboral.fechaFinalizacion = ExperienciaInfo.fechaFinalizacion;
+
+                            Profesion profesion = new Profesion();
+                            profesion.idProfesion = ExperienciaInfo.idProfesion;
+                            profesion.nombreProfesion = ExperienciaInfo.nombreProfesion;
+                            profesion.descripcion = ExperienciaInfo.descripcion;
+
+                            exLaboral.profesion = profesion;
 
                             listaExperienciaLaboral.Add(exLaboral);
                         }
@@ -303,6 +315,13 @@ namespace yourFirstJobBackend.Logica
             usuarioRetornar.idUsuario = usuarioBD.idUsuario;
             usuarioRetornar.contrasena = usuarioBD.contrasena;
 
+            if (usuarioBD.estado != null)
+            {
+                usuarioRetornar.estado = usuarioBD.estado.Value;
+            } else
+            {
+                usuarioRetornar.estado = false;
+            }
 
             return usuarioRetornar;
 
@@ -428,85 +447,131 @@ namespace yourFirstJobBackend.Logica
         }
 
         //Update usuario
-        public ResUpdateUsuario actualizarUsuarioCompleto(ReqUpdateUsuario req)
+        public ResUpdateUsuario updateUsuario(ReqUpdateUsuario req)
         {
             ResUpdateUsuario res = new ResUpdateUsuario();
+
             res.listaDeErrores = new List<string>();
-            res.resultado=false;
+
+            int? errorId = 0;
+            int? camposActualizados = 0;
+            string errorDescripcion = "";
 
             try
             {
-                if (req != null && req.usuario != null)
+                LinqDataContext conexion = new LinqDataContext();
+
+                conexion.UpdateUsuario(req.usuario.idUsuario, req.usuario.nombreUsuario, req.usuario.apellidos, req.usuario.correo, req.usuario.telefono, req.usuario.fechaNacimiento, req.usuario.idRegion, req.usuario.contrasena, req.usuario.sitioWeb, ref errorId, ref errorDescripcion, ref camposActualizados);
+
+                if (camposActualizados != 0)
                 {
-                    res.usuario = req.usuario;
-                    LinqDataContext conexion = new LinqDataContext();
-              //  int idUsuario = usuario.idUsuario; 
-              int idUsuario = 1;
-                //string archivoBase64 = Convert.ToBase64String(usuario.listaArchivosUsuarios.FirstOrDefault()?.archivo.ToArray());
-                //byte[] archivo = Convert.FromBase64String(archivoBase64);
-              //  Binary archivo = new Binary(usuario.listaArchivosUsuarios.FirstOrDefault()?.archivo.ToArray());
-
-                int? camposActualizados = 0;
-                int? errorMessage = 0;
-                int? errorOcurred = 0;
-                string errorMensaje = "";
-
-                conexion.complete_Update_Usuario(
-                    idUsuario,
-                    res.usuario.nombreUsuario,
-                    res.usuario.apellidos,
-                    res.usuario.correo,
-                    res.usuario.telefono,
-                    res.usuario.fechaNacimiento,
-                    res.usuario.idRegion,
-                    res.usuario.contrasena,
-                    res.usuario.sitioWeb,
-                    res.usuario.listaIdiomas.FirstOrDefault()?.nivel ?? "", // Provide a default value if listaIdiomas is empty
-                    res.usuario.listaIdiomas.FirstOrDefault()?.idioma ?? "",
-                    res.usuario.listaHabilidades.FirstOrDefault()?.categoria ?? "",
-                    res.usuario.listaHabilidades.FirstOrDefault()?.descripcion ?? "",
-                    res.usuario.listaEstudios.FirstOrDefault()?.nombreInstitucion ?? "",
-                    res.usuario.listaEstudios.FirstOrDefault()?.gradoAcademico ?? "",
-                    res.usuario.listaEstudios.FirstOrDefault()?.idProfesion ?? 0,
-                    res.usuario.listaEstudios.FirstOrDefault()?.fechaInicio ?? DateTime.MinValue,
-                    res.usuario.listaEstudios.FirstOrDefault()?.fechaFinalizacion ?? DateTime.MinValue,
-                    res.usuario.listaArchivosUsuarios.FirstOrDefault()?.nombreArchivo ?? "",
-                    res.usuario.listaArchivosUsuarios.FirstOrDefault()?.archivo != null ? res.usuario.listaArchivosUsuarios.FirstOrDefault()?.archivo.ToArray() : null,
-                    res.usuario.listaArchivosUsuarios.FirstOrDefault()?.tipo ?? "",
-                    res.usuario.listaExperienciaLaboral.FirstOrDefault()?.puesto ?? "",
-                    res.usuario.listaExperienciaLaboral.FirstOrDefault()?.nombreEmpresa ?? "",
-                    res.usuario.listaExperienciaLaboral.FirstOrDefault()?.responsabilidades ?? "",
-                    res.usuario.listaExperienciaLaboral.FirstOrDefault()?.fechaInicio ?? DateTime.MinValue,
-                    res.usuario.listaExperienciaLaboral.FirstOrDefault()?.fechaFinalizacion ?? DateTime.MinValue,
-                    ref errorOcurred, ref errorMensaje, ref camposActualizados
-                );
-                    if (errorOcurred == 0)
+                    //Errores
+                    if (errorId != 0)
                     {
-                        res.usuario = req.usuario;
-                        res.resultado = true;
+                        //Paso un error
+                        res.listaDeErrores.Add(errorDescripcion);
+                        res.resultado = false;
                     }
                     else
                     {
-                        res.listaDeErrores.Add(errorMensaje);
+                        //Todo bien        
+
+                        res.resultado = true;
                     }
+
                 }
                 else
                 {
-                    res.listaDeErrores.Add("Error al actualizar: El objeto usuario es nulo.");
+                    //Null
+                    res.listaDeErrores.Add("Error al update");
+                    res.resultado = false;
+
                 }
 
             }
             catch (Exception ex)
             {
-                res.listaDeErrores.Add("Error al actualizar: " + ex.Message);
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+
+            }
+            finally
+            {
+
+                //Bitacora
+
             }
 
             return res;
+
         }
 
+        //Update idiomasUsuario
+        public ResUpdateUsuarioIdioma updateIdiomasUsuario(List<ReqUpdateUsuarioIdioma> lstReq)
+        {
+            ResUpdateUsuarioIdioma res = new ResUpdateUsuarioIdioma();
+
+            res.listaDeErrores = new List<string>();
+
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
 
 
+                foreach (ReqUpdateUsuarioIdioma cadaUno in lstReq)
+                {
 
+                    int? errorId = 0;
+                    int? camposActualizados = 0;
+                    string errorDescripcion = "";
+                    conexion.UpdateIdiomasUsuarios(cadaUno.idUsuario, cadaUno.idIdioma, cadaUno.idIdiomaNuevo, ref errorId, ref errorDescripcion, ref camposActualizados);
+
+                    if (camposActualizados != 0)
+                    {
+                        //Errores
+                        if (errorId != 0)
+                        {
+                            //Paso un error
+                            res.listaDeErrores.Add(errorDescripcion);
+                            res.resultado = false;
+                        }
+                        else
+                        {
+                            //Todo bien        
+
+                            res.resultado = true;
+                        }
+
+                    }
+                    else
+                    {
+                        //Null
+                        res.listaDeErrores.Add("Error al update");
+                        res.resultado = false;
+                        break;
+
+                    }
+
+                }
+
+                
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+
+            }
+            finally
+            {
+
+                //Bitacora
+
+            }
+
+            return res;
+
+        }
     }
-
 }
