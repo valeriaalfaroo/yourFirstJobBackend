@@ -7,7 +7,7 @@ using yourFirstJobBackend.Entidades.entities;
 
 namespace yourFirstJobBackend.Entidades.Request
 {
-    public class ReqEliminarUsuario : ResBase
+    public class ReqEliminarUsuario 
     {
         public int idUsuario { get; set; }
     }

@@ -16,43 +16,22 @@ namespace API.Controllers
         //ingresar usuario
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/usuario/ingresarUsuario")]
-
-        public ResIngresarUsuario insertUsuario([FromBody] Usuario usuario)
+        public ResIngresarUsuario ingresarUsuario(ReqIngresarUsuario req)
         {
-
-            if (usuario == null)
-            {
-                return new ResIngresarUsuario
-                {
-                    resultado = false,
-                    listaDeErrores = new List<string> { "Request nulo" }
-                };
-            }
-
-            LogUsuario logica = new LogUsuario(); 
-            return logica.IngresarUsuario(usuario);
-            
-
-        }
-
-        //  ver usuario
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.Route("api/usuario/ObtenerUsuario")]
-        public ResObtenerPerfilUsuario obtenerUsuario([FromBody] ReqObtenerUsuario req)
-        {
-            if (req == null)
-            {
-
-                return new ResObtenerPerfilUsuario
-                {
-                    resultado = false,
-                    listaDeErrores = new List<string> { "Request nulo" }
-                };
-
-            }
             LogUsuario logicaBackend = new LogUsuario();
-            return logicaBackend.obtenerUsuario(req);
+            return logicaBackend.IngresarUsuario(req);
         }
+
+        //Obtener un usuario
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("api/usuario/obtenerUsuario")]
+        public ResObtenerPerfilUsuario obtenerUsuario()
+        {
+            LogUsuario logicaBackend = new LogUsuario();
+            return logicaBackend.obtenerUsuario(null);
+        }
+
+
 
         //Login
         [System.Web.Http.HttpPost]
@@ -74,6 +53,7 @@ namespace API.Controllers
 
         }
 
+
         //delete usuario (se actualiza estado a 0)
         [System.Web.Http.HttpDelete]
         [System.Web.Http.Route("api/usuario/eliminarUsuario")]
@@ -82,6 +62,7 @@ namespace API.Controllers
             LogUsuario logicaBackend = new LogUsuario();
             return logicaBackend.eliminarUsuario(null);
         }
+
 
 
         //Update usuario
