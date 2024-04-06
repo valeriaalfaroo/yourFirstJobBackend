@@ -9,6 +9,8 @@ namespace yourFirstJobBackend.Entidades.Request
 {
     public class ReqIngresarAplicacion
     {
-        public Aplicaciones aplicacion {  get; set; }
+        public int idUsuario { get; set; }
+        public int idOfertaEmpleo { get; set; }
+        public string estadoAplicacion { get; set; }
     }
 }

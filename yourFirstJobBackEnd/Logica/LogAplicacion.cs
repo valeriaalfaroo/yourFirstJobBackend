@@ -27,17 +27,17 @@ namespace yourFirstJobBackend.Logica
                 }
                 else
                 {
-                    if (req.aplicacion.empleo.idOfertas == 0)
+                    if (req.idOfertaEmpleo == 0)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se recibio el empleo");
                     }
-                    if (req.aplicacion.usuario.idUsuario == 0)
+                    if (req.idUsuario == 0)
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("No se recibio el usuario");
                     }
-                    if (String.IsNullOrEmpty(req.aplicacion.estadoAplicacion))
+                    if (String.IsNullOrEmpty(req.estadoAplicacion))
                     {
                         res.resultado = false;
                         res.listaDeErrores.Add("Estado de aplicacion faltante");
@@ -60,7 +60,7 @@ namespace yourFirstJobBackend.Logica
 
                     // conexion a SP 
 
-                    conexion.InsertarAplicacion(req.aplicacion.usuario.idUsuario,req.aplicacion.empleo.idOfertas,req.aplicacion.estadoAplicacion, ref errorId, ref errorDescripcion, ref idReturn);
+                    conexion.InsertarAplicacion(req.idUsuario,req.idOfertaEmpleo,req.estadoAplicacion, ref errorId, ref errorDescripcion, ref idReturn);
 
                     if (idReturn == 0)
                     {
@@ -137,15 +137,30 @@ namespace yourFirstJobBackend.Logica
         #region
         private Aplicaciones crearAplicacion(ObtenerAplicacionesUsuarioResult aplicacionesDeBD)
         {
-            Aplicaciones aplicacionARetornar=new Aplicaciones();
+            Aplicaciones aplicacionARetornar = new Aplicaciones();
 
             aplicacionARetornar.idAplicacion = aplicacionesDeBD.idAplicacion;
             aplicacionARetornar.estadoAplicacion = aplicacionesDeBD.estadoAplicacion;
-            aplicacionARetornar.empleo.tituloEmpleo=aplicacionesDeBD.tituloEmpleo;
-            aplicacionARetornar.empleo.descripcionEmpleo = aplicacionesDeBD.descripcionEmpleo;
 
-            return aplicacionARetornar; 
+            Empleo empleoARetornar = new Empleo();
+            empleoARetornar.tituloEmpleo = aplicacionesDeBD.tituloEmpleo;
+            empleoARetornar.descripcionEmpleo = aplicacionesDeBD.descripcionEmpleo;
+
+            aplicacionARetornar.empleo = empleoARetornar;
+
+            // Set the Usuario property
+           
+            Usuario usuario = new Usuario();
+
+            
+            usuario.idUsuario = aplicacionesDeBD.idUsuario;
+
+
+            aplicacionARetornar.usuario = usuario; ;
+
+            return aplicacionARetornar;
         }
+
         #endregion
 
     }
