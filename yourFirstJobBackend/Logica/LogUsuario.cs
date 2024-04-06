@@ -384,8 +384,7 @@ namespace yourFirstJobBackend.Logica
             try
             {
                 LinqDataContext conexion = new LinqDataContext();
-                //  int idUsuario = req.idUsuario;  Obtener el idUsuario desde el objeto req
-                int idUsuario = 10; //dato quemado
+                 int idUsuario = req.idUsuario;  
                 int? errorOccured = 0;
                 string errorMessage = "";
                 int? lineasActualizadas = 0;
