@@ -18,7 +18,8 @@ namespace yourFirstJobBackend.Logica
     public class LogUsuario
     {
         //Ingresar Usuario
-        public ResIngresarUsuario IngresarUsuario(Usuario usuario)
+        public ResIngresarUsuario IngresarUsuario(ReqIngresarUsuario req)
+
         {
             ResIngresarUsuario res = new ResIngresarUsuario();
 
@@ -28,53 +29,55 @@ namespace yourFirstJobBackend.Logica
                 res.listaDeErrores = new List<string>();
 
                 // Validación de los campos del usuario
-                if (usuario == null)
+                if (req == null)
                 {
+                    res.resultado = false;
                     res.listaDeErrores.Add("Request nulo");
                 }
                 else
                 {
-                    if (usuario.idUsuario == null)
+                    if (req == null)
                     {
+                        res.resultado=false;
                         res.listaDeErrores.Add("No se encuentra el usuario");
                     }
-                    if (String.IsNullOrEmpty(usuario.nombreUsuario))
+                    if (String.IsNullOrEmpty(req.usuario.nombreUsuario))
                     {
                         res.listaDeErrores.Add("Nombre de usuario faltante");
                     }
-                    if (String.IsNullOrEmpty(usuario.apellidos))
+                    if (String.IsNullOrEmpty(req.usuario.apellidos))
                     {
                         res.listaDeErrores.Add("No se ingreso los apellidos");
                     }
-                    if (String.IsNullOrEmpty(usuario.correo))
+                    if (String.IsNullOrEmpty(req.usuario.correo))
                     {
                         res.listaDeErrores.Add("No se ingreso el correo");
                     }
-                    if (usuario.telefono == 0)
+                    if (req.usuario.telefono == 0)
                     {
                         res.listaDeErrores.Add("No se ingreso el numero de telefono");
                     }
-                    if (usuario.fechaNacimiento == DateTime.MinValue)
+                    if (req.usuario.fechaNacimiento == DateTime.MinValue)
                     {
                         res.listaDeErrores.Add("No se ingreso la fecha de nacimiento");
                     }
-                    if (usuario.idRegion == null)
+                    if (req.usuario.region.idRegion == 0)
                     {
                         res.listaDeErrores.Add("No se ingreso id de region");
                     }
-                    if (String.IsNullOrEmpty(usuario.contrasena))
+                    if (String.IsNullOrEmpty(req.usuario.contrasena))
                     {
                         res.listaDeErrores.Add("No se ingreso la contrasena");
                     }
-                    /*if (usuario.fechaRegistro == DateTime.MinValue)
-                    {
-                        res.listaDeErrores.Add("No se encuentra la fecha de registro");
-                    }*/ //fecha lo ingresa la bd
+                    
                 }
 
                 // Si no hay errores de validación, intenta insertar el usuario en la base de datos
-                if (!res.listaDeErrores.Any())
+                if (res.listaDeErrores.Any())
                 {
+                    res.resultado = false;
+                }
+                else { 
                     LinqDataContext conexion = new LinqDataContext();
                     int? idReturn = 0;
                     int? errorId = 0;
@@ -83,12 +86,14 @@ namespace yourFirstJobBackend.Logica
 
                     Utilitarios utl = new Utilitarios();
 
-                    conexion.InsertUsuario(usuario.nombreUsuario, usuario.apellidos, usuario.correo, usuario.telefono,
-                        usuario.fechaNacimiento, usuario.idRegion, utl.encriptar(usuario.contrasena), estado, ref errorId, ref errorDescripcion, ref idReturn);
+                    conexion.InsertUsuario(req.usuario.nombreUsuario, req.usuario.apellidos, req.usuario.correo, req.usuario.telefono,
+                        req.usuario.fechaNacimiento, req.usuario.region.idRegion, utl.encriptar(req.usuario.contrasena), estado, ref errorId, ref errorDescripcion, ref idReturn);
 
                     if (idReturn == 0)
                     {
-                        // Error en la base de datos
+                        //Error en base de datos
+
+                        res.resultado = false;
                         res.listaDeErrores.Add(errorDescripcion);
                     }
                     else
@@ -96,16 +101,17 @@ namespace yourFirstJobBackend.Logica
                         res.resultado = true;
                     }
                 }
+
             }
             catch (Exception ex)
             {
+                res.resultado = false;
                 res.listaDeErrores.Add(ex.ToString());
             }
             finally
             {
-                // Bitácora
+                //Bitacora 
             }
-
             return res;
         }
 
@@ -121,7 +127,7 @@ namespace yourFirstJobBackend.Logica
             {
                 LinqDataContext conexion = new LinqDataContext();
 
-                SP_InformacionUsuarioResult usuarioBD = conexion.SP_InformacionUsuario(req.idUser, ref errorId, ref errorDescripcion).FirstOrDefault();
+                  SP_InformacionUsuarioResult usuarioBD = conexion.SP_InformacionUsuario(req.idUser, ref errorId, ref errorDescripcion).FirstOrDefault();
 
                 if (usuarioBD != null)
                 {
@@ -132,18 +138,13 @@ namespace yourFirstJobBackend.Logica
                     List<ArchivosUsuario> listaArchivoUsuario = new List<ArchivosUsuario>();
                     List<ExperienciaLaboral> listaExperienciaLaboral = new List<ExperienciaLaboral>();
                     res.resultado = true;
-                    res.usuario = traerUsuario(usuarioBD);
-                    res.usuario.listaIdiomas = listaIdiomas;
-                    res.usuario.listaHabilidades = listaHabilidad;
-                    res.usuario.listaEstudios = listaEstudio;
-                    res.usuario.listaArchivosUsuarios = listaArchivoUsuario;
-                    res.usuario.listaExperienciaLaboral = listaExperienciaLaboral;
+                
 
 
                     int? errorIdIdiomas = 0;
                     string errorDescripcionIdiomas = "";
 
-                    foreach (var idiomaInfo in conexion.Select_Idiomas_Usuario(usuarioBD.idUsuario, ref errorIdIdiomas, ref errorDescripcionIdiomas)) //agregar + controles de errores a sp
+                    foreach (var idiomaInfo in conexion.Select_Idiomas_Usuario(usuarioBD.idUsuario, ref errorIdIdiomas, ref errorDescripcionIdiomas)) 
                     {
                         if (errorIdIdiomas == 1)
                         {
@@ -280,7 +281,7 @@ namespace yourFirstJobBackend.Logica
                         }
 
                     }
-
+                    res.usuario = this.traerUsuario(usuarioBD, listaIdiomas, listaHabilidad, listaEstudio, listaArchivoUsuario, listaExperienciaLaboral);
 
 
                 }
@@ -298,39 +299,6 @@ namespace yourFirstJobBackend.Logica
             return res;
 
         }
-
-        #region
-
-
-        private Usuario traerUsuario(SP_InformacionUsuarioResult usuarioBD)
-        {
-            Usuario usuarioRetornar = new Usuario();
-            usuarioRetornar.nombreUsuario = usuarioBD.nombreUsuario;
-            usuarioRetornar.apellidos = usuarioBD.apellidos;
-            usuarioRetornar.correo = usuarioBD.correo;
-            usuarioRetornar.telefono = usuarioBD.telefono;
-            usuarioRetornar.fechaNacimiento = usuarioBD.fechaNacimiento;
-            usuarioRetornar.sitioWeb = usuarioBD.sitioWeb;
-            usuarioRetornar.idRegion = usuarioBD.idRegion;
-            usuarioRetornar.idUsuario = usuarioBD.idUsuario;
-            usuarioRetornar.contrasena = usuarioBD.contrasena;
-
-            if (usuarioBD.estado != null)
-            {
-                usuarioRetornar.estado = usuarioBD.estado.Value;
-            } else
-            {
-                usuarioRetornar.estado = false;
-            }
-
-            return usuarioRetornar;
-
-
-        }
-
-
-
-        #endregion
 
         //Login
         public ResLogin loginUser(ReqLogin req)
@@ -461,7 +429,7 @@ namespace yourFirstJobBackend.Logica
             {
                 LinqDataContext conexion = new LinqDataContext();
 
-                conexion.UpdateUsuario(req.usuario.idUsuario, req.usuario.nombreUsuario, req.usuario.apellidos, req.usuario.correo, req.usuario.telefono, req.usuario.fechaNacimiento, req.usuario.idRegion, req.usuario.contrasena, req.usuario.sitioWeb, ref errorId, ref errorDescripcion, ref camposActualizados);
+                conexion.UpdateUsuario(req.usuario.idUsuario, req.usuario.nombreUsuario, req.usuario.apellidos, req.usuario.correo, req.usuario.telefono, req.usuario.fechaNacimiento, req.usuario.region.idRegion, req.usuario.contrasena, req.usuario.sitioWeb, ref errorId, ref errorDescripcion, ref camposActualizados);
 
                 if (camposActualizados != 0)
                 {
@@ -573,5 +541,48 @@ namespace yourFirstJobBackend.Logica
             return res;
 
         }
+
+        #region
+
+        //factoria traer usuario 
+        private Usuario traerUsuario(SP_InformacionUsuarioResult usuarioBD, List<Idiomas>listaIdiomas, List<Habilidades>listaHabilidades, List<Estudios>listaEstudios, List<ArchivosUsuario>listaAchivosUsuario,
+        List<ExperienciaLaboral>listaExperienciaLaboral)
+        {
+            //entidad usuario
+            Usuario usuarioRetornar = new Usuario();
+
+            usuarioRetornar.nombreUsuario = usuarioBD.nombreUsuario;
+            usuarioRetornar.apellidos = usuarioBD.apellidos;
+            usuarioRetornar.correo = usuarioBD.correo;
+            usuarioRetornar.telefono = usuarioBD.telefono;
+            usuarioRetornar.fechaNacimiento = usuarioBD.fechaNacimiento;
+            usuarioRetornar.sitioWeb = usuarioBD.sitioWeb;
+            usuarioRetornar.idRegion = usuarioBD.idRegion;
+            usuarioRetornar.idUsuario = usuarioBD.idUsuario;
+            usuarioRetornar.contrasena = usuarioBD.contrasena;
+            usuarioRetornar.listaIdiomas = listaIdiomas;
+            usuarioRetornar.listaHabilidades = listaHabilidades;
+            usuarioRetornar.listaEstudios = listaEstudios;
+            usuarioRetornar.listaArchivosUsuarios = listaAchivosUsuario;
+            usuarioRetornar.listaExperienciaLaboral = listaExperienciaLaboral;
+            
+
+            if (usuarioBD.estado != null)
+            {
+                usuarioRetornar.estado = usuarioBD.estado.Value;
+            }
+            else
+            {
+                usuarioRetornar.estado = false;
+            }
+
+            return usuarioRetornar;
+
+
+        }
+
+
+
+        #endregion
     }
 }

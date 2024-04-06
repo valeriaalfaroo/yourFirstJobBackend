@@ -7,8 +7,8 @@ using yourFirstJobBackend.Entidades.entities;
 
 namespace yourFirstJobBackend.Entidades.Request
 {
-    public class ReqObtenerUsuario
+    public class ReqObtenerUsuario 
     {
-        public int idUser {  get; set; }
+        public int idUser { get; set; }
     }
 }

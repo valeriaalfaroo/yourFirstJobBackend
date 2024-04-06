@@ -15,7 +15,7 @@ namespace yourFirstJobBackend.Entidades.entities
         public string correo { get; set; }
         public int telefono { get; set; }
         public DateTime fechaNacimiento { get; set; }
-        public int idRegion { get; set; }
+        public int idRegion {  get; set; }
         public string contrasena { get; set; }
         public string sitioWeb { get; set; }
         public DateTime fechaRegistro { get; set; }
@@ -23,6 +23,7 @@ namespace yourFirstJobBackend.Entidades.entities
 
 
         //agregar listas
+        public Region region { get; set; }
         
 
         public List<Idiomas> listaIdiomas { get; set; }
