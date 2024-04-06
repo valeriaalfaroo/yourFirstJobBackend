@@ -23,12 +23,23 @@ namespace API.Controllers
         }
 
         //Obtener un usuario
-        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/usuario/obtenerUsuario")]
-        public ResObtenerPerfilUsuario obtenerUsuario()
+        public ResObtenerPerfilUsuario obtenerUsuario([FromBody] ReqObtenerUsuario req)
         {
+            if (req == null)
+            {
+
+                return new ResObtenerPerfilUsuario
+                {
+                    resultado = false,
+                    listaDeErrores = new List<string> { "Request nulo" }
+                };
+
+            }
+
             LogUsuario logicaBackend = new LogUsuario();
-            return logicaBackend.obtenerUsuario(null);
+            return logicaBackend.obtenerUsuario(req);
         }
 
 
