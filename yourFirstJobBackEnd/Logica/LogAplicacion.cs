@@ -93,6 +93,8 @@ namespace yourFirstJobBackend.Logica
 
             ResObtenerAplicaciones res = new ResObtenerAplicaciones();
 
+            res.aplicaciones = new List<Aplicaciones>();    
+
             res.listaDeErrores = new List<string>();
             int? errorId = 0;
             string errorDescripcion = "";
@@ -102,22 +104,31 @@ namespace yourFirstJobBackend.Logica
 
                 List<ObtenerAplicacionesUsuarioResult> aplicacionesDeBD = conexion.ObtenerAplicacionesUsuario(req.idUser, ref errorId, ref errorDescripcion).ToList();
 
-                if (errorId == 1)
+                if (aplicacionesDeBD != null)
                 {
-                    //Error en base de datos
-                    res.resultado = false;
-                    res.listaDeErrores.Add(errorDescripcion);
-                }
-                else
-                {
-                    res.resultado = true;
-                    foreach (ObtenerAplicacionesUsuarioResult cadaTC in aplicacionesDeBD)
+                    if (errorId == 1)
                     {
-                        res.aplicaciones.Add(this.crearAplicacion(cadaTC)); 
+                        //Error en base de datos
+                        res.resultado = false;
+                        res.listaDeErrores.Add(errorDescripcion);
                     }
-                    
+                    else
+                    {
+
+                        foreach (ObtenerAplicacionesUsuarioResult cadaTC in aplicacionesDeBD)
+                        {
+                            res.aplicaciones.Add(this.crearAplicacion(cadaTC));
+                        }
+
+                        res.resultado = true;
 
 
+
+                    }
+                } else
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("Aplicaciones nulas");
                 }
             }
             catch (Exception ex)
@@ -130,6 +141,7 @@ namespace yourFirstJobBackend.Logica
             {
                 //Bitacorear
             }
+
             return res;
         }
 
@@ -140,10 +152,13 @@ namespace yourFirstJobBackend.Logica
             Aplicaciones aplicacionARetornar = new Aplicaciones();
 
             aplicacionARetornar.idAplicacion = aplicacionesDeBD.idAplicacion;
+
             aplicacionARetornar.estadoAplicacion = aplicacionesDeBD.estadoAplicacion;
 
             Empleo empleoARetornar = new Empleo();
+
             empleoARetornar.tituloEmpleo = aplicacionesDeBD.tituloEmpleo;
+
             empleoARetornar.descripcionEmpleo = aplicacionesDeBD.descripcionEmpleo;
 
             aplicacionARetornar.empleo = empleoARetornar;
