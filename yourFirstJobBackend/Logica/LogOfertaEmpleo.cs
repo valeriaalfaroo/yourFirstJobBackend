@@ -97,7 +97,7 @@ namespace yourFirstJobBackend.Logica
 
         public ResObtenerTodosLosEmpleos obtenerTodosLosEmpleos(ReqObtenerTodosLosEmpleos req)
         {
-            ResObtenerTodosLosEmpleos res=new ResObtenerTodosLosEmpleos();
+            ResObtenerTodosLosEmpleos res = new ResObtenerTodosLosEmpleos();
             res.empleos = new List<Empleo>();
 
             res.listaDeErrores = new List<string>();
