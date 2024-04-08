@@ -428,7 +428,7 @@ namespace yourFirstJobBackend.Logica
             {
                 LinqDataContext conexion = new LinqDataContext();
 
-                conexion.UpdateUsuario(req.usuario.idUsuario, req.usuario.nombreUsuario, req.usuario.apellidos, req.usuario.correo, req.usuario.telefono, req.usuario.fechaNacimiento, req.usuario.region.idRegion, req.usuario.contrasena, req.usuario.sitioWeb, ref errorId, ref errorDescripcion, ref camposActualizados);
+                conexion.UpdateUsuario(req.usuario.idUsuario, req.usuario.nombreUsuario, req.usuario.apellidos, req.usuario.correo, req.usuario.telefono, req.usuario.fechaNacimiento, req.usuario.idRegion, req.usuario.sitioWeb, ref errorId, ref errorDescripcion, ref camposActualizados);
 
                 if (camposActualizados != 0)
                 {
