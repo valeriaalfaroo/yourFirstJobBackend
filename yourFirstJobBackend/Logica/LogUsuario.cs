@@ -61,7 +61,7 @@ namespace yourFirstJobBackend.Logica
                     {
                         res.listaDeErrores.Add("No se ingreso la fecha de nacimiento");
                     }
-                    if (req.usuario.region.idRegion == 0)
+                    if (req.usuario.idRegion == 0)
                     {
                         res.listaDeErrores.Add("No se ingreso id de region");
                     }
@@ -87,7 +87,7 @@ namespace yourFirstJobBackend.Logica
                     Utilitarios utl = new Utilitarios();
 
                     conexion.InsertUsuario(req.usuario.nombreUsuario, req.usuario.apellidos, req.usuario.correo, req.usuario.telefono,
-                        req.usuario.fechaNacimiento, req.usuario.region.idRegion, utl.encriptar(req.usuario.contrasena), estado, ref errorId, ref errorDescripcion, ref idReturn);
+                        req.usuario.fechaNacimiento, req.usuario.idRegion, utl.encriptar(req.usuario.contrasena), estado, ref errorId, ref errorDescripcion, ref idReturn);
 
                     if (idReturn == 0)
                     {
