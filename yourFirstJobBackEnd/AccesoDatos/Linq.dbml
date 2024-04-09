@@ -459,4 +459,66 @@
       <Column Name="Message" Type="System.String" DbType="VarChar(26) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.UpdateHabilidadesUsuarios" Method="UpdateHabilidadesUsuarios">
+    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idHabilidad" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idHabilidadNueva" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="CamposActualizados" Parameter="camposActualizados" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="UpdateHabilidadesUsuariosResult">
+      <Column Name="Message" Type="System.String" DbType="VarChar(26) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.UpdateEstudiosUsuarios" Method="UpdateEstudiosUsuarios">
+    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idEstudio" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nombreInstitucion" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="gradoAcademico" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="idProfesion" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fechaInicio" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="fechaFinalizacion" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="CamposActualizados" Parameter="camposActualizados" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="UpdateEstudiosUsuariosResult">
+      <Column Name="Message" Type="System.String" DbType="VarChar(26) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.UpdateExperienciaUsuarios" Method="UpdateExperienciaUsuarios">
+    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idExperiencia" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idProfesion" Type="System.Int32" DbType="Int" />
+    <Parameter Name="puesto" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="nombreEmpresa" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="responsabilidades" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="fechaInicio" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="fechaFinalizacion" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="CamposActualizados" Parameter="camposActualizados" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="UpdateExperienciaUsuariosResult">
+      <Column Name="Message" Type="System.String" DbType="VarChar(26) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.DeleteIdiomaUsuario" Method="DeleteIdiomaUsuario">
+    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idIdioma" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="ElemenentosEliminados" Parameter="elemenentosEliminados" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="DeleteIdiomaUsuarioResult">
+      <Column Name="Message" Type="System.String" DbType="VarChar(26) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.InsertIdiomasUsuarios" Method="InsertIdiomasUsuarios">
+    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idIdioma" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="idReturn" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="InsertIdiomasUsuariosResult">
+      <Column Name="Message" Type="System.String" DbType="VarChar(26) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>

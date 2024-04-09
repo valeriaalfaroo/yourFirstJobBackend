@@ -61,7 +61,7 @@ namespace yourFirstJobBackend.Logica
                     {
                         res.listaDeErrores.Add("No se ingreso la fecha de nacimiento");
                     }
-                    if (req.usuario.region.idRegion == 0)
+                    if (req.usuario.idRegion == 0)
                     {
                         res.listaDeErrores.Add("No se ingreso id de region");
                     }
@@ -87,7 +87,75 @@ namespace yourFirstJobBackend.Logica
                     Utilitarios utl = new Utilitarios();
 
                     conexion.InsertUsuario(req.usuario.nombreUsuario, req.usuario.apellidos, req.usuario.correo, req.usuario.telefono,
-                        req.usuario.fechaNacimiento, req.usuario.region.idRegion, utl.encriptar(req.usuario.contrasena), estado, ref errorId, ref errorDescripcion, ref idReturn);
+                        req.usuario.fechaNacimiento, req.usuario.idRegion, utl.encriptar(req.usuario.contrasena), estado, ref errorId, ref errorDescripcion, ref idReturn);
+
+                    if (idReturn == 0)
+                    {
+                        //Error en base de datos
+
+                        res.resultado = false;
+                        res.listaDeErrores.Add(errorDescripcion);
+                    }
+                    else
+                    {
+                        res.resultado = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+            }
+            finally
+            {
+                //Bitacora 
+            }
+            return res;
+        }
+
+        //Ingresar Idioma
+        public ResIngresarIdiomaUsuario IngresarIdiomaUsuario(ReqIngresarIdiomaUsuario req)
+
+        {
+            ResIngresarIdiomaUsuario res = new ResIngresarIdiomaUsuario();
+
+            try
+            {
+                res.resultado = false;
+                res.listaDeErrores = new List<string>();
+
+                // Validación
+                if (req == null)
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("No se encuentra el idioma");
+                }
+                if (req.idUsuario == 0)
+                {
+                    res.listaDeErrores.Add("Usuario invalido");
+                }
+                if (req.idIdioma == 0)
+                {
+                    res.listaDeErrores.Add("Idioma invalido");
+                }
+
+
+
+                // Si no hay errores de validación, intenta insertar el usuario en la base de datos
+                if (res.listaDeErrores.Any())
+                {
+                    res.resultado = false;
+                }
+                else
+                {
+                    LinqDataContext conexion = new LinqDataContext();
+                    int? idReturn = 0;
+                    int? errorId = 0;
+                    string errorDescripcion = "";
+
+                    conexion.InsertIdiomasUsuarios(req.idUsuario, req.idIdioma, ref errorId, ref errorDescripcion, ref idReturn);
 
                     if (idReturn == 0)
                     {
@@ -413,6 +481,66 @@ namespace yourFirstJobBackend.Logica
 
         }
 
+        //Eliminar idioma
+        public ResEliminarIdiomaUsuario eliminarIdiomaUsuario(ReqEliminarIdiomaUsuario req)
+        {
+            ResEliminarIdiomaUsuario res = new ResEliminarIdiomaUsuario();
+
+            res.listaDeErrores = new List<string>();
+
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+
+                int? errorId = 0;
+                int? camposActualizados = 0;
+                string errorDescripcion = "";
+                conexion.DeleteIdiomaUsuario(req.idUsuario, req.idIdioma, ref errorId, ref errorDescripcion, ref camposActualizados);
+
+                if (camposActualizados != 0)
+                {
+                    //Errores
+                    if (errorId != 0)
+                    {
+                        //Paso un error
+                        res.listaDeErrores.Add(errorDescripcion);
+                        res.resultado = false;
+                    }
+                    else
+                    {
+                        //Todo bien        
+
+                        res.resultado = true;
+                    }
+
+                }
+                else
+                {
+                    //Null
+                    res.listaDeErrores.Add("Error al delete");
+                    res.resultado = false;
+                    
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+
+            }
+            finally
+            {
+
+                //Bitacora
+
+            }
+
+            return res;
+
+        }
+
         //Update usuario
         public ResUpdateUsuario updateUsuario(ReqUpdateUsuario req)
         {
@@ -473,7 +601,7 @@ namespace yourFirstJobBackend.Logica
 
         }
 
-        //Update idiomasUsuario
+        //Update idiomas
         public ResUpdateUsuarioIdioma updateIdiomasUsuario(List<ReqUpdateUsuarioIdioma> lstReq)
         {
             ResUpdateUsuarioIdioma res = new ResUpdateUsuarioIdioma();
@@ -522,6 +650,210 @@ namespace yourFirstJobBackend.Logica
                 }
 
                 
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+
+            }
+            finally
+            {
+
+                //Bitacora
+
+            }
+
+            return res;
+
+        }
+
+        //Update habilidadesUsuario
+        public ResUpdateUsuarioHabilidades updateHabilidadesUsuario(List<ReqUpdateUsuarioHabilidades> lstReq)
+        {
+            ResUpdateUsuarioHabilidades res = new ResUpdateUsuarioHabilidades();
+
+            res.listaDeErrores = new List<string>();
+
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+
+
+                foreach (ReqUpdateUsuarioHabilidades cadaUno in lstReq)
+                {
+
+                    int? errorId = 0;
+                    int? camposActualizados = 0;
+                    string errorDescripcion = "";
+                    conexion.UpdateHabilidadesUsuarios(cadaUno.idUsuario, cadaUno.idHabilidad, cadaUno.idHabilidadNueva, ref errorId, ref errorDescripcion, ref camposActualizados);
+
+                    if (camposActualizados != 0)
+                    {
+                        //Errores
+                        if (errorId != 0)
+                        {
+                            //Paso un error
+                            res.listaDeErrores.Add(errorDescripcion);
+                            res.resultado = false;
+                        }
+                        else
+                        {
+                            //Todo bien        
+
+                            res.resultado = true;
+                        }
+
+                    }
+                    else
+                    {
+                        //Null
+                        res.listaDeErrores.Add("Error al update");
+                        res.resultado = false;
+                        break;
+
+                    }
+
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+
+            }
+            finally
+            {
+
+                //Bitacora
+
+            }
+
+            return res;
+
+        }
+
+        //Update estudios
+        public ResUpdateUsuarioEstudios updateEstudiosUsuario(List<ReqUpdateUsuarioEstudios> lstReq)
+        {
+            ResUpdateUsuarioEstudios res = new ResUpdateUsuarioEstudios();
+
+            res.listaDeErrores = new List<string>();
+
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+
+
+                foreach (ReqUpdateUsuarioEstudios cadaUno in lstReq)
+                {
+
+                    int? errorId = 0;
+                    int? camposActualizados = 0;
+                    string errorDescripcion = "";
+                    conexion.UpdateEstudiosUsuarios(cadaUno.idUsuario, cadaUno.estudios.idEstudios, cadaUno.estudios.nombreInstitucion, cadaUno.estudios.gradoAcademico, cadaUno.estudios.profesion.idProfesion, cadaUno.estudios.fechaInicio, cadaUno.estudios.fechaFinalizacion, ref errorId, ref errorDescripcion, ref camposActualizados);
+
+                    if (camposActualizados != 0)
+                    {
+                        //Errores
+                        if (errorId != 0)
+                        {
+                            //Paso un error
+                            res.listaDeErrores.Add(errorDescripcion);
+                            res.resultado = false;
+                        }
+                        else
+                        {
+                            //Todo bien        
+
+                            res.resultado = true;
+                        }
+
+                    }
+                    else
+                    {
+                        //Null
+                        res.listaDeErrores.Add("Error al update");
+                        res.resultado = false;
+                        break;
+
+                    }
+
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+
+            }
+            finally
+            {
+
+                //Bitacora
+
+            }
+
+            return res;
+
+        }
+
+        //Update experiencia
+        public ResUpdateUsuarioExperiencia updateExperienciaUsuario(List<ReqUpdateUsuarioExperiencia> lstReq)
+        {
+            ResUpdateUsuarioExperiencia res = new ResUpdateUsuarioExperiencia();
+
+            res.listaDeErrores = new List<string>();
+
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+
+
+                foreach (ReqUpdateUsuarioExperiencia cadaUno in lstReq)
+                {
+
+                    int? errorId = 0;
+                    int? camposActualizados = 0;
+                    string errorDescripcion = "";
+                    conexion.UpdateExperienciaUsuarios(cadaUno.idUsuario, cadaUno.experienciaLaboral.idExperiencia, cadaUno.experienciaLaboral.profesion.idProfesion, cadaUno.experienciaLaboral.puesto, cadaUno.experienciaLaboral.nombreEmpresa, cadaUno.experienciaLaboral.responsabilidades, cadaUno.experienciaLaboral.fechaInicio, cadaUno.experienciaLaboral.fechaFinalizacion, ref errorId, ref errorDescripcion, ref camposActualizados);
+
+                    if (camposActualizados != 0)
+                    {
+                        //Errores
+                        if (errorId != 0)
+                        {
+                            //Paso un error
+                            res.listaDeErrores.Add(errorDescripcion);
+                            res.resultado = false;
+                        }
+                        else
+                        {
+                            //Todo bien        
+
+                            res.resultado = true;
+                        }
+
+                    }
+                    else
+                    {
+                        //Null
+                        res.listaDeErrores.Add("Error al update");
+                        res.resultado = false;
+                        break;
+
+                    }
+
+                }
+
+
 
             }
             catch (Exception ex)
