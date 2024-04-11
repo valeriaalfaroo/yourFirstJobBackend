@@ -68,6 +68,9 @@
     <Compile Include="Entidades\Request\ReqEliminarUsuario.cs" />
     <Compile Include="Entidades\Request\ReqIngresarAplicacion.cs" />
     <Compile Include="Entidades\Request\ReqIngresarEmpleo.cs" />
+    <Compile Include="Entidades\Request\ReqIngresarEstudioUsuario.cs" />
+    <Compile Include="Entidades\Request\ReqIngresarExperienciaUsuario.cs" />
+    <Compile Include="Entidades\Request\ReqIngresarHabilidadUsuario.cs" />
     <Compile Include="Entidades\Request\ReqIngresarIdiomaUsuario.cs" />
     <Compile Include="Entidades\Request\ReqIngresarUsuario.cs" />
     <Compile Include="Entidades\Request\ReqLogin.cs" />
@@ -87,6 +90,9 @@
     <Compile Include="Entidades\Response\ResEliminarUsuario.cs" />
     <Compile Include="Entidades\Response\ResIngresarAplicacion.cs" />
     <Compile Include="Entidades\Response\ResIngresarEmpleo.cs" />
+    <Compile Include="Entidades\Response\ResIngresarEstudioUsuario.cs" />
+    <Compile Include="Entidades\Response\ResIngresarExperienciaUsuario.cs" />
+    <Compile Include="Entidades\Response\ResIngresarHabilidadUsuario.cs" />
     <Compile Include="Entidades\Response\ResIngresarIdiomaUsuario.cs" />
     <Compile Include="Entidades\Response\ResIngresarUsuario.cs" />
     <Compile Include="Entidades\Response\ResLogin.cs" />

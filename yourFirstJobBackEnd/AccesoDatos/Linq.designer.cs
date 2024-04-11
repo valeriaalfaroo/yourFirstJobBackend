@@ -336,16 +336,6 @@ namespace yourFirstJobBackend.AccesoDatos
 			return ((ISingleResult<Select_Experiencia_LaboralResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertEstudios")]
-		public ISingleResult<InsertEstudiosResult> InsertEstudios([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string nombreInstitucion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string gradoAcademico, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idProfesion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaInicio, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaFinalizacion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdReturn", DbType="Int")] ref System.Nullable<int> idReturn)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, nombreInstitucion, gradoAcademico, idProfesion, fechaInicio, fechaFinalizacion, errorOccurred, errorMensaje, idReturn);
-			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(6)));
-			errorMensaje = ((string)(result.GetParameterValue(7)));
-			idReturn = ((System.Nullable<int>)(result.GetParameterValue(8)));
-			return ((ISingleResult<InsertEstudiosResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertUsuario")]
 		public ISingleResult<InsertUsuarioResult> InsertUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string nombreUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string apellidos, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string correo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> telefono, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaNacimiento, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idRegion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string contrasena, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> estado, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdReturn", DbType="Int")] ref System.Nullable<int> idReturn)
 		{
@@ -433,6 +423,36 @@ namespace yourFirstJobBackend.AccesoDatos
 			errorMensaje = ((string)(result.GetParameterValue(3)));
 			idReturn = ((System.Nullable<int>)(result.GetParameterValue(4)));
 			return ((ISingleResult<InsertIdiomasUsuariosResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertExperienciaUsuarios")]
+		public ISingleResult<InsertExperienciaUsuariosResult> InsertExperienciaUsuarios([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idProfesion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string puesto, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string nombreEmpresa, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string responsabilidades, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaInicio, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaFinalizacion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> idReturn)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, idProfesion, puesto, nombreEmpresa, responsabilidades, fechaInicio, fechaFinalizacion, errorOccurred, errorMensaje, idReturn);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(7)));
+			errorMensaje = ((string)(result.GetParameterValue(8)));
+			idReturn = ((System.Nullable<int>)(result.GetParameterValue(9)));
+			return ((ISingleResult<InsertExperienciaUsuariosResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertEstudiosUsuarios")]
+		public ISingleResult<InsertEstudiosUsuariosResult> InsertEstudiosUsuarios([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string nombreInstitucion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string gradoAcademico, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idProfesion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaInicio, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> fechaFinalizacion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> idReturn)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, nombreInstitucion, gradoAcademico, idProfesion, fechaInicio, fechaFinalizacion, errorOccurred, errorMensaje, idReturn);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(6)));
+			errorMensaje = ((string)(result.GetParameterValue(7)));
+			idReturn = ((System.Nullable<int>)(result.GetParameterValue(8)));
+			return ((ISingleResult<InsertEstudiosUsuariosResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertHabilidadesUsuarios")]
+		public ISingleResult<InsertHabilidadesUsuariosResult> InsertHabilidadesUsuarios([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idHabilidad, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> idReturn)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, idHabilidad, errorOccurred, errorMensaje, idReturn);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(2)));
+			errorMensaje = ((string)(result.GetParameterValue(3)));
+			idReturn = ((System.Nullable<int>)(result.GetParameterValue(4)));
+			return ((ISingleResult<InsertHabilidadesUsuariosResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -2936,32 +2956,6 @@ namespace yourFirstJobBackend.AccesoDatos
 		}
 	}
 	
-	public partial class InsertEstudiosResult
-	{
-		
-		private string _Message;
-		
-		public InsertEstudiosResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(31) NOT NULL", CanBeNull=false)]
-		public string Message
-		{
-			get
-			{
-				return this._Message;
-			}
-			set
-			{
-				if ((this._Message != value))
-				{
-					this._Message = value;
-				}
-			}
-		}
-	}
-	
 	public partial class InsertUsuarioResult
 	{
 		
@@ -3482,6 +3476,84 @@ namespace yourFirstJobBackend.AccesoDatos
 		private string _Message;
 		
 		public InsertIdiomasUsuariosResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(26) NOT NULL", CanBeNull=false)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this._Message = value;
+				}
+			}
+		}
+	}
+	
+	public partial class InsertExperienciaUsuariosResult
+	{
+		
+		private string _Message;
+		
+		public InsertExperienciaUsuariosResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(26) NOT NULL", CanBeNull=false)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this._Message = value;
+				}
+			}
+		}
+	}
+	
+	public partial class InsertEstudiosUsuariosResult
+	{
+		
+		private string _Message;
+		
+		public InsertEstudiosUsuariosResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(26) NOT NULL", CanBeNull=false)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this._Message = value;
+				}
+			}
+		}
+	}
+	
+	public partial class InsertHabilidadesUsuariosResult
+	{
+		
+		private string _Message;
+		
+		public InsertHabilidadesUsuariosResult()
 		{
 		}
 		

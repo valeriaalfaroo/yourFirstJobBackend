@@ -183,6 +183,210 @@ namespace yourFirstJobBackend.Logica
             return res;
         }
 
+        //Ingresar Habilidades
+        public ResIngresarHabilidadUsuario IngresarHabilidadUsuario(ReqIngresarHabilidadUsuario req)
+
+        {
+            ResIngresarHabilidadUsuario res = new ResIngresarHabilidadUsuario();
+
+            try
+            {
+                res.resultado = false;
+                res.listaDeErrores = new List<string>();
+
+                // Validación
+                if (req == null)
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("Error en la solicitud");
+                }
+                if (req.idUsuario == 0)
+                {
+                    res.listaDeErrores.Add("Usuario invalido");
+                }
+                if (req.habilidades == null)
+                {
+                    res.listaDeErrores.Add("Habilidad vacia");
+                }
+
+
+
+                // Si no hay errores de validación, intenta insertar el usuario en la base de datos
+                if (res.listaDeErrores.Any())
+                {
+                    res.resultado = false;
+                }
+                else
+                {
+                    LinqDataContext conexion = new LinqDataContext();
+                    int? idReturn = 0;
+                    int? errorId = 0;
+                    string errorDescripcion = "";
+
+                    conexion.InsertHabilidadesUsuarios(req.idUsuario, req.habilidades.idHabilidades, ref errorId, ref errorDescripcion, ref idReturn);
+
+                    if (idReturn == 0)
+                    {
+                        //Error en base de datos
+
+                        res.resultado = false;
+                        res.listaDeErrores.Add(errorDescripcion);
+                    }
+                    else
+                    {
+                        res.resultado = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+            }
+            finally
+            {
+                //Bitacora 
+            }
+            return res;
+        }
+
+        //Ingresar Estudios
+        public ResIngresarEstudioUsuario IngresarEstudioUsuario(ReqIngresarEstudioUsuario req)
+
+        {
+            ResIngresarEstudioUsuario res = new ResIngresarEstudioUsuario();
+
+            try
+            {
+                res.resultado = false;
+                res.listaDeErrores = new List<string>();
+
+                // Validación
+                if (req == null)
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("Error en la solicitud");
+                }
+                if (req.idUsuario == 0)
+                {
+                    res.listaDeErrores.Add("Usuario invalido");
+                }
+                if (req.estudio == null)
+                {
+                    res.listaDeErrores.Add("Estudio vacio");
+                }
+
+
+
+                // Si no hay errores de validación, intenta insertar el usuario en la base de datos
+                if (res.listaDeErrores.Any())
+                {
+                    res.resultado = false;
+                }
+                else
+                {
+                    LinqDataContext conexion = new LinqDataContext();
+                    int? idReturn = 0;
+                    int? errorId = 0;
+                    string errorDescripcion = "";
+
+                    conexion.InsertEstudiosUsuarios(req.idUsuario, req.estudio.nombreInstitucion, req.estudio.gradoAcademico, req.estudio.profesion.idProfesion, req.estudio.fechaInicio, req.estudio.fechaFinalizacion, ref errorId, ref errorDescripcion, ref idReturn);
+
+                    if (idReturn == 0)
+                    {
+                        //Error en base de datos
+
+                        res.resultado = false;
+                        res.listaDeErrores.Add(errorDescripcion);
+                    }
+                    else
+                    {
+                        res.resultado = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+            }
+            finally
+            {
+                //Bitacora 
+            }
+            return res;
+        }
+
+        //Ingresar Experiencia
+        public ResIngresarExperienciaUsuario IngresarExperienciaUsuario(ReqIngresarExperienciaUsuario req)
+
+        {
+            ResIngresarExperienciaUsuario res = new ResIngresarExperienciaUsuario();
+
+            try
+            {
+                res.resultado = false;
+                res.listaDeErrores = new List<string>();
+
+                // Validación
+                if (req == null)
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("Error en la solicitud");
+                }
+                if (req.idUsuario == 0)
+                {
+                    res.listaDeErrores.Add("Usuario invalido");
+                }
+                if (req.experiencia == null)
+                {
+                    res.listaDeErrores.Add("Experiencia vacia");
+                }
+
+
+
+                // Si no hay errores de validación, intenta insertar el usuario en la base de datos
+                if (res.listaDeErrores.Any())
+                {
+                    res.resultado = false;
+                }
+                else
+                {
+                    LinqDataContext conexion = new LinqDataContext();
+                    int? idReturn = 0;
+                    int? errorId = 0;
+                    string errorDescripcion = "";
+
+                    conexion.InsertExperienciaUsuarios(req.idUsuario, req.experiencia.profesion.idProfesion, req.experiencia.puesto, req.experiencia.nombreEmpresa, req.experiencia.responsabilidades, req.experiencia.fechaInicio, req.experiencia.fechaFinalizacion, ref errorId, ref errorDescripcion, ref idReturn);
+
+                    if (idReturn == 0)
+                    {
+                        //Error en base de datos
+
+                        res.resultado = false;
+                        res.listaDeErrores.Add(errorDescripcion);
+                    }
+                    else
+                    {
+                        res.resultado = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+            }
+            finally
+            {
+                //Bitacora 
+            }
+            return res;
+        }
+
         //traer un usuario
         public ResObtenerPerfilUsuario obtenerUsuario(ReqObtenerUsuario req)
         {
