@@ -40,6 +40,62 @@ namespace API.Controllers
             return logica.IngresarIdiomaUsuario(req);
         }
 
+        //Insert habilidad usuario
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/usuario/insertHabilidadUsuario")]
+        public ResIngresarHabilidadUsuario ingresarHabilidadUsuario(ReqIngresarHabilidadUsuario req)
+        {
+            if (req == null)
+            {
+                return new ResIngresarHabilidadUsuario
+                {
+                    resultado = false,
+                    listaDeErrores = new List<string> { "Request nulo" }
+                };
+            }
+
+            LogUsuario logica = new LogUsuario();
+            return logica.IngresarHabilidadUsuario(req);
+        }
+
+        //Insert Estudio usuario
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/usuario/insertEstudioUsuario")]
+        public ResIngresarEstudioUsuario ingresarEstudioUsuario(ReqIngresarEstudioUsuario req)
+        {
+            if (req == null)
+            {
+                return new ResIngresarEstudioUsuario
+                {
+                    resultado = false,
+                    listaDeErrores = new List<string> { "Request nulo" }
+                };
+            }
+
+            LogUsuario logica = new LogUsuario();
+            return logica.IngresarEstudioUsuario(req);
+        }
+
+
+        //Insert Experiencia usuario
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/usuario/insertExperienciaUsuario")]
+        public ResIngresarExperienciaUsuario ingresarEstudioUsuario(ReqIngresarExperienciaUsuario req)
+        {
+            if (req == null)
+            {
+                return new ResIngresarExperienciaUsuario
+                {
+                    resultado = false,
+                    listaDeErrores = new List<string> { "Request nulo" }
+                };
+            }
+
+            LogUsuario logica = new LogUsuario();
+            return logica.IngresarExperienciaUsuario(req);
+        }
+
+
         //Obtener un usuario
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/usuario/obtenerUsuario")]
