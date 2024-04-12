@@ -95,6 +95,17 @@ namespace API.Controllers
             return logica.IngresarExperienciaUsuario(req);
         }
 
+        //insert archivos usuario
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/usuario/ingresarArchivoUsuario")]
+        public ResIngresarArchivosUsuarios ingresarArchivos([FromBody] ReqIngresarArchivoUsuario req)
+        {
+            LogUsuario logicaBackend = new LogUsuario();
+            return logicaBackend.ingresarArchivos(req);
+        }
+
+       
+
 
         //Obtener un usuario
         [System.Web.Http.HttpPost]
@@ -164,6 +175,16 @@ namespace API.Controllers
 
             LogUsuario logica = new LogUsuario();
             return logica.eliminarIdiomaUsuario(req);
+        }
+
+
+        //delete archivo usuario
+        [System.Web.Http.HttpDelete]
+        [System.Web.Http.Route("api/usuario/borrarArchivoUsuario")]
+        public ResEliminarArchivosUsuarios borrarArchivos([FromBody] ReqEliminarArchivosUsuario req)
+        {
+            LogUsuario logicaBackend = new LogUsuario();
+            return logicaBackend.eliminarArchivoUsuario(req);
         }
 
 
@@ -256,6 +277,26 @@ namespace API.Controllers
             LogUsuario logica = new LogUsuario();
             return logica.updateExperienciaUsuario(req);
         }
+
+
+        //update archivos usuario
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/usuario/actualizarUsuarioArchivo")]
+        public ResUpdateArchivosUsuario actualizarArchivoUser([FromBody] List<ReqUpdateArchivos> req)
+        {
+            if (req == null)
+            {
+                return new ResUpdateArchivosUsuario
+                {
+                    resultado = false,
+                    listaDeErrores = new List<string> { "Request nulo" }
+                };
+            }
+
+            LogUsuario logica = new LogUsuario();
+            return logica.actualizarArchivos(req);
+        }
+
 
 
     }

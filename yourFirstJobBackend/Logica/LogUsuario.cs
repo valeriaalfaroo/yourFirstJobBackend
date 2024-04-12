@@ -387,6 +387,93 @@ namespace yourFirstJobBackend.Logica
             return res;
         }
 
+        //Ingresar archvios usuarios
+        public ResIngresarArchivosUsuarios ingresarArchivos(ReqIngresarArchivoUsuario req)
+        {
+            ResIngresarArchivosUsuarios res = new ResIngresarArchivosUsuarios();
+            try
+            {
+                res.resultado = false;
+                res.listaDeErrores = new List<string>();
+
+                if (req.idUsuario == null)
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("Request nulo");
+                }
+
+
+
+                if (req.idUsuario == null)
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("No se recibio el usuario");
+                }
+                if (String.IsNullOrEmpty(req.nombreArchivo))
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("no se envio el nombre del archvio");
+                }
+                if (req.archivo == null || req.archivo.Length == 0)
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("No se recibió el archivo del usuario");
+                }
+
+                if (String.IsNullOrEmpty(req.tipo))
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("no se envio el tipo del archvio");
+                }
+
+
+                if (res.listaDeErrores.Any())
+                {
+                    res.resultado = false;
+                }
+                else
+                {
+                    //llamar base de datos 
+
+
+                    LinqDataContext conexion = new LinqDataContext();
+                    int? idReturn = 0;
+                    int? errorOcurred = 0;
+                    string errorMensaje = "";
+                    int? lineasInsertadas = 0;
+
+
+                    // conexion a SP 
+
+                    conexion.SP_Insertar_ArchivoUsuario(req.idUsuario, req.nombreArchivo, req.archivo, req.tipo, ref errorOcurred, ref errorMensaje);
+
+                    if (errorOcurred != 0)
+                    {
+                        //Error en base de datos
+                        res.resultado = false;
+                        res.listaDeErrores.Add(errorMensaje);
+                    }
+                    else
+                    {
+                        res.resultado = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+            }
+            finally
+            {
+                //Bitacora 
+            }
+            return res;
+
+        }
+
+
         //traer un usuario
         public ResObtenerPerfilUsuario obtenerUsuario(ReqObtenerUsuario req)
         {
@@ -512,7 +599,7 @@ namespace yourFirstJobBackend.Logica
                             archivUsuario.idArchivosUsuarios = ArchivosInfo.idArchivosUsuarios;
                             archivUsuario.idUsuario = ArchivosInfo.idUsuario;
                             archivUsuario.nombreArchivo = ArchivosInfo.nombreArchivo;
-                            archivUsuario.archivo = ArchivosInfo.archivo;
+                            archivUsuario.archivo = ArchivosInfo.archivo.ToArray();
                             archivUsuario.tipo = ArchivosInfo.tipo;
 
                             listaArchivoUsuario.Add(archivUsuario);
@@ -742,6 +829,43 @@ namespace yourFirstJobBackend.Logica
             }
 
             return res;
+
+        }
+
+        //eliminar un archivo de usuario
+
+        public ResEliminarArchivosUsuarios eliminarArchivoUsuario(ReqEliminarArchivosUsuario req)
+        {
+            ResEliminarArchivosUsuarios res = new ResEliminarArchivosUsuarios();
+            res.listaDeErrores = new List<string>();
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+                int? errorOccured = 0;
+                string errorMessage = "";
+                int? lineasActualizadas = 0;
+
+
+                conexion.SP_Borrar_ArchivoUsuario(req.idArchivosUsuarios, ref errorOccured, ref errorMessage);
+
+                if (errorOccured == 0)
+                {
+                    res.resultado = true;
+                    res.listaDeErrores.Add(errorMessage);
+                }
+                else
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("No se encontró el archivo.");
+                }
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+            }
+            return res;
+
 
         }
 
@@ -1076,6 +1200,80 @@ namespace yourFirstJobBackend.Logica
             return res;
 
         }
+
+        //update archivos usurio
+
+        public ResUpdateArchivosUsuario actualizarArchivos(List<ReqUpdateArchivos> listReq)
+        {
+
+            ResUpdateArchivosUsuario res = new ResUpdateArchivosUsuario();
+
+            res.listaDeErrores = new List<string>();
+
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+
+                List<ArchivosUsuario> listArchiv = new List<ArchivosUsuario>();
+
+                foreach (ReqUpdateArchivos archivosUser in listReq)
+                {
+
+                    int? errorId = 0;
+                    int? camposActualizados = 0;
+                    string errorMensaje = "";
+
+
+                    conexion.SP_Update_ArchivosUsuario(archivosUser.idUsuario, archivosUser.archviosUsuario.idArchivosUsuarios, archivosUser.archviosUsuario.nombreArchivo, archivosUser.archviosUsuario.archivo, archivosUser.archviosUsuario.tipo,
+                       ref errorId, ref errorMensaje, ref camposActualizados);
+
+                    if (camposActualizados != 0)
+                    {
+                        //Errores
+                        if (errorId != 0)
+                        {
+                            //Paso un error
+                            res.listaDeErrores.Add(errorMensaje);
+                            res.resultado = false;
+                        }
+                        else
+                        {
+                            //Todo bien        
+
+                            res.resultado = true;
+                        }
+
+                    }
+                    else
+                    {
+                        //Null
+                        res.listaDeErrores.Add("Error al update");
+                        res.resultado = false;
+                        break;
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+
+            }
+            finally
+            {
+
+                //Bitacora
+
+            }
+
+            return res;
+        }
+
+
+
 
         #region
 

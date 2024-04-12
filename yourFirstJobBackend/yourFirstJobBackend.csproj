@@ -64,9 +64,11 @@
     <Compile Include="Entidades\entities\Region.cs" />
     <Compile Include="Entidades\entities\Usuario.cs" />
     <Compile Include="Entidades\Request\ReqBuscarOfertasPorTitulo.cs" />
+    <Compile Include="Entidades\Request\ReqEliminarArchivosUsuario.cs" />
     <Compile Include="Entidades\Request\ReqEliminarIdiomaUsuario.cs" />
     <Compile Include="Entidades\Request\ReqEliminarUsuario.cs" />
     <Compile Include="Entidades\Request\ReqIngresarAplicacion.cs" />
+    <Compile Include="Entidades\Request\ReqIngresarArchivoUsuario.cs" />
     <Compile Include="Entidades\Request\ReqIngresarEmpleo.cs" />
     <Compile Include="Entidades\Request\ReqIngresarEstudioUsuario.cs" />
     <Compile Include="Entidades\Request\ReqIngresarExperienciaUsuario.cs" />
@@ -75,9 +77,11 @@
     <Compile Include="Entidades\Request\ReqIngresarUsuario.cs" />
     <Compile Include="Entidades\Request\ReqLogin.cs" />
     <Compile Include="Entidades\Request\ReqObtenerAplicacion.cs" />
+    <Compile Include="Entidades\Request\ReqObtenerArchivosUsuario.cs" />
     <Compile Include="Entidades\Request\ReqObtenerTodosLosEmpleos.cs" />
     <Compile Include="Entidades\Request\ReqObtenerUnEmpleo.cs" />
     <Compile Include="Entidades\Request\ReqObtenerUsuario.cs" />
+    <Compile Include="Entidades\Request\ReqUpdateArchivos.cs" />
     <Compile Include="Entidades\Request\ReqUpdateOfertaEmpleo.cs" />
     <Compile Include="Entidades\Request\ReqUpdateUsuario.cs" />
     <Compile Include="Entidades\Request\ReqUpdateUsuarioEstudios.cs" />
@@ -86,9 +90,11 @@
     <Compile Include="Entidades\Request\ReqUpdateUsuarioIdioma.cs" />
     <Compile Include="Entidades\Response\ResBase.cs" />
     <Compile Include="Entidades\Response\ResBuscarOfertasPorTitulo.cs" />
+    <Compile Include="Entidades\Response\ResEliminarArchivosUsuarios.cs" />
     <Compile Include="Entidades\Response\ResEliminarIdiomaUsuario.cs" />
     <Compile Include="Entidades\Response\ResEliminarUsuario.cs" />
     <Compile Include="Entidades\Response\ResIngresarAplicacion.cs" />
+    <Compile Include="Entidades\Response\ResIngresarArchivosUsuarios.cs" />
     <Compile Include="Entidades\Response\ResIngresarEmpleo.cs" />
     <Compile Include="Entidades\Response\ResIngresarEstudioUsuario.cs" />
     <Compile Include="Entidades\Response\ResIngresarExperienciaUsuario.cs" />
@@ -97,9 +103,11 @@
     <Compile Include="Entidades\Response\ResIngresarUsuario.cs" />
     <Compile Include="Entidades\Response\ResLogin.cs" />
     <Compile Include="Entidades\Response\ResObtenerAplicaciones.cs" />
+    <Compile Include="Entidades\Response\ResObtenerArchviosUsuario.cs" />
     <Compile Include="Entidades\Response\ResObtenerPerfilUsuario.cs" />
     <Compile Include="Entidades\Response\ResObtenerTodosLosEmpleos.cs" />
     <Compile Include="Entidades\Response\ResObtenerUnEmpleo.cs" />
+    <Compile Include="Entidades\Response\ResUpdateArchivosUsuario.cs" />
     <Compile Include="Entidades\Response\ResUpdateOfertaEmpleo.cs" />
     <Compile Include="Entidades\Response\ResUpdateUsuario.cs" />
     <Compile Include="Entidades\Response\ResUpdateUsuarioEstudios.cs" />
