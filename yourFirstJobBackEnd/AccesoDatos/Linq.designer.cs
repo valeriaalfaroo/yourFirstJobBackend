@@ -482,6 +482,15 @@ namespace yourFirstJobBackend.AccesoDatos
 			camposActualizados = ((System.Nullable<int>)(result.GetParameterValue(7)));
 			return ((ISingleResult<SP_Update_ArchivosUsuarioResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_Insertar_ArchivosOferta")]
+		public ISingleResult<SP_Insertar_ArchivosOfertaResult> SP_Insertar_ArchivosOferta([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idOferta, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string nombreArchivo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarBinary(MAX)")] System.Data.Linq.Binary nuevoArchivo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string tipo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idOferta, nombreArchivo, nuevoArchivo, tipo, errorOccurred, errorMensaje);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(4)));
+			errorMensaje = ((string)(result.GetParameterValue(5)));
+			return ((ISingleResult<SP_Insertar_ArchivosOfertaResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class DeleteUsuarioResult
@@ -3664,6 +3673,32 @@ namespace yourFirstJobBackend.AccesoDatos
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(21) NOT NULL", CanBeNull=false)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this._Message = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_Insertar_ArchivosOfertaResult
+	{
+		
+		private string _Message;
+		
+		public SP_Insertar_ArchivosOfertaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
 		public string Message
 		{
 			get

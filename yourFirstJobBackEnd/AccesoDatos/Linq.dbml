@@ -578,4 +578,15 @@
       <Column Name="Message" Type="System.String" DbType="VarChar(21) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.SP_Insertar_ArchivosOferta" Method="SP_Insertar_ArchivosOferta">
+    <Parameter Name="idOferta" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nombreArchivo" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="nuevoArchivo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" />
+    <Parameter Name="tipo" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <ElementType Name="SP_Insertar_ArchivosOfertaResult">
+      <Column Name="Message" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>
