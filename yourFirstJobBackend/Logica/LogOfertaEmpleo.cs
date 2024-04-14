@@ -232,7 +232,7 @@ namespace yourFirstJobBackend.Logica
                                 archivoOferta.idArchivosOferta = archivoInfo.idArchivosOferta;
                                 archivoOferta.idOferta = archivoInfo.idOfertas;
                                 archivoOferta.nombreArchivo = archivoInfo.nombreArchivo;
-                                archivoOferta.archivo = archivoInfo.archivo;
+                                archivoOferta.archivo = archivoInfo.archivo.ToArray();
                                 archivoOferta.tipo = archivoInfo.tipo;
 
                                 lstArchivosDeCada.Add(archivoOferta); // Agrega el archivo a la lista
@@ -486,7 +486,7 @@ namespace yourFirstJobBackend.Logica
                                 archivoOferta.idArchivosOferta = archivoInfo.idArchivosOferta;
                                 archivoOferta.idOferta = archivoInfo.idOfertas;
                                 archivoOferta.nombreArchivo = archivoInfo.nombreArchivo;
-                                archivoOferta.archivo = archivoInfo.archivo;
+                                archivoOferta.archivo = archivoInfo.archivo.ToArray();
                                 archivoOferta.tipo = archivoInfo.tipo;
 
                                 lstArchivosDeCada.Add(archivoOferta); // Agrega el archivo a la lista
@@ -645,7 +645,7 @@ namespace yourFirstJobBackend.Logica
                             archivoOferta.idArchivosOferta = archivoInfo.idArchivosOferta;
                             archivoOferta.idOferta = archivoInfo.idOfertas;
                             archivoOferta.nombreArchivo = archivoInfo.nombreArchivo;
-                            archivoOferta.archivo = archivoInfo.archivo;
+                            archivoOferta.archivo = archivoInfo.archivo.ToArray();
                             archivoOferta.tipo = archivoInfo.tipo;
 
                             lstArchivosDeCada.Add(archivoOferta); // Agrega el archivo a la lista
@@ -672,6 +672,88 @@ namespace yourFirstJobBackend.Logica
             }
 
             return res;
+        }
+
+
+        //ingresar archivos oferta
+        public ResIngresarArchivosOfertas ingresarArchivosOferta (ReqIngresarArchivosOfertas req)
+        {
+            ResIngresarArchivosOfertas res = new ResIngresarArchivosOfertas();
+            try
+            {
+                res.resultado = false;
+                res.listaDeErrores = new List<string>();
+
+               
+
+
+                if (req.idOfertas == null)
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("No se recibio el usuario");
+                }
+                if (String.IsNullOrEmpty(req.nombreArchivo))
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("no se envio el nombre del archvio");
+                }
+                if (req.archivo == null || req.archivo.Length == 0)
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("No se recibió el archivo del usuario");
+                }
+
+                if (String.IsNullOrEmpty(req.tipo))
+                {
+                    res.resultado = false;
+                    res.listaDeErrores.Add("no se envio el tipo del archvio");
+                }
+
+
+                if (res.listaDeErrores.Any())
+                {
+                    res.resultado = false;
+                }
+                else
+                {
+                    //llamar base de datos 
+
+
+                    LinqDataContext conexion = new LinqDataContext();
+                    int? idReturn = 0;
+                    int? errorOcurred = 0;
+                    string errorMensaje = "";
+                    int? lineasInsertadas = 0;
+
+
+                    // conexion a SP 
+
+                    conexion.SP_Insertar_ArchivosOferta(req.idOfertas, req.nombreArchivo, req.archivo, req.tipo, ref errorOcurred, ref errorMensaje);
+
+                    if (errorOcurred != 0)
+                    {
+                        //Error en base de datos
+                        res.resultado = false;
+                        res.listaDeErrores.Add(errorMensaje);
+                    }
+                    else
+                    {
+                        res.resultado = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+            }
+            finally
+            {
+                //Bitacora 
+            }
+            return res;
+
         }
 
         #region
