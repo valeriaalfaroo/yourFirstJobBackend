@@ -14,7 +14,7 @@ namespace yourFirstJobBackend.Entidades.entities
         public int idOferta { get; set; }
         public string nombreArchivo { get; set; }
 
-        public Binary archivo { get; set; }
+        public byte [] archivo { get; set; }
 
         public string tipo { get; set; }
 

@@ -69,5 +69,14 @@ namespace API.Controllers
             LogOfertaEmpleo logicaBackend = new LogOfertaEmpleo();
             return logicaBackend.ObtenerUnEmpleo(req);
         }
+
+        //insert archivos oferta empelo
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/empleo/ingresarArchivosOferta")]
+        public ResIngresarArchivosOfertas ingresarArchivos([FromBody] ReqIngresarArchivosOfertas req)
+        {
+            LogOfertaEmpleo logicaBackend = new LogOfertaEmpleo();
+            return logicaBackend.ingresarArchivosOferta(req);
+        }
     }
 } 

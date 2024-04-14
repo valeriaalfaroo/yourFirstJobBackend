@@ -68,6 +68,7 @@
     <Compile Include="Entidades\Request\ReqEliminarIdiomaUsuario.cs" />
     <Compile Include="Entidades\Request\ReqEliminarUsuario.cs" />
     <Compile Include="Entidades\Request\ReqIngresarAplicacion.cs" />
+    <Compile Include="Entidades\Request\ReqIngresarArchivosOfertas.cs" />
     <Compile Include="Entidades\Request\ReqIngresarArchivoUsuario.cs" />
     <Compile Include="Entidades\Request\ReqIngresarEmpleo.cs" />
     <Compile Include="Entidades\Request\ReqIngresarEstudioUsuario.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Entidades\Request\ReqIngresarUsuario.cs" />
     <Compile Include="Entidades\Request\ReqLogin.cs" />
     <Compile Include="Entidades\Request\ReqObtenerAplicacion.cs" />
+    <Compile Include="Entidades\Request\ReqObtenerArchivosOferta.cs" />
     <Compile Include="Entidades\Request\ReqObtenerArchivosUsuario.cs" />
     <Compile Include="Entidades\Request\ReqObtenerTodosLosEmpleos.cs" />
     <Compile Include="Entidades\Request\ReqObtenerUnEmpleo.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Entidades\Response\ResEliminarIdiomaUsuario.cs" />
     <Compile Include="Entidades\Response\ResEliminarUsuario.cs" />
     <Compile Include="Entidades\Response\ResIngresarAplicacion.cs" />
+    <Compile Include="Entidades\Response\ResIngresarArchivosOfertas.cs" />
     <Compile Include="Entidades\Response\ResIngresarArchivosUsuarios.cs" />
     <Compile Include="Entidades\Response\ResIngresarEmpleo.cs" />
     <Compile Include="Entidades\Response\ResIngresarEstudioUsuario.cs" />
@@ -103,6 +106,7 @@
     <Compile Include="Entidades\Response\ResIngresarUsuario.cs" />
     <Compile Include="Entidades\Response\ResLogin.cs" />
     <Compile Include="Entidades\Response\ResObtenerAplicaciones.cs" />
+    <Compile Include="Entidades\Response\ResObtenerArchviosOferta.cs" />
     <Compile Include="Entidades\Response\ResObtenerArchviosUsuario.cs" />
     <Compile Include="Entidades\Response\ResObtenerPerfilUsuario.cs" />
     <Compile Include="Entidades\Response\ResObtenerTodosLosEmpleos.cs" />

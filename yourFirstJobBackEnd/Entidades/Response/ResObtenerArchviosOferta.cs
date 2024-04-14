@@ -7,12 +7,8 @@ using yourFirstJobBackend.Entidades.entities;
 
 namespace yourFirstJobBackend.Entidades.Response
 {
-    public class ResObtenerTodosLosEmpleos : ResBase
+    public class ResObtenerArchviosOferta : ResBase
     {
-        public List<Empleo> empleos { get; set; }
-       
-
+        public List<ArchivosOferta> listaArchivosOferta {  get; set; }
     }
-
 }
-
