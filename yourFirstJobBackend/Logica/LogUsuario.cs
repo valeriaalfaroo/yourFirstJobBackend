@@ -1273,6 +1273,66 @@ namespace yourFirstJobBackend.Logica
         }
 
 
+        //actualizar foto de perfil usuario
+
+        public ResActualizarFotoPerfil actualizarFoto(ReqActualizarFotoPerfil req)
+        {
+            ResActualizarFotoPerfil res = new ResActualizarFotoPerfil();
+
+            res.listaDeErrores = new List<string>();
+
+            int? errorId = 0;
+            int? camposActualizados = 0;
+            string errorDescripcion = "";
+
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+
+                conexion.sp_Actualizar_FotoPerfil(req.idUsuario, req.idArchivo, req.archivo, ref errorId, ref errorDescripcion, ref camposActualizados);
+
+                if (camposActualizados != 0)
+                {
+                    //Errores
+                    if (errorId != 0)
+                    {
+                        //Paso un error
+                        res.listaDeErrores.Add(errorDescripcion);
+                        res.resultado = false;
+                    }
+                    else
+                    {
+                        //Todo bien        
+
+                        res.resultado = true;
+                    }
+
+                }
+                else
+                {
+                    //Null
+                    res.listaDeErrores.Add("Error al update");
+                    res.resultado = false;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+
+            }
+            finally
+            {
+
+                //Bitacora
+
+            }
+
+            return res;
+
+        }
 
 
         #region

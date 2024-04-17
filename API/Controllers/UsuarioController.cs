@@ -297,7 +297,23 @@ namespace API.Controllers
             return logica.actualizarArchivos(req);
         }
 
+        //Update foto perfil
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/usuario/actualizarFotoPerfil")]
+        public ResActualizarFotoPerfil actualizarUsuario(ReqActualizarFotoPerfil req)
+        {
+            if (req == null)
+            {
+                return new ResActualizarFotoPerfil
+                {
+                    resultado = false,
+                    listaDeErrores = new List<string> { "Request nulo" }
+                };
+            }
 
+            LogUsuario logica = new LogUsuario();
+            return logica.actualizarFoto(req);
+        }
 
     }
 }
