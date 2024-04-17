@@ -63,6 +63,7 @@
     <Compile Include="Entidades\entities\Profesion.cs" />
     <Compile Include="Entidades\entities\Region.cs" />
     <Compile Include="Entidades\entities\Usuario.cs" />
+    <Compile Include="Entidades\Request\ReqActualizarFotoPerfil.cs" />
     <Compile Include="Entidades\Request\ReqBuscarOfertasPorTitulo.cs" />
     <Compile Include="Entidades\Request\ReqEliminarArchivosUsuario.cs" />
     <Compile Include="Entidades\Request\ReqEliminarIdiomaUsuario.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Entidades\Request\ReqUpdateUsuarioExperiencia.cs" />
     <Compile Include="Entidades\Request\ReqUpdateUsuarioHabilidades.cs" />
     <Compile Include="Entidades\Request\ReqUpdateUsuarioIdioma.cs" />
+    <Compile Include="Entidades\Response\ResActualizarFotoPerfil.cs" />
     <Compile Include="Entidades\Response\ResBase.cs" />
     <Compile Include="Entidades\Response\ResBuscarOfertasPorTitulo.cs" />
     <Compile Include="Entidades\Response\ResEliminarArchivosUsuarios.cs" />
