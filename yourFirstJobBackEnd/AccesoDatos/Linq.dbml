@@ -573,6 +573,17 @@
       <Column Name="Message" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.sp_Actualizar_FotoPerfil" Method="sp_Actualizar_FotoPerfil">
+    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idArchivo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nuevoArchivo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" />
+    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="CamposActualizados" Parameter="camposActualizados" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="sp_Actualizar_FotoPerfilResult">
+      <Column Name="Message" Type="System.String" DbType="VarChar(21) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.InsertUsuario" Method="InsertUsuario">
     <Parameter Name="nombreUsuario" Type="System.String" DbType="VarChar(255)" />
     <Parameter Name="apellidos" Type="System.String" DbType="VarChar(255)" />
@@ -586,16 +597,5 @@
     <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
     <Parameter Name="IdReturn" Parameter="idReturn" Type="System.Int32" DbType="Int" Direction="InOut" />
     <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.sp_Actualizar_FotoPerfil" Method="sp_Actualizar_FotoPerfil">
-    <Parameter Name="idUsuario" Type="System.Int32" DbType="Int" />
-    <Parameter Name="idArchivo" Type="System.Int32" DbType="Int" />
-    <Parameter Name="nuevoArchivo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" />
-    <Parameter Name="ErrorOccurred" Parameter="errorOccurred" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="ErrorMensaje" Parameter="errorMensaje" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
-    <Parameter Name="CamposActualizados" Parameter="camposActualizados" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <ElementType Name="sp_Actualizar_FotoPerfilResult">
-      <Column Name="Message" Type="System.String" DbType="VarChar(21) NOT NULL" CanBeNull="false" />
-    </ElementType>
   </Function>
 </Database>
