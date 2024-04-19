@@ -473,7 +473,6 @@ namespace yourFirstJobBackend.Logica
 
         }
 
-
         //traer un usuario
         public ResObtenerPerfilUsuario obtenerUsuario(ReqObtenerUsuario req)
         {
@@ -734,7 +733,6 @@ namespace yourFirstJobBackend.Logica
             return res;
         }
 
-
         //Eliminr usuario (en bd se hace update al campo estado =0 para decir q el usuario ya no existe)
         public ResEliminarUsuario eliminarUsuario(ReqEliminarUsuario req)
         {
@@ -832,8 +830,187 @@ namespace yourFirstJobBackend.Logica
 
         }
 
-        //eliminar un archivo de usuario
+        //Eliminar habilidad
+        public ResEliminarHabilidadUsuario eliminarHabilidadUsuario(ReqEliminarHabilidadUsuario req)
+        {
+            ResEliminarHabilidadUsuario res = new ResEliminarHabilidadUsuario();
 
+            res.listaDeErrores = new List<string>();
+
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+
+                int? errorId = 0;
+                int? camposActualizados = 0;
+                string errorDescripcion = "";
+                conexion.DeleteHabilidadUsuario(req.idUsuario, req.idHabilidad, ref errorId, ref errorDescripcion, ref camposActualizados);
+
+                if (camposActualizados != 0)
+                {
+                    //Errores
+                    if (errorId != 0)
+                    {
+                        //Paso un error
+                        res.listaDeErrores.Add(errorDescripcion);
+                        res.resultado = false;
+                    }
+                    else
+                    {
+                        //Todo bien        
+
+                        res.resultado = true;
+                    }
+
+                }
+                else
+                {
+                    //Null
+                    res.listaDeErrores.Add("Error al delete");
+                    res.resultado = false;
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+
+            }
+            finally
+            {
+
+                //Bitacora
+
+            }
+
+            return res;
+
+        }
+
+        //Eliminar estudios
+        public ResEliminarEstudioUsuario eliminarEstudioUsuario(ReqEliminarEstudioUsuario req)
+        {
+            ResEliminarEstudioUsuario res = new ResEliminarEstudioUsuario();
+
+            res.listaDeErrores = new List<string>();
+
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+
+                int? errorId = 0;
+                int? camposActualizados = 0;
+                string errorDescripcion = "";
+                conexion.DeleteEstudioUsuario(req.idUsuario, req.idEstudio, ref errorId, ref errorDescripcion, ref camposActualizados);
+
+                if (camposActualizados != 0)
+                {
+                    //Errores
+                    if (errorId != 0)
+                    {
+                        //Paso un error
+                        res.listaDeErrores.Add(errorDescripcion);
+                        res.resultado = false;
+                    }
+                    else
+                    {
+                        //Todo bien        
+
+                        res.resultado = true;
+                    }
+
+                }
+                else
+                {
+                    //Null
+                    res.listaDeErrores.Add("Error al delete");
+                    res.resultado = false;
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+
+            }
+            finally
+            {
+
+                //Bitacora
+
+            }
+
+            return res;
+
+        }
+
+        //Eliminar experienciaLaboral
+        public ResEliminarExperienciaUsuario eliminarExperienciaUsuario(ReqEliminarExperienciaUsuario req)
+        {
+            ResEliminarExperienciaUsuario res = new ResEliminarExperienciaUsuario();
+
+            res.listaDeErrores = new List<string>();
+
+            try
+            {
+                LinqDataContext conexion = new LinqDataContext();
+
+                int? errorId = 0;
+                int? camposActualizados = 0;
+                string errorDescripcion = "";
+                conexion.DeleteExperenciaUsuario(req.idUsuario, req.idExperiencia, ref errorId, ref errorDescripcion, ref camposActualizados);
+
+                if (camposActualizados != 0)
+                {
+                    //Errores
+                    if (errorId != 0)
+                    {
+                        //Paso un error
+                        res.listaDeErrores.Add(errorDescripcion);
+                        res.resultado = false;
+                    }
+                    else
+                    {
+                        //Todo bien        
+
+                        res.resultado = true;
+                    }
+
+                }
+                else
+                {
+                    //Null
+                    res.listaDeErrores.Add("Error al delete");
+                    res.resultado = false;
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.resultado = false;
+                res.listaDeErrores.Add(ex.ToString());
+
+            }
+            finally
+            {
+
+                //Bitacora
+
+            }
+
+            return res;
+
+        }
+
+        //eliminar un archivo de usuario
         public ResEliminarArchivosUsuarios eliminarArchivoUsuario(ReqEliminarArchivosUsuario req)
         {
             ResEliminarArchivosUsuarios res = new ResEliminarArchivosUsuarios();
@@ -1202,7 +1379,6 @@ namespace yourFirstJobBackend.Logica
         }
 
         //update archivos usurio
-
         public ResUpdateArchivosUsuario actualizarArchivos(List<ReqUpdateArchivos> listReq)
         {
 
@@ -1272,9 +1448,7 @@ namespace yourFirstJobBackend.Logica
             return res;
         }
 
-
         //actualizar foto de perfil usuario
-
         public ResActualizarFotoPerfil actualizarFoto(ReqActualizarFotoPerfil req)
         {
             ResActualizarFotoPerfil res = new ResActualizarFotoPerfil();
@@ -1334,12 +1508,10 @@ namespace yourFirstJobBackend.Logica
 
         }
 
-
         #region
 
         //factoria traer usuario 
-        private Usuario traerUsuario(SP_InformacionUsuarioResult usuarioBD, List<Idiomas>listaIdiomas, List<Habilidades>listaHabilidades, List<Estudios>listaEstudios, List<ArchivosUsuario>listaAchivosUsuario,
-        List<ExperienciaLaboral>listaExperienciaLaboral)
+        private Usuario traerUsuario(SP_InformacionUsuarioResult usuarioBD, List<Idiomas>listaIdiomas, List<Habilidades>listaHabilidades, List<Estudios>listaEstudios, List<ArchivosUsuario>listaAchivosUsuario, List<ExperienciaLaboral>listaExperienciaLaboral)
         {
             //entidad usuario
             Usuario usuarioRetornar = new Usuario();
@@ -1381,8 +1553,6 @@ namespace yourFirstJobBackend.Logica
 
 
         }
-
-
 
         #endregion
     }
