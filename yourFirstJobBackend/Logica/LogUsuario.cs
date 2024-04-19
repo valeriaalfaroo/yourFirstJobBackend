@@ -1351,6 +1351,14 @@ namespace yourFirstJobBackend.Logica
             usuarioRetornar.fechaNacimiento = usuarioBD.fechaNacimiento;
             usuarioRetornar.sitioWeb = usuarioBD.sitioWeb;
             usuarioRetornar.idRegion = usuarioBD.idRegion;
+
+            Region region = new Region();
+
+            region.idRegion = usuarioBD.idRegion;
+            region.nombreRegion = usuarioBD.nombreRegion;
+
+            usuarioRetornar.region = region;
+
             usuarioRetornar.idUsuario = usuarioBD.idUsuario;
             usuarioRetornar.contrasena = usuarioBD.contrasena;
             usuarioRetornar.listaIdiomas = listaIdiomas;
