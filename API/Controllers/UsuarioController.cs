@@ -177,6 +177,59 @@ namespace API.Controllers
             return logica.eliminarIdiomaUsuario(req);
         }
 
+        //Delete habilidad usuario
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/usuario/eliminarHabilidadUsuario")]
+        public ResEliminarHabilidadUsuario deleteHabilidadUsuario(ReqEliminarHabilidadUsuario req)
+        {
+            if (req == null)
+            {
+                return new ResEliminarHabilidadUsuario
+                {
+                    resultado = false,
+                    listaDeErrores = new List<string> { "Request nulo" }
+                };
+            }
+
+            LogUsuario logica = new LogUsuario();
+            return logica.eliminarHabilidadUsuario(req);
+        }
+
+        //Delete estudios usuario
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/usuario/eliminarEstudiosUsuario")]
+        public ResEliminarEstudioUsuario deleteEstudiosUsuario(ReqEliminarEstudioUsuario req)
+        {
+            if (req == null)
+            {
+                return new ResEliminarEstudioUsuario
+                {
+                    resultado = false,
+                    listaDeErrores = new List<string> { "Request nulo" }
+                };
+            }
+
+            LogUsuario logica = new LogUsuario();
+            return logica.eliminarEstudioUsuario(req);
+        }
+
+        //Delete experiencia usuario
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/usuario/eliminarExperienciaUsuario")]
+        public ResEliminarExperienciaUsuario deleteEstudiosUsuario(ReqEliminarExperienciaUsuario req)
+        {
+            if (req == null)
+            {
+                return new ResEliminarExperienciaUsuario
+                {
+                    resultado = false,
+                    listaDeErrores = new List<string> { "Request nulo" }
+                };
+            }
+
+            LogUsuario logica = new LogUsuario();
+            return logica.eliminarExperienciaUsuario(req);
+        }
 
         //delete archivo usuario
         [System.Web.Http.HttpDelete]

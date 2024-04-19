@@ -66,6 +66,9 @@
     <Compile Include="Entidades\Request\ReqActualizarFotoPerfil.cs" />
     <Compile Include="Entidades\Request\ReqBuscarOfertasPorTitulo.cs" />
     <Compile Include="Entidades\Request\ReqEliminarArchivosUsuario.cs" />
+    <Compile Include="Entidades\Request\ReqEliminarEstudioUsuario.cs" />
+    <Compile Include="Entidades\Request\ReqEliminarExperienciaUsuario.cs" />
+    <Compile Include="Entidades\Request\ReqEliminarHabilidadUsuario.cs" />
     <Compile Include="Entidades\Request\ReqEliminarIdiomaUsuario.cs" />
     <Compile Include="Entidades\Request\ReqEliminarUsuario.cs" />
     <Compile Include="Entidades\Request\ReqIngresarAplicacion.cs" />
@@ -95,6 +98,9 @@
     <Compile Include="Entidades\Response\ResBase.cs" />
     <Compile Include="Entidades\Response\ResBuscarOfertasPorTitulo.cs" />
     <Compile Include="Entidades\Response\ResEliminarArchivosUsuarios.cs" />
+    <Compile Include="Entidades\Response\ResEliminarEstudioUsuario.cs" />
+    <Compile Include="Entidades\Response\ResEliminarExperienciaUsuario.cs" />
+    <Compile Include="Entidades\Response\ResEliminarHabilidadUsuario.cs" />
     <Compile Include="Entidades\Response\ResEliminarIdiomaUsuario.cs" />
     <Compile Include="Entidades\Response\ResEliminarUsuario.cs" />
     <Compile Include="Entidades\Response\ResIngresarAplicacion.cs" />
