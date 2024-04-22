@@ -445,15 +445,6 @@ namespace yourFirstJobBackend.AccesoDatos
 			return ((ISingleResult<InsertHabilidadesUsuariosResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_Borrar_ArchivoUsuario")]
-		public ISingleResult<SP_Borrar_ArchivoUsuarioResult> SP_Borrar_ArchivoUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idArchivo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idArchivo, errorOccurred, errorMensaje);
-			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(1)));
-			errorMensaje = ((string)(result.GetParameterValue(2)));
-			return ((ISingleResult<SP_Borrar_ArchivoUsuarioResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_Insertar_ArchivoUsuario")]
 		public ISingleResult<SP_Insertar_ArchivoUsuarioResult> SP_Insertar_ArchivoUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string nombreArchivo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarBinary(MAX)")] System.Data.Linq.Binary nuevoArchivo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string tipo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje)
 		{
@@ -461,16 +452,6 @@ namespace yourFirstJobBackend.AccesoDatos
 			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(4)));
 			errorMensaje = ((string)(result.GetParameterValue(5)));
 			return ((ISingleResult<SP_Insertar_ArchivoUsuarioResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_Update_ArchivosUsuario")]
-		public ISingleResult<SP_Update_ArchivosUsuarioResult> SP_Update_ArchivosUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idArchivo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string nombreArchivo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarBinary(MAX)")] System.Data.Linq.Binary nuevoArchivo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string tipo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CamposActualizados", DbType="Int")] ref System.Nullable<int> camposActualizados)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, idArchivo, nombreArchivo, nuevoArchivo, tipo, errorOccurred, errorMensaje, camposActualizados);
-			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(5)));
-			errorMensaje = ((string)(result.GetParameterValue(6)));
-			camposActualizados = ((System.Nullable<int>)(result.GetParameterValue(7)));
-			return ((ISingleResult<SP_Update_ArchivosUsuarioResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_Insertar_ArchivosOferta")]
@@ -530,6 +511,25 @@ namespace yourFirstJobBackend.AccesoDatos
 			errorMensaje = ((string)(result.GetParameterValue(3)));
 			elemenentosEliminados = ((System.Nullable<int>)(result.GetParameterValue(4)));
 			return ((ISingleResult<DeleteExperenciaUsuarioResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_Borrar_ArchivoUsuario")]
+		public ISingleResult<SP_Borrar_ArchivoUsuarioResult> SP_Borrar_ArchivoUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idArchivo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idArchivo, idUsuario, errorOccurred, errorMensaje);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(2)));
+			errorMensaje = ((string)(result.GetParameterValue(3)));
+			return ((ISingleResult<SP_Borrar_ArchivoUsuarioResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_Update_ArchivosUsuario")]
+		public ISingleResult<SP_Update_ArchivosUsuarioResult> SP_Update_ArchivosUsuario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idArchivo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string nombreArchivo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarBinary(MAX)")] System.Data.Linq.Binary nuevoArchivo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorOccurred", DbType="Int")] ref System.Nullable<int> errorOccurred, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorMensaje", DbType="VarChar(255)")] ref string errorMensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CamposActualizados", DbType="Int")] ref System.Nullable<int> camposActualizados)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, idArchivo, nombreArchivo, nuevoArchivo, errorOccurred, errorMensaje, camposActualizados);
+			errorOccurred = ((System.Nullable<int>)(result.GetParameterValue(4)));
+			errorMensaje = ((string)(result.GetParameterValue(5)));
+			camposActualizados = ((System.Nullable<int>)(result.GetParameterValue(6)));
+			return ((ISingleResult<SP_Update_ArchivosUsuarioResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -3625,32 +3625,6 @@ namespace yourFirstJobBackend.AccesoDatos
 		}
 	}
 	
-	public partial class SP_Borrar_ArchivoUsuarioResult
-	{
-		
-		private string _Message;
-		
-		public SP_Borrar_ArchivoUsuarioResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
-		public string Message
-		{
-			get
-			{
-				return this._Message;
-			}
-			set
-			{
-				if ((this._Message != value))
-				{
-					this._Message = value;
-				}
-			}
-		}
-	}
-	
 	public partial class SP_Insertar_ArchivoUsuarioResult
 	{
 		
@@ -3661,32 +3635,6 @@ namespace yourFirstJobBackend.AccesoDatos
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
-		public string Message
-		{
-			get
-			{
-				return this._Message;
-			}
-			set
-			{
-				if ((this._Message != value))
-				{
-					this._Message = value;
-				}
-			}
-		}
-	}
-	
-	public partial class SP_Update_ArchivosUsuarioResult
-	{
-		
-		private string _Message;
-		
-		public SP_Update_ArchivosUsuarioResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(21) NOT NULL", CanBeNull=false)]
 		public string Message
 		{
 			get
@@ -3817,6 +3765,58 @@ namespace yourFirstJobBackend.AccesoDatos
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(26) NOT NULL", CanBeNull=false)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this._Message = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_Borrar_ArchivoUsuarioResult
+	{
+		
+		private string _Message;
+		
+		public SP_Borrar_ArchivoUsuarioResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this._Message = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_Update_ArchivosUsuarioResult
+	{
+		
+		private string _Message;
+		
+		public SP_Update_ArchivosUsuarioResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(21) NOT NULL", CanBeNull=false)]
 		public string Message
 		{
 			get

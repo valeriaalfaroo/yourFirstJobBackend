@@ -1023,7 +1023,7 @@ namespace yourFirstJobBackend.Logica
                 int? lineasActualizadas = 0;
 
 
-                conexion.SP_Borrar_ArchivoUsuario(req.idArchivosUsuarios, ref errorOccured, ref errorMessage);
+                conexion.SP_Borrar_ArchivoUsuario(req.idArchivosUsuarios, req.idUsuario, ref errorOccured, ref errorMessage);
 
                 if (errorOccured == 0)
                 {
@@ -1400,7 +1400,7 @@ namespace yourFirstJobBackend.Logica
                     string errorMensaje = "";
 
 
-                    conexion.SP_Update_ArchivosUsuario(archivosUser.idUsuario, archivosUser.archviosUsuario.idArchivosUsuarios, archivosUser.archviosUsuario.nombreArchivo, archivosUser.archviosUsuario.archivo, archivosUser.archviosUsuario.tipo,
+                    conexion.SP_Update_ArchivosUsuario(archivosUser.idUsuario, archivosUser.idArchivosUsuarios, archivosUser.nombreArchivo, archivosUser.archivo, 
                        ref errorId, ref errorMensaje, ref camposActualizados);
 
                     if (camposActualizados != 0)
