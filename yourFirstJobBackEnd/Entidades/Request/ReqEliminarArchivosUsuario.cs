@@ -9,7 +9,7 @@ namespace yourFirstJobBackend.Entidades.Request
 {
     public class ReqEliminarArchivosUsuario
     {
-
+        public int idUsuario {  get; set; }
         public int idArchivosUsuarios { get; set; }
     }
 }
