@@ -231,24 +231,10 @@ namespace API.Controllers
             return logica.eliminarExperienciaUsuario(req);
         }
 
-        /// <summary>
-        /// //////////
-        /// </summary>
-        /// <param name="req"></param>
-        /// <returns></returns>
-
-        //delete archivo usuario
-        /* [System.Web.Http.HttpDelete]
-         [System.Web.Http.Route("api/usuario/borrarArchivoUsuario")]
-         public ResEliminarArchivosUsuarios borrarArchivos([FromBody] ReqEliminarArchivosUsuario req)
-         {
-             LogUsuario logicaBackend = new LogUsuario();
-             return logicaBackend.eliminarArchivoUsuario(req);
-         }*/
 
 
 
-        //Delete experiencia usuario
+        //Delete archvios usuario
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/usuario/borrarArchivosUsuario")]
         public ResEliminarArchivosUsuarios deleteArchivosUsuario(ReqEliminarArchivosUsuario req)
@@ -361,23 +347,6 @@ namespace API.Controllers
         }
 
 
-        //update archivos usuario
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.Route("api/usuario/actualizarUsuarioArchivo")]
-        public ResUpdateArchivosUsuario actualizarArchivoUser( List<ReqUpdateArchivos> req)
-        {
-            if (req == null)
-            {
-                return new ResUpdateArchivosUsuario
-                {
-                    resultado = false,
-                    listaDeErrores = new List<string> { "Request nulo" }
-                };
-            }
-
-            LogUsuario logica = new LogUsuario();
-            return logica.actualizarArchivos(req);
-        }
 
         //Update foto perfil
         [System.Web.Http.HttpPost]
