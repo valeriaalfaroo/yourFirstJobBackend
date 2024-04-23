@@ -1378,75 +1378,7 @@ namespace yourFirstJobBackend.Logica
 
         }
 
-        //update archivos usurio
-        public ResUpdateArchivosUsuario actualizarArchivos(List<ReqUpdateArchivos> listReq)
-        {
-
-            ResUpdateArchivosUsuario res = new ResUpdateArchivosUsuario();
-
-            res.listaDeErrores = new List<string>();
-
-            try
-            {
-                LinqDataContext conexion = new LinqDataContext();
-
-                List<ArchivosUsuario> listArchiv = new List<ArchivosUsuario>();
-
-                foreach (ReqUpdateArchivos archivosUser in listReq)
-                {
-
-                    int? errorId = 0;
-                    int? camposActualizados = 0;
-                    string errorMensaje = "";
-
-
-                    conexion.SP_Update_ArchivosUsuario(archivosUser.idUsuario, archivosUser.idArchivosUsuarios, archivosUser.nombreArchivo, archivosUser.archivo, 
-                       ref errorId, ref errorMensaje, ref camposActualizados);
-
-                    if (camposActualizados != 0)
-                    {
-                        //Errores
-                        if (errorId != 0)
-                        {
-                            //Paso un error
-                            res.listaDeErrores.Add(errorMensaje);
-                            res.resultado = false;
-                        }
-                        else
-                        {
-                            //Todo bien        
-
-                            res.resultado = true;
-                        }
-
-                    }
-                    else
-                    {
-                        //Null
-                        res.listaDeErrores.Add("Error al update");
-                        res.resultado = false;
-                        break;
-
-                    }
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                res.resultado = false;
-                res.listaDeErrores.Add(ex.ToString());
-
-            }
-            finally
-            {
-
-                //Bitacora
-
-            }
-
-            return res;
-        }
+   
 
         //actualizar foto de perfil usuario
         public ResActualizarFotoPerfil actualizarFoto(ReqActualizarFotoPerfil req)
